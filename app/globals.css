@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #0a0a0b;
+  color: #ededf0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* tabular numerals */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* selection color */
+::selection {
+  background: #f59e0b;
+  color: #0a0a0b;
+}
+
+/* hide scrollbar on the graph filter scroll, etc */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* live audio waveform bars on the Now Playing hero (components/RecentPlays.tsx) */
+@keyframes waveform {
+  0%   { transform: scaleY(0.2); }
+  50%  { transform: scaleY(1); }
+  100% { transform: scaleY(0.35); }
+}

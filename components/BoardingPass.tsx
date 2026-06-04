@@ -1,0 +1,131 @@
+import { ArrowDownToLine, Plane } from 'lucide-react';
+
+/**
+ * CV boarding-pass card. Themed to the TPE ↔ LAX international-student angle.
+ *
+ * To wire up the actual download: drop your CV PDF into `public/cv.pdf`.
+ * It'll then be available at `/cv.pdf` and the download button works.
+ */
+export function BoardingPass() {
+  return (
+    <a
+      href="/cv.pdf"
+      download="martin-hsieh-cv.pdf"
+      className="group block relative w-full overflow-hidden rounded-2xl border border-divider bg-surface/70 transition-all hover:border-muted hover:shadow-[0_0_60px_-15px_rgba(251,113,133,0.25)]"
+    >
+      {/* subtle Ferrari-red accent stripe at top */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rose-500 to-transparent opacity-60" />
+
+      {/* main row */}
+      <div className="flex">
+        {/* === left stub === */}
+        <div className="flex-1 p-7 md:p-8">
+          {/* top meta */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
+              Boarding Pass · CV-2026
+            </div>
+            <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
+              Seat — Anywhere
+            </div>
+          </div>
+
+          {/* big route */}
+          <div className="flex items-center gap-6 md:gap-10">
+            <div>
+              <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted mb-1">
+                From
+              </div>
+              <div className="font-serif text-4xl md:text-5xl leading-none tabular">TPE</div>
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted mt-2">
+                Taipei · 桃園
+              </div>
+            </div>
+
+            <div className="flex-1 relative h-[2px] bg-divider mx-2">
+              <Plane
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 text-rose-400 rotate-90 bg-bg px-0.5 transition-transform group-hover:translate-x-2"
+                strokeWidth={1.5}
+              />
+            </div>
+
+            <div className="text-right">
+              <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted mb-1">
+                To
+              </div>
+              <div className="font-serif text-4xl md:text-5xl leading-none tabular">LAX</div>
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted mt-2">
+                Los Angeles · USC
+              </div>
+            </div>
+          </div>
+
+          {/* secondary meta — 4 columns */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-4 mt-10">
+            <Cell label="Passenger" value="Martin Hsieh" />
+            <Cell label="Class" value="CS · '28" />
+            <Cell label="Flight" value="CV-2026" />
+            <Cell label="Boarding" value="Now" mono />
+          </div>
+        </div>
+
+        {/* === perforated divider === */}
+        <div className="relative w-px shrink-0">
+          <div className="absolute inset-y-0 w-px border-l border-dashed border-divider" />
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bg border border-divider" />
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bg border border-divider" />
+        </div>
+
+        {/* === right stub: the action === */}
+        <div className="w-32 md:w-44 p-5 md:p-6 flex flex-col items-center justify-between text-center">
+          <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
+            Resume
+          </div>
+
+          {/* "barcode" — fits the boarding-pass metaphor */}
+          <div className="flex items-center gap-px h-10 my-4" aria-hidden>
+            {[...Array(22)].map((_, i) => (
+              <span
+                key={i}
+                className="bg-primary"
+                style={{
+                  width: i % 3 === 0 ? '2px' : '1px',
+                  height: `${50 + ((i * 13) % 50)}%`,
+                  opacity: 0.4 + ((i * 7) % 60) / 100,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-rose-400 group-hover:text-rose-300 transition-colors">
+            <ArrowDownToLine className="w-3 h-3" strokeWidth={2} />
+            <span>Download</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function Cell({
+  label,
+  value,
+  mono,
+}: {
+  label: string;
+  value: string;
+  mono?: boolean;
+}) {
+  return (
+    <div>
+      <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted mb-1">
+        {label}
+      </div>
+      <div
+        className={`text-base ${mono ? 'font-mono uppercase tracking-wider text-rose-400' : 'font-serif'}`}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
