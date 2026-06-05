@@ -20,15 +20,50 @@ const serif = Instrument_Serif({
   display: 'swap',
 });
 
+const SITE_URL = 'https://martinhsieh.com';
+const TITLE = 'Martin Hsieh — CS @ USC';
+const DESCRIPTION =
+  'USC computer science junior building full-stack systems and applied-AI tooling. Three internships shipped. Open to Summer 2027 roles.';
+
 export const metadata: Metadata = {
-  title: 'Martin Hsieh — CS @ USC',
-  description:
-    'CS undergrad at USC building full-stack and applied-AI systems. Los Angeles · Taipei.',
-  metadataBase: new URL('https://martinhsieh.com'),
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: '%s · Martin Hsieh',
+  },
+  description: DESCRIPTION,
+  keywords: [
+    'Martin Hsieh', 'USC Computer Science', 'software engineering intern',
+    'applied AI', 'full-stack', 'Next.js', 'Taipei', 'Los Angeles',
+  ],
+  authors: [{ name: 'Martin Hsieh', url: SITE_URL }],
+  creator: 'Martin Hsieh',
   openGraph: {
-    title: 'Martin Hsieh',
-    description: 'CS @ USC. Systems that move data, music, and the occasional latte order.',
     type: 'website',
+    locale: 'en_US',
+    url: SITE_URL,
+    siteName: 'Martin Hsieh',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Martin Hsieh — CS @ USC',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['/og.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
 };
 

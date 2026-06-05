@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   Play,
   Pause,
@@ -98,11 +99,13 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
       {/* Blurred album halo backdrop */}
       {track.albumImage && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={track.albumImage}
             alt=""
-            className="w-full h-full object-cover scale-150 blur-3xl opacity-30"
+            fill
+            sizes="600px"
+            className="object-cover scale-150 blur-3xl opacity-30"
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-bg/30 via-bg/60 to-bg/85" />
         </div>
@@ -140,11 +143,13 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
             className="shrink-0"
             aria-label={`Open ${track.name} in Spotify`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={track.albumImage}
               alt={track.album}
-              className="w-11 h-11 rounded-md"
+              width={44}
+              height={44}
+              className="w-11 h-11 rounded-md object-cover"
+              unoptimized
             />
           </a>
         )}

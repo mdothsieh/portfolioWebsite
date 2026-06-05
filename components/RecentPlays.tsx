@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getNowPlaying, getRecentlyPlayed } from '@/lib/spotify';
 import { SpotifyPlayer, type PlayerEntry } from './SpotifyPlayer';
 
@@ -75,12 +76,14 @@ export async function RecentPlays() {
                 className="flex items-center gap-4 px-5 py-3 hover:bg-divider/30 transition-colors group"
               >
                 {play.track.albumImage && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={play.track.albumImage}
                     alt=""
                     aria-hidden
-                    className="w-9 h-9 rounded shrink-0"
+                    width={36}
+                    height={36}
+                    className="w-9 h-9 rounded shrink-0 object-cover"
+                    unoptimized
                   />
                 )}
                 <div className="min-w-0 flex-1">

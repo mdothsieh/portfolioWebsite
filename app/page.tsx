@@ -11,9 +11,10 @@ import { getAllProjects } from '@/lib/projects';
 import { getClaudeUsage } from '@/lib/claude-usage';
 import { getNowPlaying } from '@/lib/spotify';
 
-// Force the homepage to render on every request — no static caching.
-// This guarantees the Claude usage scan and Spotify feed are always fresh.
-export const dynamic = 'force-dynamic';
+// Revalidate the homepage every 30 seconds. Fresh enough that the live feeds
+// reflect new activity quickly, fast enough that recruiters get a snappy TTFB
+// (the served HTML is a cached snapshot until revalidation).
+export const revalidate = 30;
 
 function usageHeadingSuffix(startDate: string, dayCount: number): string {
   if (!startDate) return '';

@@ -356,7 +356,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
               <circle r={TOURB_R - 18} fill="none" stroke="#52525b" strokeWidth="0.3" opacity="0.6" />
               <circle r={TOURB_R - 21} fill="none" stroke="#52525b" strokeWidth="0.3" opacity="0.4" />
               {/* Top-of-cage orange marker — visible rotation indicator */}
-              <circle cx="0" cy={-(TOURB_R - 4)} r="2.5" fill="#f97316" />
+              <circle cx="0" cy={-(TOURB_R - 4)} r="2.5" fill="#fb7185" />
             </g>
             {/* Center pivot jewel (static) */}
             <circle r="3" fill="#7f1d1d" stroke="#c75050" strokeWidth="0.5" />
@@ -420,7 +420,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
                 />
                 {/* lume dot at the inner tip — orange superluminova */}
                 {isMajor && (
-                  <circle cx={lume.x} cy={lume.y} r="1.6" fill="#f97316" opacity="0.85" />
+                  <circle cx={lume.x} cy={lume.y} r="1.6" fill="#fb7185" opacity="0.85" />
                 )}
                 {hasNode && (
                   <g
@@ -436,11 +436,11 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
                       cx={dot.x}
                       cy={dot.y}
                       r={isHovered ? 6 : 3.5}
-                      fill={isHovered ? '#f97316' : '#ededf0'}
+                      fill={isHovered ? '#fb7185' : '#ededf0'}
                       style={{ transition: 'r 200ms ease, fill 200ms ease' }}
                     />
                     {isHovered && (
-                      <circle cx={dot.x} cy={dot.y} r={11} fill="none" stroke="#f97316" strokeWidth={1} opacity={0.5} />
+                      <circle cx={dot.x} cy={dot.y} r={11} fill="none" stroke="#fb7185" strokeWidth={1} opacity={0.5} />
                     )}
                   </g>
                 )}
@@ -534,7 +534,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
             x={CX}
             y={CY + 209}
             textAnchor="middle"
-            fill="#f97316"
+            fill="#fb7185"
             fontSize="6"
             letterSpacing="2.5"
             style={{ fontFamily: 'var(--font-mono), monospace' }}
@@ -558,32 +558,46 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
                 {/* hour — skeletonized with body and lume tip */}
                 <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="url(#handGrad)" strokeWidth={7} strokeLinecap="round" />
                 <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="#0a0a0b" strokeWidth={1.8} strokeLinecap="round" />
-                <circle cx={hourLume.x} cy={hourLume.y} r={3.5} fill="#f97316" />
+                <circle cx={hourLume.x} cy={hourLume.y} r={3.5} fill="#fb7185" />
                 <circle cx={hourLume.x} cy={hourLume.y} r={2} fill="#fbbf24" />
 
                 {/* minute — narrower, longer */}
                 <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="url(#handGrad)" strokeWidth={4} strokeLinecap="round" />
                 <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="#0a0a0b" strokeWidth={1.2} strokeLinecap="round" />
-                <circle cx={minLume.x} cy={minLume.y} r={2.5} fill="#f97316" />
+                <circle cx={minLume.x} cy={minLume.y} r={2.5} fill="#fb7185" />
 
                 {/* second — bright orange with counter-balance */}
-                <line x1={sBack.x} y1={sBack.y} x2={s.x} y2={s.y} stroke="#f97316" strokeWidth={1.5} strokeLinecap="round" />
-                <circle cx={sBack.x} cy={sBack.y} r={4} fill="#f97316" />
+                <line x1={sBack.x} y1={sBack.y} x2={s.x} y2={s.y} stroke="#fb7185" strokeWidth={1.5} strokeLinecap="round" />
+                <circle cx={sBack.x} cy={sBack.y} r={4} fill="#fb7185" />
 
                 {/* pinion */}
                 <circle cx={CX} cy={CY} r={8} fill="#ededf0" />
-                <circle cx={CX} cy={CY} r={4.5} fill="#f97316" />
+                <circle cx={CX} cy={CY} r={4.5} fill="#fb7185" />
                 <circle cx={CX} cy={CY} r={1.5} fill="#0a0a0b" />
               </>
             );
           })()}
 
           {/* === Crown protector + crown + pushers === */}
+          {/* Crown affordance label — gives users an obvious "click me" hint */}
+          <text
+            x={425}
+            y={CY - 70}
+            fill="#fb7185"
+            fontSize="5.5"
+            letterSpacing="1.5"
+            textAnchor="end"
+            style={{ fontFamily: 'var(--font-mono), monospace' }}
+          >
+            CLICK · CYCLE LAYER ↓
+          </text>
+
           <g
             onClick={cycleLayer}
             className="cursor-pointer"
             aria-label="Crown — click to cycle layer"
           >
+            <title>Click to cycle layer</title>
             {/* Crown protector wing */}
             <path
               d={`M 414 ${CY - 22} Q 440 ${CY - 28} 446 ${CY - 14} L 446 ${CY + 14} Q 440 ${CY + 28} 414 ${CY + 22} Z`}
@@ -602,7 +616,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
               <line key={i} x1={434 + i * 4} y1={CY - 10} x2={434 + i * 4} y2={CY + 10} stroke="#0a0a0b" strokeWidth="0.8" />
             ))}
             {/* Orange function-selector dot — RM signature */}
-            <circle cx={443} cy={CY} r="2.5" fill="#f97316" />
+            <circle cx={443} cy={CY} r="2.5" fill="#fb7185" />
             {/* Lower pusher */}
             <rect x={432} y={CY + 45} width={16} height={11} fill="#2a2a2e" stroke="#0a0a0b" strokeWidth="0.6" rx={2} />
             <text x={440} y={CY + 54} textAnchor="middle" fill="#8a8a93" fontSize="4" letterSpacing="0.5" style={{ fontFamily: 'var(--font-mono), monospace' }}>
@@ -622,13 +636,13 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
                 <span className="text-divider mx-1.5">·</span>
                 {hovered.kind}
               </div>
-              <div className="font-serif text-2xl group-hover:text-orange-400 transition-colors">
+              <div className="font-serif text-2xl group-hover:text-rose-300 transition-colors">
                 {hovered.label}
               </div>
               {hovered.meta?.description ? (
                 <div className="text-xs text-muted mt-1">{String(hovered.meta.description)}</div>
               ) : (
-                <div className="text-[10px] font-mono uppercase tracking-widest text-orange-400 mt-1">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-rose-400 mt-1">
                   Click to open →
                 </div>
               )}
@@ -666,7 +680,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
             }}
             className={`px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest border transition-colors ${
               key === layerKey
-                ? 'bg-orange-500 text-bg border-orange-500'
+                ? 'bg-rose-400 text-bg border-rose-400'
                 : 'bg-bg/60 text-muted border-divider hover:text-primary hover:border-muted'
             }`}
           >
