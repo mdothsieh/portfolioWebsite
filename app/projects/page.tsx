@@ -3,7 +3,8 @@ import { getAllProjects } from '@/lib/projects';
 
 export const metadata = {
   title: 'Projects · Martin Hsieh',
-  description: 'Selected builds.',
+  description:
+    'Selected software projects by Martin Hsieh — full-stack systems, applied-AI tooling, RPA bots, and internal platforms, each led by the metric it moved.',
 };
 
 export default function ProjectsPage() {

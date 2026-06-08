@@ -7,6 +7,7 @@ import { Atmosphere } from '@/components/Atmosphere';
 import { AmbientWash } from '@/components/AmbientWash';
 import { LiveFavicon } from '@/components/LiveFavicon';
 import { CommandPalette } from '@/components/CommandPalette';
+import { SiteFooter } from '@/components/SiteFooter';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgress />
         <Nav />
         {children}
+        <SiteFooter />
         <CommandPalette />
       </body>
     </html>

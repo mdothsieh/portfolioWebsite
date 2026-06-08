@@ -1,0 +1,32 @@
+# Martin Hsieh
+
+> Computer science junior at the University of Southern California (USC), building full-stack systems and applied-AI tooling. Grew up in Taipei; now splits time between Los Angeles and Taiwan. Three software internships shipped. Joining Flex Ltd (Suzhou) as an engineering intern for Summer 2026, and open to Summer 2027 roles in software engineering and applied AI.
+
+## Who he is
+
+- Rising junior at USC studying Computer Science.
+- Grew up in Taipei, Taiwan; moves between Los Angeles and Taiwan/China.
+- Founder of PulsePrep Academy, where he taught 50+ middle and high schoolers across three IGCSE curricula for two years before college.
+- Drawn to agentic systems, full-stack work where the front/back boundary is intentionally blurred, and infrastructure that quietly makes a whole team faster.
+
+## What he does
+
+- Builds the whole system, not just the screen — front end, back end, data pipelines, and automation.
+- Summer 2025, Kenmou Enterprise (Taipei): wired a React + Node order-processing dashboard into the production floor; cross-team coordination overhead dropped ~35%.
+- Summer 2024, Far Eastern Apparel (Suzhou): shipped four production tools — RPA bots, a React engagement portal, an Android app, and a Python data pipeline — across a 20-person team.
+- Summer 2026 (upcoming): engineering intern at Flex Ltd's Suzhou facility.
+- Core stack: TypeScript, React, Next.js, Node, Python; applied AI and agentic frameworks.
+
+## How to get in touch
+
+- Email: mdothsieh@gmail.com
+- LinkedIn: https://www.linkedin.com/in/martin-hsieh/
+- GitHub: https://github.com/mdothsieh
+
+## Key pages
+
+- [Home](https://martinhsieh.com/): Bio, experience timeline, skills, and live activity.
+- [Projects](https://martinhsieh.com/projects): Selected builds, each led by the metric it moved.
+- [Now](https://martinhsieh.com/now): What he is currently working on, studying, and reading.
+- [Tea Atlas](https://martinhsieh.com/tea): A rated bubble-tea map across LA and Taipei.
+- [Resume (PDF)](https://martinhsieh.com/cv.pdf): Full CV.

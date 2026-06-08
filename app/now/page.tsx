@@ -3,7 +3,8 @@ import { lastUpdated, nowSections } from '@/data/now';
 
 export const metadata = {
   title: '/now',
-  description: 'What Martin Hsieh is actually working on this week.',
+  description:
+    'A /now page from Martin Hsieh — what he is actually working on, studying, and reading this week, kept current instead of curated.',
 };
 
 export default function NowPage() {

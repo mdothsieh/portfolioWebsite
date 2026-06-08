@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { TeaAtlas } from '@/components/TeaAtlas';
+import { TeaAtlasClient } from '@/components/TeaAtlasClient';
 
 export const metadata = {
   title: 'Tea Atlas',
-  description: 'Curated bubble tea map across LA and Taipei.',
+  description:
+    "Martin Hsieh's interactive bubble-tea atlas — rated boba spots mapped across Los Angeles and Taipei, the two cities he moves between.",
 };
 
 export default function TeaPage() {
@@ -19,7 +20,7 @@ export default function TeaPage() {
         click a card to fly the map there.
       </p>
 
-      <TeaAtlas />
+      <TeaAtlasClient />
 
       <div className="mt-16 pt-8 border-t border-divider">
         <Link

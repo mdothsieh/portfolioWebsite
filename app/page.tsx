@@ -152,23 +152,6 @@ export default async function Home() {
           <ListeningSection />
         </Reveal>
       </section>
-
-      <footer className="border-t border-divider mt-12">
-        <div className="max-w-6xl mx-auto px-6 py-8 flex items-center justify-between gap-4 flex-wrap text-[10px] font-mono uppercase tracking-widest text-muted">
-          <span>© 2026 Martin Hsieh</span>
-          <span>
-            Built with Next.js · Tailwind ·{' '}
-            <a
-              href="https://github.com/mdothsieh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-            >
-              source ↗
-            </a>
-          </span>
-        </div>
-      </footer>
     </main>
   );
 }
