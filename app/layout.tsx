@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google';
+import { Hanken_Grotesk, JetBrains_Mono, Bodoni_Moda } from 'next/font/google';
 import './globals.css';
 import { Nav } from '@/components/Nav';
 import { ScrollProgress } from '@/components/ScrollProgress';
@@ -9,7 +9,9 @@ import { LiveFavicon } from '@/components/LiveFavicon';
 import { CommandPalette } from '@/components/CommandPalette';
 import { SiteFooter } from '@/components/SiteFooter';
 
-const inter = Inter({
+// Body: warm humanist grotesk (keeps the --font-inter var name so Tailwind's
+// `sans` token resolves without further changes).
+const sans = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
@@ -19,8 +21,9 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
   display: 'swap',
 });
-const serif = Instrument_Serif({
-  weight: '400',
+// Display: high-contrast Didone for headings, big numerals, and the watch
+// signature — sharp, luxury, precise.
+const serif = Bodoni_Moda({
   subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
@@ -77,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${mono.variable} ${serif.variable}`}
+      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
     >
       <body className="relative bg-bg text-primary font-sans antialiased">
         <AmbientWash />

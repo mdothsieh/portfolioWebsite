@@ -37,10 +37,26 @@ main > .reveal {
   font-variant-numeric: tabular-nums;
 }
 
+/* Display serif (Bodoni Moda) — the high-contrast Didone reads tighter and
+   more deliberate at heading sizes; a hair of negative tracking + balanced
+   text-wrap keeps big headlines from looking loose. */
+.font-serif {
+  letter-spacing: -0.012em;
+}
+h1.font-serif,
+h2.font-serif {
+  text-wrap: balance;
+}
+
+/* Body grotesk — slightly open tracking suits Hanken Grotesk at small sizes. */
+body {
+  letter-spacing: 0.002em;
+}
+
 /* selection color */
 ::selection {
-  background: #fb7185;
-  color: #0a0a0b;
+  background: #CEDC00;
+  color: #08160F;
 }
 
 /* hide scrollbar on the graph filter scroll, etc */
