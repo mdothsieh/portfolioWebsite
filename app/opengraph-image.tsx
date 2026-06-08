@@ -11,7 +11,7 @@ export default function OG() {
     (
       <div
         style={{
-          background: '#0a0a0b',
+          background: '#08160F',
           width: '100%',
           height: '100%',
           padding: 80,
@@ -50,7 +50,7 @@ export default function OG() {
           <div
             style={{
               fontSize: 36,
-              color: '#fb7185',
+              color: '#CEDC00',
               marginTop: 20,
               display: 'flex',
             }}

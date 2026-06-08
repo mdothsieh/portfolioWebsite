@@ -8,7 +8,7 @@
 
 html,
 body {
-  background: #0a0a0b;
+  background: #08160F;
   color: #ededf0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -141,17 +141,17 @@ main > .reveal {
 }
 .aurora .a1 {
   width: 46vw; height: 46vw; left: -8vw; top: -6vw;
-  background: #fb7185;
+  background: #CEDC00;
   animation: aurora-drift-1 22s ease-in-out infinite alternate;
 }
 .aurora .a2 {
   width: 38vw; height: 38vw; right: -6vw; top: 4vw;
-  background: #818cf8;
+  background: #006d5b; /* Aston Martin racing green */
   animation: aurora-drift-2 26s ease-in-out infinite alternate;
 }
 .aurora .a3 {
   width: 30vw; height: 30vw; left: 30vw; bottom: -10vw;
-  background: #f59e0b;
+  background: #1f9e6e; /* emerald */
   opacity: 0.1;
   animation: aurora-drift-3 30s ease-in-out infinite alternate;
 }
@@ -167,7 +167,7 @@ main > .reveal {
   pointer-events: none;
   background: radial-gradient(
     100% 55% at 50% 0%,
-    var(--wash, rgba(251, 113, 133, 0.10)) 0%,
+    var(--wash, rgba(206, 220, 0, 0.10)) 0%,
     transparent 60%
   );
   transition: background 1.6s ease;
