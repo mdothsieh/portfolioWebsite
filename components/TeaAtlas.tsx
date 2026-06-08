@@ -157,7 +157,7 @@ export function TeaAtlas({ spots = teaSpots }: Props) {
       </div>
 
       {/* Map + list */}
-      <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 rounded-xl border border-divider overflow-hidden">
+      <div className="panel-carbon grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 rounded-xl border border-divider overflow-hidden">
         <div
           ref={containerRef}
           className="bg-surface min-h-[420px] lg:min-h-[600px]"

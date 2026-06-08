@@ -6,10 +6,15 @@ const GRAIN =
 
 export function Atmosphere() {
   return (
-    <div
-      className="atmosphere"
-      aria-hidden
-      style={{ '--grain': GRAIN } as React.CSSProperties}
-    />
+    <>
+      {/* Woven carbon-fibre material — sits behind page content (z-0). */}
+      <div className="carbon-field" aria-hidden />
+      {/* Grain + green vignette — ride above content (z-40). */}
+      <div
+        className="atmosphere"
+        aria-hidden
+        style={{ '--grain': GRAIN } as React.CSSProperties}
+      />
+    </>
   );
 }

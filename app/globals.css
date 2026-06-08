@@ -171,12 +171,40 @@ body {
   z-index: 40; /* grain/vignette ride above content, below the nav (z-50) */
   pointer-events: none;
 }
-/* edge vignette — pulls focus to center, adds depth to the flat black */
+/* edge vignette — racing-green-tinted, pulls focus to centre and adds depth */
 .atmosphere::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  background: radial-gradient(120% 90% at 50% 40%, transparent 52%, rgba(2, 12, 8, 0.62) 100%);
+}
+
+/* ============ Carbon-fibre weave — global material texture (behind content) ===
+   Aston Martin's defining material. Two fine diagonal weaves at low opacity read
+   as woven carbon over the racing-green base without competing with content. */
+.carbon-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(220, 235, 225, 0.018) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 4px);
+  background-size: 4px 4px;
+}
+
+/* Elevated panel: top sheen + faint carbon weave + soft drop shadow, so cards
+   read as physical surfaces lifted off the dial. Pair with bg-surface/border. */
+.panel-carbon {
+  background-image:
+    linear-gradient(rgba(220, 235, 225, 0.03), transparent 42%),
+    repeating-linear-gradient(45deg, rgba(220, 235, 225, 0.014) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 4px);
+  background-size: auto, 4px 4px, 4px 4px;
+  box-shadow:
+    inset 0 1px 0 rgba(220, 235, 225, 0.05),
+    0 14px 36px -22px rgba(0, 0, 0, 0.7);
 }
 /* fine film grain */
 .atmosphere::after {

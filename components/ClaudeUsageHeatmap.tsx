@@ -107,7 +107,7 @@ export function ClaudeUsageHeatmap({ data }: Props) {
   });
 
   return (
-    <div className="bg-surface/60 border border-divider rounded-xl p-6 relative">
+    <div className="panel-carbon bg-surface/60 border border-divider rounded-xl p-6 relative">
       {/* --- Stats row --- */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
         <Stat
