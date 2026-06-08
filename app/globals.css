@@ -16,15 +16,7 @@ body {
 
 html {
   scroll-behavior: smooth;
-  /* Gentle scroll-snap: section tops "settle" without trapping the scroll. */
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 96px; /* clears the fixed two-row nav */
-}
-
-/* Each top-level section becomes a soft snap point */
-main > section,
-main > .reveal {
-  scroll-snap-align: start;
+  scroll-padding-top: 96px; /* clears the fixed two-row nav on anchor jumps */
 }
 
 /* Cross-document view transitions where supported (progressive enhancement) */
@@ -102,10 +94,74 @@ body {
   }
 }
 
-/* top scroll-progress bar (components/ScrollProgress.tsx) */
+/* top scroll-progress bar (components/ScrollProgress.tsx) — lime telemetry line */
 .scroll-progress {
   transform-origin: 0 50%;
   transform: scaleX(var(--progress, 0));
+  box-shadow: 0 0 10px rgba(206, 220, 0, 0.55);
+}
+
+/* ============================================================================
+   Motion system — motorsport-grade easing, an orchestrated hero entrance, and
+   a small set of reusable interaction primitives. All disabled under
+   prefers-reduced-motion (see block at the foot of this section).
+   ============================================================================ */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Orchestrated hero entrance — elements carry their own animation-delay. */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-enter {
+  opacity: 0;
+  animation: hero-rise 0.85s var(--ease-out-expo) both;
+}
+
+/* Premium button: lift, lime glow, and a metallic sheen that sweeps across. */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease-out-expo), box-shadow 0.3s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(206, 220, 0, 0.5);
+}
+.btn-glow:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.25) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+.btn-glow:hover::after { transform: translateX(130%); }
+
+/* Animated underline that wipes in from the left in the current colour. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s var(--ease-out-expo);
+}
+.link-underline:hover { background-size: 100% 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter { opacity: 1 !important; animation: none !important; }
+  .btn-glow { transition: none !important; }
+  .btn-glow:hover { transform: none !important; box-shadow: none !important; }
+  .btn-glow::after { display: none !important; }
+  .link-underline { transition: none !important; }
 }
 
 /* ============ Atmosphere: grain + vignette (components/Atmosphere.tsx) ============ */

@@ -97,17 +97,17 @@ export function AskAI() {
                 rel="noopener noreferrer"
                 onClick={() => handleClick(p)}
                 aria-label={`Ask ${p.name} about ${NAME}`}
-                className="group inline-flex items-center gap-2.5 rounded-full border border-divider bg-surface/80 px-4 py-2.5 text-xs font-mono uppercase tracking-widest text-muted hover:text-primary hover:border-muted transition-colors"
+                className="btn-glow group inline-flex items-center gap-2.5 rounded-full border border-divider bg-surface/80 px-4 py-2.5 text-xs font-mono uppercase tracking-widest text-muted hover:text-primary hover:border-muted"
               >
                 <span
                   aria-hidden
-                  className="h-2 w-2 rounded-full shrink-0"
+                  className="h-2 w-2 rounded-full shrink-0 transition-transform duration-300 group-hover:scale-125"
                   style={{ backgroundColor: p.dot }}
                 />
                 {p.name}
                 <span
                   aria-hidden
-                  className="text-divider group-hover:text-muted transition-colors"
+                  className="inline-block text-divider transition-all duration-300 group-hover:text-muted group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 >
                   ↗
                 </span>
