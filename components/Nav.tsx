@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { getNowPlaying } from '@/lib/spotify';
 import { getClaudeUsage } from '@/lib/claude-usage';
+import { NavLinks } from './NavLinks';
+import { LangToggle } from './LangToggle';
 
 const SOCIALS = {
   github: 'https://github.com/mdothsieh',
@@ -38,18 +40,12 @@ export async function Nav() {
         </Link>
 
         <div className="flex items-center gap-5">
-          {/* page links */}
-          <div className="hidden md:flex items-center gap-5 text-[10px] font-mono uppercase tracking-widest text-muted">
-            <Link href="/#about" className="hover:text-primary transition-colors">about</Link>
-            <Link href="/projects" className="hover:text-primary transition-colors">builds</Link>
-            <Link href="/#stack" className="hover:text-primary transition-colors">stack</Link>
-            <Link href="/#off-hours" className="hover:text-primary transition-colors">off-hours</Link>
-            <Link href="/now" className="hover:text-primary transition-colors">/now</Link>
-            <Link href="/tea" className="hover:text-primary transition-colors">tea</Link>
-            <a href="/cv.pdf" className="hover:text-primary transition-colors" download>cv</a>
-          </div>
+          {/* page links (with active-section highlighting) */}
+          <NavLinks />
 
           <span className="hidden md:inline text-divider" aria-hidden>·</span>
+
+          <LangToggle />
 
           {/* social cluster */}
           <div className="flex items-center gap-1 rounded-full bg-surface/80 border border-divider px-1.5 py-1">

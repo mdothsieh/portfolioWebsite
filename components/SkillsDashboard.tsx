@@ -1,4 +1,5 @@
 import { strong, proficient, learning, type Skill } from '@/data/skills';
+import { Kicker } from './Kicker';
 
 const KIND_DOT: Record<Skill['kind'], string> = {
   language: 'bg-rose-400',
@@ -10,9 +11,7 @@ const KIND_DOT: Record<Skill['kind'], string> = {
 export function SkillsDashboard() {
   return (
     <section id="stack" className="max-w-3xl mx-auto px-6 py-24">
-      <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-        05 — Stack
-      </div>
+      <Kicker cn="零五" num="05" en="Stack" zh="技术栈" />
       <h2 className="font-serif text-4xl md:text-5xl mb-3">The honest stack.</h2>
       <p className="text-muted mb-12 max-w-xl">
         No 10-out-of-10 expert ratings. Three buckets only — what I&apos;d reach for in

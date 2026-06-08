@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "predev": "node scripts/sync-claude-usage.mjs",
+    "prebuild": "node scripts/sync-claude-usage.mjs",
     "sync:claude": "node scripts/sync-claude-usage.mjs",
     "spotify:auth": "node scripts/spotify-auth.mjs"
   },

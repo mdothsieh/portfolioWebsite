@@ -145,6 +145,7 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
   const [now, setNow] = useState<Date>(() => new Date());
   const [layerKey, setLayerKey] = useState<LayerKey>('builds');
   const [hoveredHour, setHoveredHour] = useState<number | null>(null);
+  const [crownSpin, setCrownSpin] = useState(0);
 
   useEffect(() => {
     let raf: number;
@@ -155,6 +156,19 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  // Arrow keys cycle layers (ignored while typing, e.g. in the command palette)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const el = document.activeElement;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); cycleLayer(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); cycleLayer(-1); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [layerKey]);
 
   const slots: (GraphNode | null)[] = useMemo(() => {
     const kinds = LAYERS[layerKey].kinds;
@@ -179,11 +193,12 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
 
   const hovered = hoveredHour != null ? slots[hoveredHour] : null;
 
-  function cycleLayer() {
+  function cycleLayer(dir: number = 1) {
     const i = LAYER_ORDER.indexOf(layerKey);
-    const next = (i + 1) % LAYER_ORDER.length;
+    const next = (i + dir + LAYER_ORDER.length) % LAYER_ORDER.length;
     setLayerKey(LAYER_ORDER[next]);
     setHoveredHour(null);
+    setCrownSpin((s) => s + dir * 36); // tactile crown turn
   }
 
   return (
@@ -593,11 +608,11 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
           </text>
 
           <g
-            onClick={cycleLayer}
+            onClick={() => cycleLayer(1)}
             className="cursor-pointer"
             aria-label="Crown — click to cycle layer"
           >
-            <title>Click to cycle layer</title>
+            <title>Click to cycle layer · ← → arrow keys</title>
             {/* Crown protector wing */}
             <path
               d={`M 414 ${CY - 22} Q 440 ${CY - 28} 446 ${CY - 14} L 446 ${CY + 14} Q 440 ${CY + 28} 414 ${CY + 22} Z`}
@@ -610,13 +625,18 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
             <text x={440} y={CY - 47} textAnchor="middle" fill="#8a8a93" fontSize="4" letterSpacing="0.5" style={{ fontFamily: 'var(--font-mono), monospace' }}>
               ↑
             </text>
-            {/* Crown */}
-            <rect x={432} y={CY - 12} width={22} height={24} fill="#2a2a2e" stroke="#0a0a0b" strokeWidth="0.6" rx={3} />
-            {[0, 1, 2, 3, 4].map((i) => (
-              <line key={i} x1={434 + i * 4} y1={CY - 10} x2={434 + i * 4} y2={CY + 10} stroke="#0a0a0b" strokeWidth="0.8" />
-            ))}
-            {/* Orange function-selector dot — RM signature */}
-            <circle cx={443} cy={CY} r="2.5" fill="#fb7185" />
+            {/* Crown — spins tactilely on each layer change */}
+            <g
+              transform={`rotate(${crownSpin} 443 ${CY})`}
+              style={{ transition: 'transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+            >
+              <rect x={432} y={CY - 12} width={22} height={24} fill="#2a2a2e" stroke="#0a0a0b" strokeWidth="0.6" rx={3} />
+              {[0, 1, 2, 3, 4].map((i) => (
+                <line key={i} x1={434 + i * 4} y1={CY - 10} x2={434 + i * 4} y2={CY + 10} stroke="#0a0a0b" strokeWidth="0.8" />
+              ))}
+              {/* Orange function-selector dot — RM signature */}
+              <circle cx={443} cy={CY} r="2.5" fill="#fb7185" />
+            </g>
             {/* Lower pusher */}
             <rect x={432} y={CY + 45} width={16} height={11} fill="#2a2a2e" stroke="#0a0a0b" strokeWidth="0.6" rx={2} />
             <text x={440} y={CY + 54} textAnchor="middle" fill="#8a8a93" fontSize="4" letterSpacing="0.5" style={{ fontFamily: 'var(--font-mono), monospace' }}>

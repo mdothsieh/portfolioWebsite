@@ -16,6 +16,20 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Gentle scroll-snap: section tops "settle" without trapping the scroll. */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 96px; /* clears the fixed two-row nav */
+}
+
+/* Each top-level section becomes a soft snap point */
+main > section,
+main > .reveal {
+  scroll-snap-align: start;
+}
+
+/* Cross-document view transitions where supported (progressive enhancement) */
+@view-transition {
+  navigation: auto;
 }
 
 /* tabular numerals */
@@ -25,7 +39,7 @@ html {
 
 /* selection color */
 ::selection {
-  background: #f59e0b;
+  background: #fb7185;
   color: #0a0a0b;
 }
 
@@ -38,9 +52,150 @@ html {
   scrollbar-width: none;
 }
 
-/* live audio waveform bars on the Now Playing hero (components/RecentPlays.tsx) */
+/* live audio waveform bars on the Now Playing hero */
 @keyframes waveform {
   0%   { transform: scaleY(0.2); }
   50%  { transform: scaleY(1); }
   100% { transform: scaleY(0.35); }
+}
+
+/* ============ Scroll-reveal (components/Reveal.tsx) ============ */
+/* "Pronounced": fade + 32px rise + slight scale, expressive easing. */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.985);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal[data-shown='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Always show content for users who prefer less motion or have JS disabled */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* top scroll-progress bar (components/ScrollProgress.tsx) */
+.scroll-progress {
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+}
+
+/* ============ Atmosphere: grain + vignette (components/Atmosphere.tsx) ============ */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 40; /* grain/vignette ride above content, below the nav (z-50) */
+  pointer-events: none;
+}
+/* edge vignette — pulls focus to center, adds depth to the flat black */
+.atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+/* fine film grain */
+.atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background-image: var(--grain);
+  opacity: 0.035;
+  animation: grain-shift 7s steps(6) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-6%, 3%); }
+  40%  { transform: translate(4%, -5%); }
+  60%  { transform: translate(-3%, 6%); }
+  80%  { transform: translate(5%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ============ Aurora field (components/Aurora.tsx) ============ */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.aurora span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.16;
+  will-change: transform;
+}
+.aurora .a1 {
+  width: 46vw; height: 46vw; left: -8vw; top: -6vw;
+  background: #fb7185;
+  animation: aurora-drift-1 22s ease-in-out infinite alternate;
+}
+.aurora .a2 {
+  width: 38vw; height: 38vw; right: -6vw; top: 4vw;
+  background: #818cf8;
+  animation: aurora-drift-2 26s ease-in-out infinite alternate;
+}
+.aurora .a3 {
+  width: 30vw; height: 30vw; left: 30vw; bottom: -10vw;
+  background: #f59e0b;
+  opacity: 0.1;
+  animation: aurora-drift-3 30s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift-1 { to { transform: translate(8vw, 6vw) scale(1.15); } }
+@keyframes aurora-drift-2 { to { transform: translate(-6vw, 8vw) scale(1.1); } }
+@keyframes aurora-drift-3 { to { transform: translate(4vw, -6vw) scale(1.2); } }
+
+/* ============ Album-color wash (components/AmbientWash.tsx) ============ */
+.ambient-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    100% 55% at 50% 0%,
+    var(--wash, rgba(251, 113, 133, 0.10)) 0%,
+    transparent 60%
+  );
+  transition: background 1.6s ease;
+}
+
+/* ============ Hero decode (components/DecodeText.tsx) ============ */
+.decode-char { display: inline-block; white-space: pre; }
+
+/* ============ Page transition (app/template.tsx) ============ */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.page-in {
+  animation: page-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ============ 中文 bicultural numerals ============ */
+.cn-numeral {
+  font-variant-numeric: normal;
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere::after,
+  .aurora .a1,
+  .aurora .a2,
+  .aurora .a3 { animation: none !important; }
+  .page-in { animation: none !important; }
 }

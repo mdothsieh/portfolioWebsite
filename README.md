@@ -144,6 +144,10 @@ script writes a valid empty file and the heatmap renders as an empty grid with a
 SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
 SPOTIFY_REFRESH_TOKEN=
+
+# NetEase Cloud Music 网易云音乐 — leave blank to hide the 网易云 tab
+NETEASE_UID=
+NETEASE_COOKIE=
 ```
 
 ### Getting a Spotify refresh token (one-time, ~5 minutes)
@@ -177,6 +181,29 @@ SPOTIFY_REFRESH_TOKEN=
 For production, add a second Redirect URI in your Spotify app settings:
 `https://<your-vercel-domain>/callback` — you only need it for the one-time
 auth dance, never at runtime.
+
+### Connecting NetEase Cloud Music 网易云音乐 (one-time, ~3 minutes)
+
+> NetEase has **no official API and no OAuth**. There's also no real-time
+> "now playing" — so the 网易云 tab shows your **most-played tracks** (last 7
+> days + all time) from your play records. Auth is cookie-based.
+
+1. Make your play records public: NetEase app/web → **设置 → 隐私设置 →**
+   enable **"允许其他人查看我的播放记录"**. Without this the endpoint returns nothing.
+2. Get your **UID**: open https://music.163.com in a browser, go to your
+   profile. The URL looks like `music.163.com/#/user/home?id=123456789` — the
+   number after `id=` is `NETEASE_UID`.
+3. Get your **cookie**: while logged in at music.163.com, open DevTools
+   (⌥⌘I) → **Application → Cookies → https://music.163.com** → find the row
+   named **`MUSIC_U`** and copy its **Value** (a long string). That's
+   `NETEASE_COOKIE` — paste the value only, without the `MUSIC_U=` prefix.
+4. Put both in `.env.local`, save, restart `npm run dev`. The 网易云 tab in the
+   Listening section will populate.
+
+Notes: the `MUSIC_U` cookie is long-lived but not permanent — if the tab goes
+empty months later, re-grab the cookie. Add the same two vars in Vercel →
+Settings → Environment Variables for production. The cookie is a secret; it
+stays in `.env.local` (gitignored) and is only ever read server-side.
 
 ## Deploy to the internet (Vercel)
 

@@ -3,10 +3,12 @@ import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { ExperienceTimeline } from '@/components/ExperienceTimeline';
 import { ClaudeUsageHeatmap } from '@/components/ClaudeUsageHeatmap';
-import { RecentPlays } from '@/components/RecentPlays';
+import { ListeningSection } from '@/components/ListeningSection';
 import { BoardingPass } from '@/components/BoardingPass';
 import { SkillsDashboard } from '@/components/SkillsDashboard';
 import { Hobbies } from '@/components/Hobbies';
+import { Reveal } from '@/components/Reveal';
+import { Kicker } from '@/components/Kicker';
 import { getAllProjects } from '@/lib/projects';
 import { getClaudeUsage } from '@/lib/claude-usage';
 import { getNowPlaying } from '@/lib/spotify';
@@ -40,30 +42,30 @@ export default async function Home() {
       <Hero isPlaying={nowPlaying.isPlaying} todayActivity={todayActivity} />
 
       {/* 02 — About + Currently */}
-      <About />
+      <Reveal><About /></Reveal>
 
       {/* 03 — Experience */}
-      <ExperienceTimeline />
+      <Reveal><ExperienceTimeline /></Reveal>
 
       {/* Boarding-pass CV interlude */}
-      <section className="max-w-3xl mx-auto px-6 pb-12">
+      <Reveal as="section" className="max-w-3xl mx-auto px-6 pb-12">
         <BoardingPass />
-      </section>
+      </Reveal>
 
       {/* 04 — Builds */}
       <section id="projects" className="max-w-3xl mx-auto px-6 py-24">
-        <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-          04 — Builds
-        </div>
-        <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl">Selected projects.</h2>
-          <Link
-            href="/projects"
-            className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors"
-          >
-            all projects ↗
-          </Link>
-        </div>
+        <Reveal>
+          <Kicker cn="零四" num="04" en="Builds" zh="作品" />
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
+            <h2 className="font-serif text-4xl md:text-5xl">Selected projects.</h2>
+            <Link
+              href="/projects"
+              className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors"
+            >
+              all projects ↗
+            </Link>
+          </div>
+        </Reveal>
 
         {projects.length === 0 ? (
           <div className="border border-dashed border-divider rounded p-8 text-center text-sm text-muted font-mono">
@@ -72,11 +74,16 @@ export default async function Home() {
           </div>
         ) : (
           <ol className="space-y-10">
-            {projects.slice(0, 4).map((p) => (
-              <li key={p.slug}>
-                <Link href={`/projects/${p.slug}`} className="block group">
+            {projects.slice(0, 4).map((p, i) => (
+              <Reveal as="li" key={p.slug} delay={i * 90}>
+                <Link
+                  href={`/projects/${p.slug}`}
+                  className="block group relative pl-0 hover:pl-5 transition-[padding] duration-300"
+                >
+                  {/* hover accent bar */}
+                  <span className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-rose-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
-                    <div className="font-serif text-2xl group-hover:text-accent-project transition-colors">
+                    <div className="font-serif text-2xl group-hover:text-rose-300 transition-colors">
                       {p.frontmatter.title}
                     </div>
                     <div className="text-[10px] font-mono uppercase tracking-widest text-muted">
@@ -99,46 +106,51 @@ export default async function Home() {
                     </div>
                   )}
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ol>
         )}
       </section>
 
       {/* 05 — Stack */}
-      <SkillsDashboard />
+      <Reveal><SkillsDashboard /></Reveal>
 
       {/* 06 — Off-Hours */}
-      <Hobbies />
+      <Reveal><Hobbies /></Reveal>
 
       {/* 07 — Claude usage */}
       <section className="max-w-3xl mx-auto px-6 py-24">
-        <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-          07 — Claude usage
-        </div>
-        <h2 className="font-serif text-4xl md:text-5xl mb-3">
-          Claude usage{suffix}.
-        </h2>
-        <p className="text-muted mb-12 max-w-xl">
-          How often Claude and I actually work together. Quiet weeks are usually travel
-          or exams; spikes are hackathons and project crunches.
-        </p>
-        <ClaudeUsageHeatmap data={usage} />
+        <Reveal>
+          <Kicker cn="零七" num="07" en="Claude usage" zh="Claude 使用" />
+          <h2 className="font-serif text-4xl md:text-5xl mb-3">
+            Claude usage{suffix}.
+          </h2>
+          <p className="text-muted mb-12 max-w-xl">
+            How often Claude and I actually work together. Quiet weeks are usually travel
+            or exams; spikes are hackathons and project crunches.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <ClaudeUsageHeatmap data={usage} />
+        </Reveal>
       </section>
 
       {/* 08 — Listening */}
       <section id="listening" className="max-w-3xl mx-auto px-6 py-24">
-        <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-          08 — Listening
-        </div>
-        <h2 className="font-serif text-4xl md:text-5xl mb-3">
-          What I&apos;m listening to.
-        </h2>
-        <p className="text-muted mb-12 max-w-xl">
-          The hero is whatever is playing right now, or the last track if Spotify is silent.
-          Below: the chronological tail. Click any row to open it in Spotify.
-        </p>
-        <RecentPlays />
+        <Reveal>
+          <Kicker cn="零八" num="08" en="Listening" zh="在听" />
+          <h2 className="font-serif text-4xl md:text-5xl mb-3">
+            What I&apos;m listening to.
+          </h2>
+          <p className="text-muted mb-12 max-w-xl">
+            Two libraries, two languages. Spotify shows what&apos;s playing right now and
+            the recent tail; 网易云音乐 shows my most-played tracks. Switch sources with
+            the toggle.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <ListeningSection />
+        </Reveal>
       </section>
 
       <footer className="border-t border-divider mt-12">

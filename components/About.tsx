@@ -1,11 +1,10 @@
 import { bio, currently } from '@/data/about';
+import { Kicker } from './Kicker';
 
 export function About() {
   return (
     <section id="about" className="max-w-5xl mx-auto px-6 py-24">
-      <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-        02 — About
-      </div>
+      <Kicker cn="零二" num="02" en="About" zh="关于" />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-12 lg:gap-16">
         {/* --- Bio paragraphs --- */}

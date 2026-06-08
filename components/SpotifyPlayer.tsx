@@ -1,15 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
-import {
-  Play,
-  Pause,
-  ChevronUp,
-  ChevronDown,
-  Star,
-  ExternalLink,
-} from 'lucide-react';
+import { ChevronUp, ChevronDown, ExternalLink } from 'lucide-react';
 
 // Minimal track shape — mirrors lib/spotify.ts SpotifyTrack
 export interface PlayerTrack {
@@ -19,7 +12,7 @@ export interface PlayerTrack {
   album: string;
   albumImage: string | null;
   spotifyUrl: string;
-  previewUrl: string | null;
+  previewUrl: string | null; // kept for shape compatibility; no longer used
 }
 
 export interface PlayerEntry {
@@ -34,8 +27,11 @@ interface Props {
   nowPlaying?: PlayerTrack;
 }
 
+// Spotify deprecated 30-second preview_url in the Web API (Nov 2024), so the
+// old <audio> preview no longer works. We embed Spotify's official iframe
+// player instead — full track for logged-in Premium users, 30s otherwise,
+// and it needs no preview_url.
 export function SpotifyPlayer({ plays, nowPlaying }: Props) {
-  // Stitch nowPlaying (if any) to the head, but de-dup if it already matches the most recent.
   const queue: PlayerTrack[] = useMemo(() => {
     const base = plays.map((p) => p.track);
     if (nowPlaying && base[0]?.id !== nowPlaying.id) return [nowPlaying, ...base];
@@ -43,45 +39,10 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
   }, [plays, nowPlaying]);
 
   const [idx, setIdx] = useState(0);
-  const [expanded, setExpanded] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [vol, setVol] = useState(0.7);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [expanded, setExpanded] = useState(true);
 
   const track = queue[idx];
-
-  // Reset playback state when the track changes
-  useEffect(() => {
-    setPlaying(false);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-  }, [idx]);
-
-  // Sync volume to the audio element
-  useEffect(() => {
-    if (audioRef.current) audioRef.current.volume = vol;
-  }, [vol]);
-
   if (!track) return null;
-
-  const canPreview = !!track.previewUrl;
-
-  const togglePlay = async () => {
-    if (!canPreview || !audioRef.current) return;
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
-    } else {
-      try {
-        await audioRef.current.play();
-        setPlaying(true);
-      } catch {
-        // autoplay blocked or fetch failed — silent fail, UI just doesn't toggle
-      }
-    }
-  };
 
   const prev = () => setIdx((i) => Math.max(0, i - 1));
   const next = () => setIdx((i) => Math.min(queue.length - 1, i + 1));
@@ -111,48 +72,35 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
         </div>
       )}
 
-      {/* === Compact header — always visible === */}
+      {/* === Compact header === */}
       <div className="relative flex items-center gap-3 p-3">
-        {/* play / pause */}
-        <button
-          onClick={togglePlay}
-          disabled={!canPreview}
-          aria-label={playing ? 'Pause preview' : 'Play 30-second preview'}
-          className={`
-            shrink-0 w-11 h-11 rounded-full flex items-center justify-center
-            transition-all
-            ${canPreview
-              ? 'bg-primary text-bg hover:scale-105 active:scale-95'
-              : 'bg-divider text-muted cursor-not-allowed'
-            }
-          `}
+        {/* album thumb + live dot */}
+        <a
+          href={track.spotifyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 relative"
+          aria-label={`Open ${track.name} in Spotify`}
         >
-          {playing ? (
-            <Pause className="w-5 h-5 fill-current" strokeWidth={0} />
-          ) : (
-            <Play className="w-5 h-5 fill-current ml-[2px]" strokeWidth={0} />
-          )}
-        </button>
-
-        {/* album thumb */}
-        {track.albumImage && (
-          <a
-            href={track.spotifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0"
-            aria-label={`Open ${track.name} in Spotify`}
-          >
+          {track.albumImage ? (
             <Image
               src={track.albumImage}
               alt={track.album}
-              width={44}
-              height={44}
-              className="w-11 h-11 rounded-md object-cover"
+              width={48}
+              height={48}
+              className="w-12 h-12 rounded-md object-cover"
               unoptimized
             />
-          </a>
-        )}
+          ) : (
+            <span className="w-12 h-12 rounded-md bg-divider block" />
+          )}
+          {nowPlaying && idx === 0 && (
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+            </span>
+          )}
+        </a>
 
         {/* track meta */}
         <a
@@ -161,7 +109,10 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
           rel="noopener noreferrer"
           className="min-w-0 flex-1 group"
         >
-          <div className="font-serif text-base leading-tight truncate group-hover:text-rose-300 transition-colors">
+          <span className="text-[9px] font-mono uppercase tracking-widest text-green-500/90">
+            {nowPlaying && idx === 0 ? 'now playing' : 'from recent'}
+          </span>
+          <div className="font-serif text-lg leading-tight truncate group-hover:text-green-200 transition-colors mt-0.5">
             {track.name}
           </div>
           <div className="text-[10px] font-mono lowercase tracking-wider text-muted truncate mt-0.5">
@@ -173,7 +124,7 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
         <button
           onClick={() => setExpanded((e) => !e)}
           aria-label={expanded ? 'Collapse player' : 'Expand player'}
-          className="shrink-0 p-2 text-muted hover:text-primary transition-colors"
+          className="shrink-0 p-2 text-muted hover:text-green-300 transition-colors"
         >
           {expanded ? (
             <ChevronDown className="w-4 h-4" strokeWidth={1.75} />
@@ -183,7 +134,7 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
         </button>
       </div>
 
-      {/* === Expanded body === */}
+      {/* === Expanded body — official Spotify embed === */}
       <div
         className={`
           relative grid transition-[grid-template-rows] duration-300 ease-out
@@ -192,7 +143,20 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
       >
         <div className="overflow-hidden">
           <div className="border-t border-divider p-4 space-y-4">
-            {/* prev / next row */}
+            {/* The real player — full track for Premium, 30s otherwise */}
+            <iframe
+              key={track.id}
+              title={`Spotify player — ${track.name}`}
+              src={`https://open.spotify.com/embed/track/${track.id}?theme=0`}
+              width="100%"
+              height={152}
+              frameBorder={0}
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              className="rounded-xl block w-full"
+            />
+
+            {/* queue nav */}
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={prev}
@@ -200,7 +164,7 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
                 className="
                   py-2.5 rounded-md border border-divider
                   font-mono text-[11px] lowercase tracking-widest
-                  text-muted hover:text-primary hover:border-muted
+                  text-muted hover:text-green-300 hover:border-muted
                   transition-colors
                   disabled:opacity-40 disabled:cursor-not-allowed
                 "
@@ -213,7 +177,7 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
                 className="
                   py-2.5 rounded-md border border-divider
                   font-mono text-[11px] lowercase tracking-widest
-                  text-muted hover:text-primary hover:border-muted
+                  text-muted hover:text-green-300 hover:border-muted
                   transition-colors
                   disabled:opacity-40 disabled:cursor-not-allowed
                 "
@@ -222,84 +186,29 @@ export function SpotifyPlayer({ plays, nowPlaying }: Props) {
               </button>
             </div>
 
-            {/* Ferrari-red volume slider */}
-            <div className="flex items-center gap-3">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0">
-                vol
-              </span>
-              <input
-                type="range"
-                min={0}
-                max={1}
-                step={0.01}
-                value={vol}
-                onChange={(e) => setVol(parseFloat(e.target.value))}
-                className="
-                  flex-1 h-1 rounded-full appearance-none cursor-pointer
-                  bg-divider
-                  [&::-webkit-slider-thumb]:appearance-none
-                  [&::-webkit-slider-thumb]:h-3
-                  [&::-webkit-slider-thumb]:w-3
-                  [&::-webkit-slider-thumb]:rounded-full
-                  [&::-webkit-slider-thumb]:bg-primary
-                  [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(251,113,133,0.4)]
-                  [&::-moz-range-thumb]:h-3
-                  [&::-moz-range-thumb]:w-3
-                  [&::-moz-range-thumb]:rounded-full
-                  [&::-moz-range-thumb]:bg-primary
-                  [&::-moz-range-thumb]:border-0
-                "
-                style={{
-                  background: `linear-gradient(to right, rgb(244 63 94) 0%, rgb(244 63 94) ${vol * 100}%, rgb(31 31 36) ${vol * 100}%, rgb(31 31 36) 100%)`,
-                }}
-              />
-            </div>
-
             {/* meta row */}
-            <div className="flex items-center justify-between text-[10px] font-mono lowercase tracking-wider text-muted">
-              <span>
-                spotify preview {canPreview ? '· 30s' : '· unavailable'} ·{' '}
-                <Star className="inline w-3 h-3 -mt-0.5 fill-rose-400 text-rose-400" strokeWidth={0} />
-              </span>
-              <span className="tabular">
+            <div className="flex items-center justify-between">
+              <a
+                href={track.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex items-center gap-1.5
+                  text-[11px] font-mono lowercase tracking-widest
+                  text-green-400 hover:text-green-300 transition-colors
+                  border-b border-green-400/60 hover:border-green-300 pb-0.5
+                "
+              >
+                <ExternalLink className="w-3 h-3" strokeWidth={1.75} />
+                open on spotify
+              </a>
+              <span className="text-[10px] font-mono lowercase tracking-wider text-muted tabular-nums">
                 {idx + 1}/{queue.length}
               </span>
             </div>
-
-            <a
-              href={track.spotifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                flex items-center gap-1.5
-                text-[11px] font-mono lowercase tracking-widest
-                text-rose-400 hover:text-rose-300 transition-colors
-                border-b border-rose-400/60 hover:border-rose-300 pb-0.5 w-fit
-              "
-            >
-              <ExternalLink className="w-3 h-3" strokeWidth={1.75} />
-              open on spotify
-            </a>
           </div>
         </div>
       </div>
-
-      {/* hidden audio element drives the actual preview playback */}
-      {canPreview && (
-        <audio
-          ref={audioRef}
-          src={track.previewUrl!}
-          preload="none"
-          onEnded={() => {
-            setPlaying(false);
-            // auto-advance to next preview when one ends
-            if (idx < queue.length - 1) {
-              setIdx((i) => i + 1);
-              setTimeout(() => audioRef.current?.play().then(() => setPlaying(true)).catch(() => {}), 100);
-            }
-          }}
-        />
-      )}
     </div>
   );
 }

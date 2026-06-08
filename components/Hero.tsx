@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { ArrowDownToLine, Mail } from 'lucide-react';
 import { WatchFace } from './WatchFace';
+import { Parallax } from './Parallax';
+import { Aurora } from './Aurora';
+import { DecodeText } from './DecodeText';
 
 interface Props {
   isPlaying?: boolean;
@@ -9,16 +12,17 @@ interface Props {
 
 export function Hero({ isPlaying, todayActivity }: Props) {
   return (
-    <section className="min-h-screen flex flex-col">
-      <div className="max-w-6xl mx-auto px-6 pt-40 pb-6 w-full">
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
+      <Aurora />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-40 pb-6 w-full">
         <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
           CS · USC · class of 2028 · open to Summer 2027 SWE / Applied AI
         </div>
 
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] max-w-3xl">
-          Martin Hsieh — I build full-stack systems and applied-AI tooling.
-          Three internships shipped, joining{' '}
-          <span className="text-rose-400">Flex Ltd</span> for Summer 2026.
+          <DecodeText text="Martin Hsieh — I build full-stack systems and applied-AI tooling. Three internships shipped, joining " />
+          <DecodeText text="Flex Ltd" className="text-rose-400" duration={900} />
+          <DecodeText text=" for Summer 2026." duration={950} />
         </h1>
 
         <p className="text-muted mt-6 max-w-xl text-sm">
@@ -53,8 +57,10 @@ export function Hero({ isPlaying, todayActivity }: Props) {
         </div>
       </div>
 
-      <div className="flex-1 max-w-6xl w-full mx-auto px-6 pb-16 flex items-center justify-center">
-        <WatchFace isPlaying={isPlaying} todayActivity={todayActivity} />
+      <div className="relative z-10 flex-1 max-w-6xl w-full mx-auto px-6 pb-16 flex items-center justify-center">
+        <Parallax speed={56} className="w-full flex items-center justify-center">
+          <WatchFace isPlaying={isPlaying} todayActivity={todayActivity} />
+        </Parallax>
       </div>
     </section>
   );

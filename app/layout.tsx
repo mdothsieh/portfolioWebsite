@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import { Nav } from '@/components/Nav';
+import { ScrollProgress } from '@/components/ScrollProgress';
+import { Atmosphere } from '@/components/Atmosphere';
+import { AmbientWash } from '@/components/AmbientWash';
+import { LiveFavicon } from '@/components/LiveFavicon';
+import { CommandPalette } from '@/components/CommandPalette';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -73,9 +78,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${inter.variable} ${mono.variable} ${serif.variable}`}
     >
-      <body className="bg-bg text-primary font-sans antialiased">
+      <body className="relative bg-bg text-primary font-sans antialiased">
+        <AmbientWash />
+        <Atmosphere />
+        <LiveFavicon />
+        <ScrollProgress />
         <Nav />
         {children}
+        <CommandPalette />
       </body>
     </html>
   );
