@@ -429,11 +429,22 @@ async function scanLive(): Promise<UsageData> {
   return aggregate(files, chatMessages);
 }
 
-// Scans the filesystem on every call — no caching here, freshness wins over CPU.
-// Page-level dynamic rendering (`export const dynamic = 'force-dynamic'` in
-// app/page.tsx) ensures every page request triggers a new scan.
+// A full live scan recursively walks ~/.claude (+ other Claude dirs) and reads
+// every transcript .jsonl synchronously — cheap on a fresh machine, but heavy
+// for active Claude users with thousands of transcripts. Running it on every
+// render made navigating to pages that render the heatmap (home, via <About>)
+// noticeably slow. Memoize for a short TTL so back-to-back navigations reuse the
+// last scan; this matches the home page's `revalidate = 30` freshness window.
+const USAGE_TTL_MS = 30_000;
+let usageCache: { at: number; data: UsageData } | null = null;
+
 export async function getClaudeUsage(): Promise<UsageData> {
-  return scanLive();
+  if (usageCache && Date.now() - usageCache.at < USAGE_TTL_MS) {
+    return usageCache.data;
+  }
+  const data = await scanLive();
+  usageCache = { at: Date.now(), data };
+  return data;
 }
 
 // Exported for the sync script (which writes the snapshot for prod deploys).

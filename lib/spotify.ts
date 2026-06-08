@@ -31,7 +31,14 @@ export interface RecentPlay {
   track: SpotifyTrack;
 }
 
+// Cache the access token until shortly before it expires. Without this we hit
+// Spotify's token endpoint on every server render (the token is valid ~1h), an
+// avoidable network round-trip that slowed each page load.
+let tokenCache: { token: string; exp: number } | null = null;
+
 async function getAccessToken(): Promise<string | null> {
+  if (tokenCache && Date.now() < tokenCache.exp) return tokenCache.token;
+
   const id = process.env.SPOTIFY_CLIENT_ID;
   const secret = process.env.SPOTIFY_CLIENT_SECRET;
   const refresh = process.env.SPOTIFY_REFRESH_TOKEN;
@@ -51,8 +58,12 @@ async function getAccessToken(): Promise<string | null> {
     cache: 'no-store',
   });
   if (!res.ok) return null;
-  const json = (await res.json()) as { access_token?: string };
-  return json.access_token ?? null;
+  const json = (await res.json()) as { access_token?: string; expires_in?: number };
+  if (!json.access_token) return null;
+  // Refresh 60s early to avoid races against expiry.
+  const ttlMs = ((json.expires_in ?? 3600) - 60) * 1000;
+  tokenCache = { token: json.access_token, exp: Date.now() + ttlMs };
+  return json.access_token;
 }
 
 function normalizeTrack(t: any): SpotifyTrack {
@@ -70,7 +81,15 @@ function normalizeTrack(t: any): SpotifyTrack {
   };
 }
 
+// Short memo so the Nav + page (and rapid navigations) share one fetch instead
+// of hitting Spotify on every server render. 15s is well within "now playing"
+// freshness; the client SpotifyPill still polls the API route for live updates.
+const NOW_TTL_MS = 15_000;
+let nowCache: { at: number; data: NowPlaying } | null = null;
+
 export async function getNowPlaying(): Promise<NowPlaying> {
+  if (nowCache && Date.now() - nowCache.at < NOW_TTL_MS) return nowCache.data;
+
   const token = await getAccessToken();
   if (!token) return { isPlaying: false };
   const res = await fetch(NOW_URL, {
@@ -80,7 +99,12 @@ export async function getNowPlaying(): Promise<NowPlaying> {
   if (res.status === 204 || res.status >= 400) return { isPlaying: false };
   const data = await res.json();
   if (!data?.item) return { isPlaying: false };
-  return { isPlaying: Boolean(data.is_playing), track: normalizeTrack(data.item) };
+  const result: NowPlaying = {
+    isPlaying: Boolean(data.is_playing),
+    track: normalizeTrack(data.item),
+  };
+  nowCache = { at: Date.now(), data: result };
+  return result;
 }
 
 export async function getRecentlyPlayed(limit = 10): Promise<RecentPlay[]> {
