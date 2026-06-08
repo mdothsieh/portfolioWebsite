@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { UsageData, UsageDay } from '@/lib/claude-usage';
 
 interface Props {
@@ -8,13 +9,14 @@ interface Props {
 }
 
 // Inverted intensity scale: pale pink = quiet day, deep crimson = heavy day.
-// Reads like glowing embers — more activity, more saturation.
+// Smooth single-hue green → lime ramp (GitHub-style, AM-tinted). Monotonic in
+// lightness with no muddy olive midtone, so it reads cleanly on the dark dial.
 const LEVEL_BG: string[] = [
-  'bg-divider',         // 0 — no activity
-  'bg-rose-300/70',     // 1 — light
-  'bg-rose-400/90',     // 2 — moderate
-  'bg-rose-600',        // 3 — heavy
-  'bg-rose-800',        // 4 — most intense
+  'bg-divider',     // 0 — no activity
+  'bg-[#1a5236]',   // 1 — deep racing green
+  'bg-[#237d4a]',   // 2 — emerald
+  'bg-[#4cae57]',   // 3 — fresh green
+  'bg-[#bcd62e]',   // 4 — lime (most intense)
 ];
 
 const CELL_PX = 11;
@@ -344,15 +346,23 @@ function HoverTooltip({ day, x, y }: { day: UsageDay; x: number; y: number }) {
   const vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  // Default: above-right of cursor. Flip if it'd clip.
+  // Default: above-right of cursor. Flip/clamp so it stays on-screen.
   let left = x + 14;
   let top = y - H - 14;
   if (left + W > vw - 12) left = x - W - 14;
   if (top < 12) top = y + 18;
+  if (top + H > vh - 12) top = vh - H - 12;
 
   const isEmpty = day.count === 0;
 
-  return (
+  // Render into <body> via a portal. The heatmap lives inside a `.reveal`
+  // wrapper whose `will-change: transform` makes it a containing block for
+  // fixed-position descendants — so a `fixed` tooltip rendered in-tree would be
+  // offset relative to that wrapper instead of the viewport (clientX/clientY).
+  // Portaling to body, which has no such ancestor, keeps fixed coords correct.
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div
       className="fixed z-50 pointer-events-none w-[240px] rounded-lg border border-divider bg-bg/95 backdrop-blur p-4 shadow-2xl"
       style={{ left, top }}
@@ -391,6 +401,7 @@ function HoverTooltip({ day, x, y }: { day: UsageDay; x: number; y: number }) {
           </div>
         </>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 }
