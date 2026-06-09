@@ -7,7 +7,7 @@ export const nowSections: { heading: string; items: string[] }[] = [
   {
     heading: 'This week',
     items: [
-      'Polishing v1 of this portfolio for the public launch.',
+      'Polishing public portfolio.',
       'Prepping for Flex Ltd onboarding in Suzhou — Summer 2026 internship starts soon.',
     ],
   },
@@ -25,13 +25,6 @@ export const nowSections: { heading: string; items: string[] }[] = [
     items: [
       'Internal tooling for the Flex Ltd manufacturing-software bridge (pre-internship).',
       'Side experiments with multi-step agent workflows + tool-use APIs.',
-    ],
-  },
-  {
-    heading: 'Reading',
-    items: [
-      'Parfit · Reasons and Persons',
-      'Anthropic blog posts on agent design',
     ],
   },
   {

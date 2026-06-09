@@ -27,6 +27,8 @@ export async function GET() {
     const data = await res.json();
     return NextResponse.json(data);
   } catch (e) {
-    return NextResponse.json({ error: 'network', message: String(e) }, { status: 500 });
+    // Log the detail server-side; don't leak internal error/network detail to the client.
+    console.error('github contributions fetch failed:', e);
+    return NextResponse.json({ error: 'network' }, { status: 500 });
   }
 }
