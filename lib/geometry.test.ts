@@ -1,3 +1,4 @@
+// Tests for lib/geometry.ts (round3, polar) — the watch-face math helpers.
 import { describe, it, expect } from 'vitest';
 import { round3, polar } from './geometry';
 

@@ -1,3 +1,5 @@
+// Experience/timeline content (internships, founder roles). Consumed by
+// components/ExperienceTimeline.tsx. Edit freely to update the resume timeline.
 export interface Experience {
   id: string;
   org: string;

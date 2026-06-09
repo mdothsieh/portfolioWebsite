@@ -1,3 +1,5 @@
+// Apple touch icon (180×180), generated from JSX at build time via next/og.
+// Sibling of app/icon.tsx (favicon) and app/opengraph-image.tsx (social card).
 import { ImageResponse } from 'next/og';
 
 export const size = { width: 180, height: 180 };

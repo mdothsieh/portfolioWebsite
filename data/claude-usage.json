@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T06:03:56.210Z",
+  "generated_at": "2026-06-09T06:28:08.837Z",
   "days": [
     {
       "date": "2026-04-25",
@@ -195,7 +195,7 @@
       "count": 1165,
       "tokens": 62387949,
       "sessions": 7,
-      "level": 4
+      "level": 3
     },
     {
       "date": "2026-05-23",
@@ -318,20 +318,20 @@
     },
     {
       "date": "2026-06-09",
-      "count": 1048,
-      "tokens": 122895214,
-      "sessions": 3,
-      "level": 3
+      "count": 1330,
+      "tokens": 134919928,
+      "sessions": 4,
+      "level": 4
     }
   ],
   "stats": {
     "active_days": 23,
     "current_streak": 2,
-    "sessions": 30,
-    "tokens": 1800941097
+    "sessions": 31,
+    "tokens": 1812965811
   },
   "start_date": "2026-04-25",
   "empty": false,
-  "files_scanned": 40,
+  "files_scanned": 41,
   "chat_messages_imported": 0
 }

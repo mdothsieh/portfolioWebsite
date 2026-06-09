@@ -1,3 +1,5 @@
+// Section 02 "About" (server). Renders the bio + "currently" lists from
+// data/about.ts. Uses the shared <Kicker> bilingual section header.
 import { bio, currently } from '@/data/about';
 import { Kicker } from './Kicker';
 

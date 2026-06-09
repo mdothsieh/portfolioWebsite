@@ -1,3 +1,4 @@
+// Tests for components/SpecStrip.tsx (Vitest + Testing Library).
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { SpecStrip } from './SpecStrip';

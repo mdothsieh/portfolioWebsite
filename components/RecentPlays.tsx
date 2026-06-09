@@ -1,3 +1,5 @@
+// Server component: recent Spotify plays. Pulls now-playing + recently-played
+// from lib/spotify and hands entries to the <SpotifyPlayer> client component.
 import Image from 'next/image';
 import { getNowPlaying, getRecentlyPlayed } from '@/lib/spotify';
 import { SpotifyPlayer, type PlayerEntry } from './SpotifyPlayer';

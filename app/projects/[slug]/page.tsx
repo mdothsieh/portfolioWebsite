@@ -1,3 +1,6 @@
+// Project detail page (/projects/[slug]). Loads one MDX case study via
+// lib/projects getProjectBySlug() and renders it server-side with <MDXRemote>.
+// generateStaticParams() pre-builds one page per content/projects/*.mdx file.
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getProjectBySlug, getAllProjects } from '@/lib/projects';
 import { notFound } from 'next/navigation';

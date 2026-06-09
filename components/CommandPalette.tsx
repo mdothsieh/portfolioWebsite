@@ -1,5 +1,7 @@
 'use client';
 
+// Global ⌘K command palette (client). Mounted once in app/layout.tsx so it's
+// available on every route; provides keyboard navigation to sections and routes.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 

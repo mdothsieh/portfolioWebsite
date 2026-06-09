@@ -1,3 +1,4 @@
+// Site footer (server). Includes the <AskAI> visitor prompt. Mounted in app/layout.tsx.
 import { AskAI } from './AskAI';
 
 export function SiteFooter() {

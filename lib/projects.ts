@@ -1,3 +1,6 @@
+// Server-only MDX project loader. Reads content/projects/*.mdx and parses
+// frontmatter with gray-matter. getAllProjects() (drafts dropped, newest first)
+// and getProjectBySlug() back app/page.tsx, /projects, /projects/[slug], and sitemap.ts.
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';

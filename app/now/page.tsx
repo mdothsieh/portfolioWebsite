@@ -1,3 +1,5 @@
+// /now page — "what I'm doing now" (Derek Sivers convention).
+// Pure content render from data/now.ts (nowSections + lastUpdated).
 import Link from 'next/link';
 import { lastUpdated, nowSections } from '@/data/now';
 

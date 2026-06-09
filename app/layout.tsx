@@ -1,3 +1,8 @@
+// Root layout for every route. Loads the three Google fonts (mapped to the
+// legacy --font-inter/serif/mono CSS vars that Tailwind reads), defines site-wide
+// SEO/OpenGraph metadata, and mounts the persistent chrome wrapping all pages:
+// AmbientWash, Atmosphere, LiveFavicon, ScrollProgress, Nav, SiteFooter,
+// CommandPalette. Per-navigation entrance animation lives in app/template.tsx.
 import type { Metadata } from 'next';
 import { Hanken_Grotesk, Spline_Sans_Mono, Schibsted_Grotesk } from 'next/font/google';
 import './globals.css';

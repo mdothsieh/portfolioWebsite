@@ -1,5 +1,7 @@
 'use client';
 
+// Client "now playing" pill. Polls /api/spotify/now-playing and shows the
+// current track; hides itself when nothing is playing or creds are unset.
 import { useEffect, useState } from 'react';
 
 interface NowPlaying {

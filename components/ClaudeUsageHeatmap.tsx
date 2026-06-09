@@ -1,5 +1,8 @@
 'use client';
 
+// Section 07 widget (client): GitHub-style year heatmap of Claude usage.
+// Receives UsageData (produced by lib/claude-usage.ts, passed down from
+// app/page.tsx) as a prop and renders the ember→red activity grid with tooltips.
 import { useState, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import type { UsageData, UsageDay } from '@/lib/claude-usage';

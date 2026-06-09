@@ -1,3 +1,6 @@
+// Section 01 hero (server). Headline + CTAs alongside the live <WatchFace>
+// centerpiece. Receives isPlaying + todayActivity props from app/page.tsx to
+// drive the watch's live registers.
 import Link from 'next/link';
 import { ArrowDownToLine, Mail } from 'lucide-react';
 import { WatchFace } from './WatchFace';

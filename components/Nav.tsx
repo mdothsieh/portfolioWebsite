@@ -1,3 +1,6 @@
+// Sticky top navigation (server). Two stacked rows in one fixed container:
+// nav links (<NavLinks>) + a live strip. Fetches now-playing via lib/spotify
+// for the live row. Mounted in app/layout.tsx. (Replaced the retired LiveStrip.)
 import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { getNowPlaying } from '@/lib/spotify';

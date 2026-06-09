@@ -1,5 +1,7 @@
 'use client';
 
+// Client card for the listening section. Rendered by ListeningSection with
+// server-fetched Spotify/NetEase data; owns the source-toggle UI between them.
 import { useState } from 'react';
 import Image from 'next/image';
 import { SpotifyPlayer, type PlayerEntry, type PlayerTrack } from './SpotifyPlayer';

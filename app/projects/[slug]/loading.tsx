@@ -1,3 +1,4 @@
+// Suspense loading fallback for /projects/[slug] (Next.js convention).
 export default function Loading() {
   return (
     <main className="max-w-2xl mx-auto px-6 pt-32 pb-24">

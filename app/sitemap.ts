@@ -1,3 +1,4 @@
+// Generates /sitemap.xml: static routes + one entry per project (from lib/projects).
 import type { MetadataRoute } from 'next';
 import { getAllProjects } from '@/lib/projects';
 

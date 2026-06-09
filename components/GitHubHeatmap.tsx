@@ -1,5 +1,7 @@
 'use client';
 
+// Client widget: 365-day GitHub contribution grid. Fetches
+// /api/github/contributions on mount; shows a friendly fallback on error.
 import { useEffect, useState } from 'react';
 
 interface ContributionDay {

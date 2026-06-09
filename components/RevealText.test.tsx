@@ -1,3 +1,4 @@
+// Tests for components/RevealText.tsx (Vitest + Testing Library).
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render } from '@testing-library/react';
 import { RevealText } from './RevealText';

@@ -1,5 +1,7 @@
 'use client';
 
+// Client view: NetEase (网易云音乐) most-played tracks, brand-red themed.
+// Data originates in lib/netease and arrives via the ListeningSection server component.
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';

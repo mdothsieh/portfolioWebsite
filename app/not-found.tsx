@@ -1,3 +1,4 @@
+// Custom 404 page (Next.js convention route). Rendered for any unmatched path.
 import Link from 'next/link';
 
 export default function NotFound() {

@@ -1,3 +1,5 @@
+// Section 03 "Experience" (server). Vertical timeline built from
+// data/experience.ts. Uses the shared <Kicker> + <RevealText> heading.
 import { experiences } from '@/data/experience';
 import { Kicker } from './Kicker';
 import { RevealText } from './RevealText';

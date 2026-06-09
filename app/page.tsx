@@ -1,3 +1,8 @@
+// Landing page (/). The composition root: fetches projects (lib/projects),
+// Claude usage (lib/claude-usage) and Spotify now-playing (lib/spotify) on the
+// server, then lays out the numbered sections from components/*. revalidate=30
+// serves a cached snapshot while keeping live feeds fresh. Full section order is
+// documented in overview.md §3.
 import Link from 'next/link';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';

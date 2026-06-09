@@ -1,3 +1,5 @@
+// Section 06 "Off-Hours" (server). Renders personality vignettes from
+// data/hobbies.ts. Uses the shared <Kicker> + <RevealText> heading.
 import { hobbies, type HobbyVignette } from '@/data/hobbies';
 import { Kicker } from './Kicker';
 import { RevealText } from './RevealText';

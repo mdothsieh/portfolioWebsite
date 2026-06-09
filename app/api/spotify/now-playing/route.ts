@@ -1,3 +1,6 @@
+// API route: GET /api/spotify/now-playing
+// Thin JSON endpoint over lib/spotify.ts getNowPlaying(). Returns only curated
+// track fields (never the access token). Polled by the SpotifyPill client component.
 import { NextResponse } from 'next/server';
 import { getNowPlaying } from '@/lib/spotify';
 

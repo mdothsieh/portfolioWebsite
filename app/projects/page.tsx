@@ -1,3 +1,5 @@
+// Projects index (/projects). Lists every project from lib/projects
+// getAllProjects() (drafts dropped, newest first). Each entry links to /projects/[slug].
 import Link from 'next/link';
 import { getAllProjects } from '@/lib/projects';
 
