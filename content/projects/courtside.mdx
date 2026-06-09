@@ -1,0 +1,53 @@
+---
+title: Courtside
+slug: courtside
+tagline: A desktop basketball team-management system — coaches and players track games, per-player statistics, rankings, and scheduling from one role-aware JavaFX app backed by MySQL.
+date: '2024-01-10'
+stack:
+  - Java
+  - JavaFX
+  - MySQL
+  - JDBC
+  - Druid
+  - Maven
+metrics:
+  - label: type
+    value: JavaFX desktop
+  - label: roles
+    value: Coach / Player
+  - label: data
+    value: MySQL + Druid
+  - label: build
+    value: Maven
+github_repo: mdothsieh/dcsz-basketball
+---
+
+> Courtside is a desktop application for running a basketball team end to end — managing the roster, recording games and per-player stats, ranking performance, and scheduling — built as my IB Computer Science HL Internal Assessment.
+
+## The problem
+
+A coach managing a squad keeps the same information in five different places: who's on the roster, what happened in each game, how every player is trending, and what's on the calendar. Spreadsheets drift, paper box scores get lost, and there's no single view that a coach and a player can both trust. Courtside collapses all of that into one application with a real database behind it, so the roster, the games, and the statistics are always the same source of truth.
+
+## What it does
+
+- **Role-aware experience** — coaches and players sign in to different home screens. Coaches manage the roster, edit games, and run the team; players get a focused view of their own schedule and stats.
+- **Game and box-score tracking** — every game is recorded with its detailed per-player breakdown, so individual contributions roll up into team results.
+- **Statistics and rankings** — performance is aggregated into statistics tables and leaderboards that rank players across the season.
+- **Scheduling** — a calendar view organizes games and team events.
+- **Search and roster management** — players and records are searchable; rosters can be imported and exported as CSV, with offline local-user management for when there's no database to hand.
+
+## How it's built
+
+A native JavaFX desktop app over a MySQL database — chosen deliberately so the assessment could go deep on data modeling and core data structures rather than lean on a framework:
+
+- **JavaFX + FXML** define every screen (login, coach and player home pages, calendar, rankings, search, and the editor dialogs), themed with BootstrapFX.
+- **MySQL over JDBC**, pooled through a **Druid** `DataSource` with a SQL-logging filter, is the system of record. A thin **DAO layer** (users, games, game details) keeps persistence isolated from the UI.
+- **Custom data structures from scratch** — including a generic linked list implemented and unit-tested by hand — satisfy the IA's algorithms requirement instead of reaching for `java.util` everywhere.
+- **Maven** (with the wrapper) builds the project; the codebase is organized under the Java Platform Module System (`module-info.java`).
+- **Credentials are externalized** — the database password loads from an untracked `db.properties` or environment variables, never hardcoded in source.
+
+The interesting engineering is in the boundaries: keeping the game/game-detail/statistics model consistent as box scores aggregate into rankings, isolating all persistence behind DAOs, and proving the hand-written data structures correct with their own unit tests.
+
+## Context
+
+Built as my Internal Assessment for **IB Computer Science HL** at DCSZ (my high school). The full assessment documentation — planning, design, development, and evaluation — accompanied the original submission; the code now lives on GitHub with a README covering the MySQL schema setup and the Maven build.

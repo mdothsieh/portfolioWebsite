@@ -140,7 +140,7 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 ### `content/projects/*.mdx` — the project "CMS"
 Each `.mdx` file is one project case study. Frontmatter shape (see `lib/projects.ts`):
 `title, slug, tagline, date, stack[], metrics[], github_repo?, cover?, draft?`.
-Currently: `usc-fit.mdx`. **To add a project:** drop a new `.mdx` here — it auto-appears
+Currently: `usc-fit.mdx`, `courtside.mdx`. **To add a project:** drop a new `.mdx` here — it auto-appears
 at `/projects` and gets its own `/projects/<slug>` page.
 
 ### `data/*.ts` — typed content modules

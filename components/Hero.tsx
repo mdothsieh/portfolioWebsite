@@ -59,13 +59,13 @@ export function Hero({ isPlaying, todayActivity }: Props) {
               <ArrowDownToLine className="w-3.5 h-3.5" strokeWidth={2} />
               Resume
             </a>
-            <Link
+            <a
               href="mailto:mdothsieh@gmail.com"
               className="btn-glow inline-flex items-center gap-2 px-4 py-2 rounded-full border border-divider text-muted text-xs font-mono uppercase tracking-widest hover:text-primary hover:border-muted"
             >
               <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
               Get in touch
-            </Link>
+            </a>
             <Link
               href="#projects"
               className="group text-xs font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors px-2"
