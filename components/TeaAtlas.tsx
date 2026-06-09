@@ -23,9 +23,9 @@ const ALL_BOUNDS: L.LatLngBoundsLiteral = [
 ];
 
 function pinColor(rating: number): string {
-  if (rating >= 9) return '#CEDC00';   // Aston Martin lime — top picks
-  if (rating >= 7) return '#3ec79e';   // emerald-teal — solid
-  return '#5c726a';                    // sage muted
+  if (rating >= 9) return '#FF3B30';   // Corsa red — top picks
+  if (rating >= 7) return '#ff8079';   // light red — solid
+  return '#8b9099';                    // graphite muted
 }
 
 interface Props {
@@ -95,7 +95,7 @@ export function TeaAtlas({ spots = teaSpots }: Props) {
           display:block; width:14px; height:14px;
           background:${color};
           border-radius:9999px;
-          border:2px solid #08160F;
+          border:2px solid #08090b;
           box-shadow:0 0 0 1px ${color}33;
           transition:transform 200ms ease;
         "></span>`,
@@ -182,7 +182,7 @@ export function TeaAtlas({ spots = teaSpots }: Props) {
           Map attribution lives in bottom-right per CARTO/OSM ToS. */}
       <style jsx global>{`
         .leaflet-container {
-          background: #08160F;
+          background: #08090b;
           font-family: var(--font-mono), monospace;
         }
         .leaflet-control-zoom a {

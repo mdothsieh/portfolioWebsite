@@ -8,8 +8,8 @@
 
 html,
 body {
-  background: #08160F;
-  color: #ededf0;
+  background: #08090b;
+  color: #f4f6f8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -29,11 +29,12 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
-/* Display serif (Bodoni Moda) — the high-contrast Didone reads tighter and
-   more deliberate at heading sizes; a hair of negative tracking + balanced
-   text-wrap keeps big headlines from looking loose. */
+/* Display grotesk (Schibsted Grotesk) — the clean engineered grotesk reads
+   tight and confident at heading sizes; negative tracking + balanced
+   text-wrap keep big headlines crisp and deliberate (Apple/Ferrari). */
 .font-serif {
-  letter-spacing: -0.012em;
+  letter-spacing: -0.028em;
+  font-weight: 800;
 }
 h1.font-serif,
 h2.font-serif {
@@ -47,8 +48,8 @@ body {
 
 /* selection color */
 ::selection {
-  background: #CEDC00;
-  color: #08160F;
+  background: #FF3B30;
+  color: #08090b;
 }
 
 /* hide scrollbar on the graph filter scroll, etc */
@@ -82,9 +83,32 @@ body {
   transform: none;
 }
 
+/* ============ Word slide-up reveal (components/RevealText.tsx) ============ */
+/* Each word rises a touch and fades in, staggered left-to-right — the signature
+   site-wide text motion. Words are inline-block so they animate independently
+   while still wrapping naturally. */
+.rt-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.42em);
+  transition:
+    opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-text[data-shown='true'] .rt-word {
+  opacity: 1;
+  transform: none;
+}
+
 /* Always show content for users who prefer less motion or have JS disabled */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .rt-word {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -94,11 +118,11 @@ body {
   }
 }
 
-/* top scroll-progress bar (components/ScrollProgress.tsx) — lime telemetry line */
+/* top scroll-progress bar (components/ScrollProgress.tsx) — red telemetry line */
 .scroll-progress {
   transform-origin: 0 50%;
   transform: scaleX(var(--progress, 0));
-  box-shadow: 0 0 10px rgba(206, 220, 0, 0.55);
+  box-shadow: 0 0 10px rgba(255, 59, 48, 0.55);
 }
 
 /* ============================================================================
@@ -121,7 +145,7 @@ body {
   animation: hero-rise 0.85s var(--ease-out-expo) both;
 }
 
-/* Premium button: lift, lime glow, and a metallic sheen that sweeps across. */
+/* Premium button: lift, red glow, and a metallic sheen that sweeps across. */
 .btn-glow {
   position: relative;
   overflow: hidden;
@@ -129,7 +153,7 @@ body {
 }
 .btn-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px -8px rgba(206, 220, 0, 0.5);
+  box-shadow: 0 8px 24px -8px rgba(255, 59, 48, 0.5);
 }
 .btn-glow:active {
   transform: translateY(0);
@@ -171,26 +195,27 @@ body {
   z-index: 40; /* grain/vignette ride above content, below the nav (z-50) */
   pointer-events: none;
 }
-/* edge vignette — racing-green-tinted, pulls focus to centre and adds depth */
+/* edge vignette — neutral graphite, pulls focus to centre and adds depth */
 .atmosphere::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 90% at 50% 40%, transparent 52%, rgba(2, 12, 8, 0.62) 100%);
+  background: radial-gradient(120% 90% at 50% 40%, transparent 52%, rgba(2, 3, 5, 0.66) 100%);
 }
 
 /* ============ Carbon-fibre weave — global material texture (behind content) ===
-   Aston Martin's defining material. Two fine diagonal weaves at low opacity read
-   as woven carbon over the racing-green base without competing with content. */
+   A shared performance-car material (Ferrari/Apple-grade). Two fine diagonal
+   weaves at low opacity read as woven carbon over the near-black base without
+   competing with content. */
 .carbon-field {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.55;
+  opacity: 0.5;
   background-image:
-    repeating-linear-gradient(45deg, rgba(220, 235, 225, 0.018) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 4px);
+    repeating-linear-gradient(45deg, rgba(235, 238, 242, 0.016) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.24) 0 1px, transparent 1px 4px);
   background-size: 4px 4px;
 }
 
@@ -198,9 +223,9 @@ body {
    read as physical surfaces lifted off the dial. Pair with bg-surface/border. */
 .panel-carbon {
   background-image:
-    linear-gradient(rgba(220, 235, 225, 0.03), transparent 42%),
-    repeating-linear-gradient(45deg, rgba(220, 235, 225, 0.014) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 4px);
+    linear-gradient(rgba(235, 238, 242, 0.028), transparent 42%),
+    repeating-linear-gradient(45deg, rgba(235, 238, 242, 0.012) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 4px);
   background-size: auto, 4px 4px, 4px 4px;
   box-shadow:
     inset 0 1px 0 rgba(220, 235, 225, 0.05),
@@ -241,18 +266,20 @@ body {
 }
 .aurora .a1 {
   width: 46vw; height: 46vw; left: -8vw; top: -6vw;
-  background: #CEDC00;
+  background: #FF3B30; /* Corsa red — the signature glow */
+  opacity: 0.13;
   animation: aurora-drift-1 22s ease-in-out infinite alternate;
 }
 .aurora .a2 {
   width: 38vw; height: 38vw; right: -6vw; top: 4vw;
-  background: #006d5b; /* Aston Martin racing green */
+  background: #7a1410; /* deep ember */
+  opacity: 0.14;
   animation: aurora-drift-2 26s ease-in-out infinite alternate;
 }
 .aurora .a3 {
   width: 30vw; height: 30vw; left: 30vw; bottom: -10vw;
-  background: #1f9e6e; /* emerald */
-  opacity: 0.1;
+  background: #2a2e36; /* cool graphite, keeps depth without colour cast */
+  opacity: 0.18;
   animation: aurora-drift-3 30s ease-in-out infinite alternate;
 }
 @keyframes aurora-drift-1 { to { transform: translate(8vw, 6vw) scale(1.15); } }
@@ -267,7 +294,7 @@ body {
   pointer-events: none;
   background: radial-gradient(
     100% 55% at 50% 0%,
-    var(--wash, rgba(206, 220, 0, 0.10)) 0%,
+    var(--wash, rgba(255, 59, 48, 0.08)) 0%,
     transparent 60%
   );
   transition: background 1.6s ease;

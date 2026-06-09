@@ -1,12 +1,13 @@
 import { hobbies, type HobbyVignette } from '@/data/hobbies';
 import { Kicker } from './Kicker';
+import { RevealText } from './RevealText';
 
 export function Hobbies() {
   return (
     <section id="off-hours" className="max-w-3xl mx-auto px-6 py-24">
       <Kicker cn="零六" num="06" en="Off-Hours" zh="工余" />
       <h2 className="font-serif text-4xl md:text-5xl mb-3">
-        What I do when the IDE is closed.
+        <RevealText text="What I do when the IDE is closed." />
       </h2>
       <p className="text-muted mb-12 max-w-xl">
         Four practices, each unrelated to software, each quietly shaping how I think about it.

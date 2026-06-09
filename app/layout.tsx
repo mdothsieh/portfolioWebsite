@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Hanken_Grotesk, JetBrains_Mono, Bodoni_Moda } from 'next/font/google';
+import { Hanken_Grotesk, Spline_Sans_Mono, Schibsted_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Nav } from '@/components/Nav';
 import { ScrollProgress } from '@/components/ScrollProgress';
@@ -16,15 +16,18 @@ const sans = Hanken_Grotesk({
   variable: '--font-inter',
   display: 'swap',
 });
-const mono = JetBrains_Mono({
+// Mono: telemetry / instrument labels — engineered, even-width.
+const mono = Spline_Sans_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'swap',
 });
-// Display: high-contrast Didone for headings, big numerals, and the watch
-// signature — sharp, luxury, precise.
-const serif = Bodoni_Moda({
+// Display: clean engineered grotesk for headings, big numerals, and the watch
+// signature — Apple-crisp, Ferrari-precise. (Keeps the --font-serif var name so
+// every existing `font-serif` heading resolves to it with no per-file changes.)
+const serif = Schibsted_Grotesk({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-serif',
   display: 'swap',
 });

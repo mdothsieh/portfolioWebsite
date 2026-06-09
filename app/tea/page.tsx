@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { TeaAtlasClient } from '@/components/TeaAtlasClient';
 
+// The Leaflet map is client-only (ssr:false). Rendering this route on demand
+// instead of statically prerendering it avoids pulling Leaflet's window-touching
+// code into the build-time prerender, which crashes static generation.
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Tea Atlas',
   description:
@@ -16,8 +21,8 @@ export default function TeaPage() {
       <h1 className="font-serif text-5xl mb-3">Where I actually drink.</h1>
       <p className="text-muted mb-12 max-w-2xl">
         Pinned across the two cities I move between. Pin color is my rating —
-        rose = 9+, pink = solid, muted = situational. Hover a pin for the card;
-        click a card to fly the map there.
+        red = 9+, light red = solid, muted = situational. Hover a pin for the
+        card; click a card to fly the map there.
       </p>
 
       <TeaAtlasClient />

@@ -8,15 +8,15 @@ interface Props {
   data: UsageData;
 }
 
-// Inverted intensity scale: pale pink = quiet day, deep crimson = heavy day.
-// Smooth single-hue green → lime ramp (GitHub-style, AM-tinted). Monotonic in
-// lightness with no muddy olive midtone, so it reads cleanly on the dark dial.
+// Single-hue ember → red ramp (GitHub-style, Corsa-tinted). Monotonic in
+// lightness from a dark maroon to the signature red, so it reads cleanly on
+// the near-black dial: quiet day = faint ember, heavy day = full Ferrari red.
 const LEVEL_BG: string[] = [
   'bg-divider',     // 0 — no activity
-  'bg-[#1a5236]',   // 1 — deep racing green
-  'bg-[#237d4a]',   // 2 — emerald
-  'bg-[#4cae57]',   // 3 — fresh green
-  'bg-[#bcd62e]',   // 4 — lime (most intense)
+  'bg-[#5e1714]',   // 1 — dark ember
+  'bg-[#9e241c]',   // 2 — deep red
+  'bg-[#d62f24]',   // 3 — red
+  'bg-[#ff3b30]',   // 4 — signature red (most intense)
 ];
 
 const CELL_PX = 11;
@@ -329,14 +329,16 @@ function ScannedAgo({ iso }: { iso: string }) {
     return () => clearInterval(id);
   }, []);
 
-  if (!iso) return <span className="text-primary">just now</span>;
+  if (!iso) return <span className="text-primary" suppressHydrationWarning>just now</span>;
   const diff = Math.max(0, Math.floor((now - new Date(iso).getTime()) / 1000));
   let label: string;
   if (diff < 5) label = 'just now';
   else if (diff < 60) label = `${diff}s ago`;
   else if (diff < 3600) label = `${Math.floor(diff / 60)}m ago`;
   else label = `${Math.floor(diff / 3600)}h ago`;
-  return <span className="text-primary">{label}</span>;
+  // now is seeded from Date.now() at SSR vs hydration → the second-resolution
+  // label legitimately differs by a tick; suppress the expected mismatch.
+  return <span className="text-primary" suppressHydrationWarning>{label}</span>;
 }
 
 function HoverTooltip({ day, x, y }: { day: UsageDay; x: number; y: number }) {

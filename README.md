@@ -38,7 +38,7 @@ components/
 
 content/
   projects/
-    trojan-rooms.mdx         demo project — delete/replace freely
+    usc-fit.mdx              project case study (one .mdx per project)
 
 data/
   graph.ts                   nodes + edges for the Living Graph

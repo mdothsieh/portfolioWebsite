@@ -1,0 +1,51 @@
+---
+title: USC FIT
+slug: usc-fit
+tagline: USC's First Fitness Matching Platform — a campus web app that helps students find, schedule, and join fitness activities together.
+date: '2026-05-05'
+stack:
+  - Java
+  - JSP / Servlets
+  - MySQL
+  - JDBC
+  - Maven
+  - Tomcat
+metrics:
+  - label: course
+    value: CSCI 201
+  - label: core features
+    value: '6'
+  - label: auth
+    value: USC email
+  - label: build
+    value: Maven → WAR
+github_repo: mdothsieh/CSCI201_FinalProject-
+---
+
+> USC FIT (USC's First Fitness Matching Platform) was the team final for **CSCI 201 — Principles of Software Development**: a full-stack Java web application for USC students to find and join campus fitness activities.
+
+## The problem
+
+Working out is easier with people, but finding a partner at the right facility, time, and skill level is friction nobody wants to manage in group chats. USC FIT turns that into a structured matching problem: students post and discover activities, filter by interest and skill, and commit to a scheduled session — with light accountability so plans actually hold.
+
+## What it does
+
+- **USC-email registration and login** — accounts are validated against a `usc.edu` address; guests can browse activities before signing up.
+- **Event creation and scheduling** — students create activities tied to a facility and time, and others join them.
+- **Profiles with interests and skill levels** — so matches are between people who actually fit, not just whoever's free.
+- **Facility information and ratings** — campus gyms and courts carry details and a rating, surfacing where to go.
+- **Cancellation penalties** — a small accountability mechanic that discourages flaking and keeps scheduled sessions real.
+
+## How it's built
+
+A classic server-rendered MVC stack, built deliberately without a heavyweight framework so the request lifecycle stays visible end to end:
+
+- **Java Servlets + JSP** handle routing, request handling, and views.
+- **MySQL over JDBC** is the system of record; the schema (`schema.sql`) models users, activities, facilities, and sign-ups.
+- **Maven** builds the project into a WAR that deploys to **Tomcat**.
+
+The interesting engineering is in the boundaries — validating USC identity at the auth edge, keeping the activity/sign-up data model consistent under concurrent joins, and enforcing the cancellation-penalty rules in one place rather than scattering them across handlers.
+
+## Context
+
+Built as a team project for CSCI 201. The codebase lives on GitHub; the README documents the feature set, the MySQL schema setup, and the Maven → Tomcat deploy path.

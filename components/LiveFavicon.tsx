@@ -25,7 +25,7 @@ export function LiveFavicon() {
       ctx.clearRect(0, 0, 64, 64);
 
       // disc
-      ctx.fillStyle = '#08160F';
+      ctx.fillStyle = '#08090b';
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
       ctx.fill();
@@ -34,7 +34,7 @@ export function LiveFavicon() {
       ctx.stroke();
 
       // 12 o'clock pip
-      ctx.fillStyle = '#CEDC00';
+      ctx.fillStyle = '#FF3B30';
       ctx.beginPath();
       ctx.arc(cx, cy - r + 6, 2.2, 0, Math.PI * 2);
       ctx.fill();
@@ -53,11 +53,11 @@ export function LiveFavicon() {
       const s = now.getSeconds();
       const m = now.getMinutes() + s / 60;
       const h = (now.getHours() % 12) + m / 60;
-      hand((h / 12) * 360, 12, 5, '#ededf0');
-      hand((m / 60) * 360, 18, 3.5, '#ededf0');
-      hand((s / 60) * 360, 20, 1.6, '#CEDC00');
+      hand((h / 12) * 360, 12, 5, '#f4f6f8');
+      hand((m / 60) * 360, 18, 3.5, '#f4f6f8');
+      hand((s / 60) * 360, 20, 1.6, '#FF3B30');
 
-      ctx.fillStyle = '#ededf0';
+      ctx.fillStyle = '#f4f6f8';
       ctx.beginPath();
       ctx.arc(cx, cy, 2.4, 0, Math.PI * 2);
       ctx.fill();

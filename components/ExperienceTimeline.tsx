@@ -1,11 +1,14 @@
 import { experiences } from '@/data/experience';
 import { Kicker } from './Kicker';
+import { RevealText } from './RevealText';
 
 export function ExperienceTimeline() {
   return (
     <section id="experience" className="max-w-3xl mx-auto px-6 py-24">
       <Kicker cn="零三" num="03" en="Experience" zh="经历" />
-      <h2 className="font-serif text-4xl md:text-5xl mb-3">Three summers, three cities.</h2>
+      <h2 className="font-serif text-4xl md:text-5xl mb-3">
+        <RevealText text="Three summers, three cities." />
+      </h2>
       <p className="text-muted mb-16 max-w-xl">
         Hardware-floor pragmatism in Suzhou, full-stack iteration speed in Taipei, applied-AI ambition in Los Angeles.
       </p>

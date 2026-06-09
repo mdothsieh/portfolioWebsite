@@ -11,7 +11,7 @@ export function BoardingPass() {
     <a
       href="/cv.pdf"
       download="martin-hsieh-cv.pdf"
-      className="panel-carbon group block relative w-full overflow-hidden rounded-2xl border border-divider bg-surface/70 transition-all hover:border-muted hover:shadow-[0_0_60px_-15px_rgba(206,220,0,0.25)]"
+      className="panel-carbon group block relative w-full overflow-hidden rounded-2xl border border-divider bg-surface/70 transition-all hover:border-muted hover:shadow-[0_0_60px_-15px_rgba(255,59,48,0.25)]"
     >
       {/* subtle Ferrari-red accent stripe at top */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rose-500 to-transparent opacity-60" />

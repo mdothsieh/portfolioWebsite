@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { graphData, type GraphNode, type NodeKind } from '@/data/graph';
+import { round3 as r3, polar } from '@/lib/geometry';
 
 // ---------------------------------------------------------------------------
 // Layers — what the 12 hour markers represent (switched via the chrono pushers)
@@ -19,15 +20,17 @@ const LAYERS: Record<LayerKey, { label: string; kinds: NodeKind[] }> = {
 const LAYER_ORDER: LayerKey[] = ['builds', 'experience', 'stack', 'hobbies'];
 
 // ---------------------------------------------------------------------------
-// Palette (Aston Martin F1 — racing green + acid lime)
+// Palette (Corsa — Apple × Ferrari, Daytona-inspired reverse-panda)
 // ---------------------------------------------------------------------------
 
-const LIME = '#CEDC00';
-const SILVER = '#eaf2ee';
-const MUTED = '#7f978b';
+const RED = '#FF3B30';      // Apple system red ≈ Ferrari Rosso — the signature
+const SILVER = '#f4f6f8';   // crisp off-white (markers, hands, dial text)
+const MUTED = '#9aa0a9';    // graphite gray (minor ticks, dial labels)
+const SUB_INK = '#16191f';  // dark text on the light silver sub-registers
+const SUB_MUTE = '#6a6f78'; // muted label on the silver sub-registers
 
 // ---------------------------------------------------------------------------
-// Geometry — round "Solaria" grand-complication case
+// Geometry — round chronograph case, tri-compax (Daytona-style) layout
 // ---------------------------------------------------------------------------
 
 const VB_W = 480;
@@ -35,100 +38,37 @@ const VB_H = 640;
 const CX = 240;
 const CY = 300;
 
-const R_CASE = 198;     // outer case
-const R_BEZEL_O = 190;  // bezel outer
-const R_BEZEL_I = 172;  // bezel inner
-const R_RING24 = 180;   // celestial / sidereal scale
-const R_ZODIAC = 158;   // constellation ring
-const R_CHAP = 150;     // hour-marker (data) chapter ring
-const R_DIAL = 146;     // green dial disc
+const R_CASE = 198;     // polished steel case
+const R_BEZEL_O = 192;  // tachymeter bezel outer
+const R_BEZEL_I = 162;  // tachymeter bezel inner (meets the flange)
+const R_TACHY = 177;    // tachymeter numeral radius
+const R_FLANGE = 159;   // thin flange ring between bezel and dial
+const R_DIAL = 156;     // matte black dial
+const R_TRACK = 148;    // outer minute track
+const R_CHAP = 143;     // hour-marker outer tip / node-dot ring
+const R_MARK_I = 126;   // hour-marker (baton) inner end
 
-const R_HAND_HOUR = 64;
-const R_HAND_MIN = 98;
+const SUB_C = 80;       // sub-register centre distance from dial centre
+const SUB_R = 28;       // sub-register radius
+const ACT_C = { x: CX - SUB_C, y: CY };        // 9 o'clock — Claude activity
+const PULSE_C = { x: CX + SUB_C, y: CY };       // 3 o'clock — Spotify pulse
+const DATE_C = { x: CX, y: CY + SUB_C };        // 6 o'clock — date
+
+const R_HAND_HOUR = 52;
+const R_HAND_MIN = 86;
 const R_HAND_SEC = 120;
 
-const SUB_R = 28;
-const DATE_C = { x: CX, y: CY - 84 };
-const WORK_C = { x: CX - 84, y: CY + 18 };
-const PULSE_C = { x: CX + 84, y: CY + 18 };
-const TOURB_C = { x: CX, y: CY + 92 };
-const TOURB_R = 30;
-const MOON_C = { x: CX - 58, y: CY - 44 };
-const MOON_R = 15;
-const SUN_C = { x: CX + 58, y: CY - 44 };
-const SUN_R = 15;
-
-function polar(cx: number, cy: number, r: number, deg: number) {
-  const rad = ((deg - 90) * Math.PI) / 180;
-  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
-}
+// Tachymeter scale: [unitsPerHour, angleFrom12]. angle = 21600 / value.
+const TACHY: [number, number][] = [
+  [400, 54], [300, 72], [240, 90], [200, 108], [175, 123.4], [150, 144],
+  [130, 166.2], [120, 180], [110, 196.4], [100, 216], [90, 240], [80, 270],
+  [70, 308.6], [65, 332.3], [60, 360],
+];
 
 // Spread polar() as x/y/cx/cy props on an element (relative to the dial centre).
 function polarObj(r: number, deg: number) {
   const p = polar(CX, CY, r, deg);
   return { x: p.x, y: p.y, cx: p.x, cy: p.y };
-}
-
-// ---------------------------------------------------------------------------
-// Deterministic decorative geometry (precomputed once — never re-rendered)
-// ---------------------------------------------------------------------------
-
-function seeded(seed: number) {
-  let s = seed >>> 0;
-  return () => {
-    s = (s * 1664525 + 1013904223) >>> 0;
-    return s / 4294967296;
-  };
-}
-
-// Starfield scattered across the dial.
-const STARS = (() => {
-  const rnd = seeded(7);
-  const out: { x: number; y: number; r: number; o: number }[] = [];
-  for (let i = 0; i < 46; i++) {
-    const a = rnd() * Math.PI * 2;
-    const rad = Math.sqrt(rnd()) * (R_DIAL - 12);
-    out.push({
-      x: CX + Math.cos(a) * rad,
-      y: CY + Math.sin(a) * rad,
-      r: rnd() * 1.0 + 0.3,
-      o: rnd() * 0.45 + 0.2,
-    });
-  }
-  return out;
-})();
-
-// Sunburst guilloché — faint radial lines from the centre.
-const SUNBURST = Array.from({ length: 120 }, (_, i) => {
-  const p = polar(CX, CY, R_DIAL - 2, i * 3);
-  return { x: p.x, y: p.y, o: i % 2 ? 0.05 : 0.09 };
-});
-
-// Zodiac constellation clusters around the ring.
-const ZODIAC = (() => {
-  const rnd = seeded(19);
-  return Array.from({ length: 12 }, (_, i) => {
-    const c = polar(CX, CY, R_ZODIAC, i * 30 + 15);
-    const stars = Array.from({ length: 3 }, () => ({
-      x: c.x + (rnd() - 0.5) * 14,
-      y: c.y + (rnd() - 0.5) * 14,
-      r: rnd() * 0.9 + 0.5,
-    }));
-    return { stars };
-  });
-})();
-
-// ---------------------------------------------------------------------------
-// Moon phase (0 = new, 0.5 = full) — drives the moonphase aperture
-// ---------------------------------------------------------------------------
-
-function moonPhase(date: Date) {
-  const synodic = 29.530588853;
-  const ref = Date.UTC(2000, 0, 6, 18, 14) / 86400000;
-  const days = date.getTime() / 86400000 - ref;
-  let phase = (days % synodic) / synodic;
-  if (phase < 0) phase += 1;
-  return phase;
 }
 
 // ---------------------------------------------------------------------------
@@ -140,12 +80,13 @@ export interface WatchFaceProps {
   todayActivity?: number;
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
+// Deterministic seed time so the server render and the client's first render
+// agree (no hydration mismatch). It's the classic 10:08 watch-display pose; the
+// rAF loop below snaps to real time on mount, so it's only ever a single frame.
+const SEED_TIME = new Date(2025, 0, 1, 10, 8, 0, 0);
 
 export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFaceProps) {
-  const [now, setNow] = useState<Date>(() => new Date());
+  const [now, setNow] = useState<Date>(SEED_TIME);
   const [layerKey, setLayerKey] = useState<LayerKey>('builds');
   const [hoveredHour, setHoveredHour] = useState<number | null>(null);
   const [crownSpin, setCrownSpin] = useState(0);
@@ -188,11 +129,9 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
   const secondAngle = (seconds / 60) * 360;
   const minuteAngle = (minutes / 60) * 360;
   const hourAngle = (hours / 12) * 360;
-  const dayNight = (now.getHours() + minutes / 60) / 24;
 
   const dateNum = now.getDate();
   const dayShort = now.toLocaleString('en', { weekday: 'short' }).toUpperCase();
-  const phase = moonPhase(now);
 
   const hovered = hoveredHour != null ? slots[hoveredHour] : null;
 
@@ -210,130 +149,122 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
     window.setTimeout(() => setPressed(null), 170);
   }
 
-  // ----- Static art (case, bezel, celestial rings, dial, sub-dial frames,
-  // tourbillon cage). None of this depends on time, so it is memoized and the
-  // 60fps clock never re-renders it. ----------------------------------------
-  const staticArt = useMemo(() => (
-    <g>
-      {/* lugs */}
-      <g opacity="0.9">
-        <rect x={CX - 26} y={70} width={52} height={26} rx={5} fill="url(#caseGrad)" />
-        <rect x={CX - 26} y={VB_H - 96} width={52} height={26} rx={5} fill="url(#caseGrad)" />
-      </g>
-
-      {/* case + bezel */}
-      <circle cx={CX} cy={CY} r={R_CASE} fill="url(#caseGrad)" />
-      <circle cx={CX} cy={CY} r={R_BEZEL_O} fill="none" stroke="url(#bezelGrad)" strokeWidth="6" />
-      <circle cx={CX} cy={CY} r={R_BEZEL_I} fill="none" stroke="#11271f" strokeWidth="1.5" />
-
-      {/* sidereal / celestial scale on the bezel */}
-      {Array.from({ length: 96 }, (_, i) => {
-        const major = i % 8 === 0;
-        const a = polar(CX, CY, R_RING24, i * (360 / 96));
-        const b = polar(CX, CY, R_RING24 - (major ? 7 : 3.5), i * (360 / 96));
-        return (
-          <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-            stroke={major ? LIME : MUTED} strokeWidth={major ? 1.3 : 0.6}
-            opacity={major ? 0.55 : 0.3} strokeLinecap="round" />
-        );
-      })}
-
-      {/* slowly-rotating zodiac constellation ring */}
+  // ----- Static art: case, tachymeter bezel, dial, minute track, sub-register
+  // wells, and branding. Time-independent → memoized so the 60fps clock never
+  // re-renders it. --------------------------------------------------------------
+  const staticArt = useMemo(() => {
+    const subWell = (c: { x: number; y: number }) => (
       <g>
-        <animateTransform attributeName="transform" type="rotate"
-          from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`} dur="300s" repeatCount="indefinite" />
-        <circle cx={CX} cy={CY} r={R_ZODIAC} fill="none" stroke="#1b3a2c" strokeWidth="0.5" opacity="0.6" />
-        {ZODIAC.map((z, i) => (
-          <g key={i} opacity="0.5">
-            {z.stars.map((s, j) => (
-              <circle key={j} cx={s.x} cy={s.y} r={s.r} fill={SILVER} />
-            ))}
-            <line x1={z.stars[0].x} y1={z.stars[0].y} x2={z.stars[1].x} y2={z.stars[1].y}
-              stroke={SILVER} strokeWidth="0.25" opacity="0.5" />
-            <line x1={z.stars[1].x} y1={z.stars[1].y} x2={z.stars[2].x} y2={z.stars[2].y}
-              stroke={SILVER} strokeWidth="0.25" opacity="0.5" />
-          </g>
+        {/* light silver register (reverse-panda) */}
+        <circle cx={c.x} cy={c.y} r={SUB_R} fill="url(#subSilver)" />
+        {/* snailed concentric grooves */}
+        {[SUB_R - 5, SUB_R - 11, SUB_R - 17, SUB_R - 22].map((rr) => (
+          <circle key={rr} cx={c.x} cy={c.y} r={rr} fill="none" stroke="#aab0ba" strokeWidth="0.4" opacity="0.5" />
         ))}
+        {/* edge graduations */}
+        {Array.from({ length: 12 }, (_, k) => {
+          const a = polar(c.x, c.y, SUB_R - 1.5, k * 30);
+          const b = polar(c.x, c.y, SUB_R - (k % 3 === 0 ? 5 : 3), k * 30);
+          return <line key={k} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#7d828c" strokeWidth="0.5" opacity="0.7" />;
+        })}
+        {/* polished bevel ring */}
+        <circle cx={c.x} cy={c.y} r={SUB_R} fill="none" stroke="#d6dae0" strokeWidth="1.4" />
+        <circle cx={c.x} cy={c.y} r={SUB_R + 1.4} fill="none" stroke="#15171c" strokeWidth="1.2" />
       </g>
+    );
 
-      {/* racing-green dial + sunburst + starfield */}
-      <circle cx={CX} cy={CY} r={R_DIAL} fill="url(#dialGreen)" />
-      <g opacity="0.9">
-        {SUNBURST.map((l, i) => (
-          <line key={i} x1={CX} y1={CY} x2={l.x} y2={l.y} stroke="#1e7a5e" strokeWidth="0.6" opacity={l.o} />
-        ))}
-      </g>
+    return (
       <g>
-        {STARS.map((s, i) => (
-          <circle key={i} cx={s.x} cy={s.y} r={s.r} fill={SILVER} opacity={s.o} />
-        ))}
+        {/* polished steel case + bezel rim */}
+        <circle cx={CX} cy={CY} r={R_CASE} fill="url(#caseGrad)" />
+        <circle cx={CX} cy={CY} r={R_BEZEL_O} fill="url(#bezelDark)" />
+        <circle cx={CX} cy={CY} r={R_BEZEL_O} fill="none" stroke="url(#bezelRim)" strokeWidth="2.5" />
+
+        {/* tachymeter scale — fine ticks + units-per-hour numerals */}
+        {Array.from({ length: 60 }, (_, i) => {
+          const angle = i * 6;
+          const a = polar(CX, CY, R_BEZEL_O - 4, angle);
+          const b = polar(CX, CY, R_BEZEL_O - (i % 5 === 0 ? 9 : 6.5), angle);
+          return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={MUTED} strokeWidth={i % 5 === 0 ? 0.8 : 0.45} opacity="0.55" />;
+        })}
+        {TACHY.map(([val, angle]) => {
+          const p = polar(CX, CY, R_TACHY, angle);
+          const t = polar(CX, CY, R_BEZEL_O - 4, angle);
+          const u = polar(CX, CY, R_BEZEL_O - 11, angle);
+          return (
+            <g key={val}>
+              <line x1={t.x} y1={t.y} x2={u.x} y2={u.y} stroke={SILVER} strokeWidth="1" opacity="0.85" />
+              <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central"
+                fill={SILVER} fontSize="6.6" letterSpacing="0.3" opacity="0.9"
+                style={{ fontFamily: 'var(--font-mono), monospace' }}>{val}</text>
+            </g>
+          );
+        })}
+        <text x={CX} y={CY - R_TACHY - 3} textAnchor="middle" fill={RED} fontSize="5.2" letterSpacing="2.6"
+          style={{ fontFamily: 'var(--font-mono), monospace' }}>TACHYMÈTRE</text>
+
+        {/* flange + matte black dial */}
+        <circle cx={CX} cy={CY} r={R_BEZEL_I} fill="#0a0b0e" />
+        <circle cx={CX} cy={CY} r={R_FLANGE} fill="none" stroke="#2b2f37" strokeWidth="1" />
+        <circle cx={CX} cy={CY} r={R_DIAL} fill="url(#dialDark)" />
+
+        {/* outer minute / seconds track */}
+        {Array.from({ length: 60 }, (_, i) => {
+          const angle = i * 6;
+          const major = i % 5 === 0;
+          const a = polar(CX, CY, R_TRACK, angle);
+          const b = polar(CX, CY, R_TRACK - (major ? 6 : 3), angle);
+          return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+            stroke={major ? SILVER : MUTED} strokeWidth={major ? 1.1 : 0.5} opacity={major ? 0.8 : 0.4} strokeLinecap="round" />;
+        })}
+
+        {/* three silver sub-registers (9 · 3 · 6) */}
+        {subWell(ACT_C)}
+        {subWell(PULSE_C)}
+        {subWell(DATE_C)}
+
+        {/* branding — CORSA, no maker's marks but our own */}
+        <path d={`M ${CX} ${CY - 96} l 4 4 l -4 4 l -4 -4 z`} fill={RED} />
+        <text x={CX} y={CY - 82} textAnchor="middle" fill={SILVER} fontSize="12" fontWeight="700" letterSpacing="5"
+          style={{ fontFamily: 'var(--font-serif), Georgia, serif' }}>CORSA</text>
+        <text x={CX} y={CY - 70} textAnchor="middle" fill={MUTED} fontSize="4.6" letterSpacing="2.4"
+          style={{ fontFamily: 'var(--font-mono), monospace' }}>PRECISION · CHRONOGRAPH</text>
+        {/* single red model word, seated in the clear gap between the 9/3 and
+            6 registers so nothing overlaps */}
+        <text x={CX} y={CY + 36} textAnchor="middle" fill={RED} fontSize="6.5" letterSpacing="3.2"
+          style={{ fontFamily: 'var(--font-serif), Georgia, serif' }}>CHRONOGRAPHE</text>
       </g>
-      <circle cx={CX} cy={CY} r={R_DIAL} fill="none" stroke="#1b3a2c" strokeWidth="1" />
+    );
+  }, []);
 
-      {/* sub-dial frames */}
-      {[DATE_C, WORK_C, PULSE_C].map((c, i) => (
-        <g key={i}>
-          <circle cx={c.x} cy={c.y} r={SUB_R} fill="url(#subGreen)" stroke="#1f4636" strokeWidth="1" />
-          <circle cx={c.x} cy={c.y} r={SUB_R - 3} fill="none" stroke="#0a2a20" strokeWidth="0.5" />
-        </g>
-      ))}
-
-      {/* tourbillon — fixed bridge + rotating cage */}
-      <g>
-        <circle cx={TOURB_C.x} cy={TOURB_C.y} r={TOURB_R} fill="#06201a" stroke="#1f4636" strokeWidth="1" />
-        <circle cx={TOURB_C.x} cy={TOURB_C.y} r={TOURB_R - 4} fill="none" stroke="#0a2a20" strokeWidth="0.5" />
-        <g>
-          <animateTransform attributeName="transform" type="rotate"
-            from={`0 ${TOURB_C.x} ${TOURB_C.y}`} to={`360 ${TOURB_C.x} ${TOURB_C.y}`}
-            dur="60s" repeatCount="indefinite" />
-          {[0, 120, 240].map((d) => {
-            const p = polar(TOURB_C.x, TOURB_C.y, TOURB_R - 5, d);
-            return <line key={d} x1={TOURB_C.x} y1={TOURB_C.y} x2={p.x} y2={p.y} stroke="url(#steelGrad)" strokeWidth="1.4" />;
-          })}
-          <circle cx={TOURB_C.x} cy={TOURB_C.y} r={TOURB_R - 7} fill="none" stroke="url(#steelGrad)" strokeWidth="1.4" />
-          <circle cx={TOURB_C.x} cy={TOURB_C.y - (TOURB_R - 7)} r="2" fill={LIME} />
-          <circle cx={TOURB_C.x} cy={TOURB_C.y} r="3.5" fill="none" stroke={SILVER} strokeWidth="0.8" />
-          <circle cx={TOURB_C.x} cy={TOURB_C.y} r="1.4" fill={LIME} />
-        </g>
-        <text x={TOURB_C.x} y={TOURB_C.y + TOURB_R + 10} textAnchor="middle" fill={MUTED}
-          fontSize="5" letterSpacing="2" style={{ fontFamily: 'var(--font-mono), monospace' }}>
-          TOURBILLON
-        </text>
-      </g>
-
-      {/* brand / signature */}
-      <text x={CX} y={CY + 150} textAnchor="middle" fill={MUTED} fontSize="8" letterSpacing="3.5"
-        style={{ fontFamily: 'var(--font-serif), Georgia, serif' }}>
-        SOLARIA
-      </text>
-      <text x={CX} y={CY + 164} textAnchor="middle" fill={MUTED} fontSize="5" letterSpacing="2.5"
-        style={{ fontFamily: 'var(--font-mono), monospace' }}>
-        GRANDE COMPLICATION
-      </text>
-    </g>
-  ), []);
-
-  // ----- Hour markers = the data layer (re-render only on layer/hover change) -
+  // ----- Hour markers (applied batons) = the interactive data layer -----------
   const markers = useMemo(() => (
     <g>
       {slots.map((node, i) => {
-        if (i === 6) return null; // tourbillon owns 6 o'clock
         const angle = i * 30;
         const isMajor = i % 3 === 0;
         const hasNode = !!node;
         const isHovered = hoveredHour === i;
-        const inner = polar(CX, CY, R_CHAP - (isMajor ? 16 : 9), angle);
+        const inner = polar(CX, CY, R_MARK_I, angle);
         const outer = polar(CX, CY, R_CHAP, angle);
-        const dot = polar(CX, CY, R_CHAP, angle);
+        const dot = polar(CX, CY, (R_MARK_I + R_CHAP) / 2, angle);
 
         return (
           <g key={i}>
-            <line x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y}
-              stroke={SILVER} strokeWidth={isMajor ? 3.5 : 1.5}
-              opacity={hasNode ? 0.95 : 0.3} strokeLinecap="round" />
-            {isMajor && (
-              <circle {...polarObj(R_CHAP - 4, angle)} r="1.5" fill={LIME} opacity="0.8" />
+            {/* applied baton (12 o'clock gets a wider double index) */}
+            {i === 0 ? (
+              <>
+                <line x1={inner.x - 3} y1={inner.y} x2={outer.x - 3} y2={outer.y} stroke="url(#batonGrad)" strokeWidth={3.2} strokeLinecap="round" />
+                <line x1={inner.x + 3} y1={inner.y} x2={outer.x + 3} y2={outer.y} stroke="url(#batonGrad)" strokeWidth={3.2} strokeLinecap="round" />
+                <circle {...polarObj(R_CHAP + 4, 0)} r="2" fill={RED} />
+              </>
+            ) : (
+              <line x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y}
+                stroke="url(#batonGrad)" strokeWidth={isMajor ? 5 : 3} strokeLinecap="round"
+                opacity={hasNode ? 1 : 0.82} />
             )}
+
+            {/* interactive data node sitting on the baton */}
             {hasNode && (
               <g
                 onMouseEnter={() => setHoveredHour(i)}
@@ -342,22 +273,16 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
                 className={node?.slug ? 'cursor-pointer' : 'cursor-help'}
               >
                 <circle cx={dot.x} cy={dot.y} r={16} fill="transparent" />
-                <circle cx={dot.x} cy={dot.y} r={isHovered ? 6 : 3.5}
-                  fill={isHovered ? LIME : SILVER}
-                  style={{ transition: 'r 200ms ease, fill 200ms ease' }} />
+                <circle cx={dot.x} cy={dot.y} r={isHovered ? 5.5 : 3}
+                  fill={RED} style={{ transition: 'r 200ms ease' }} />
                 {isHovered && (
-                  <circle cx={dot.x} cy={dot.y} r={11} fill="none" stroke={LIME} strokeWidth={1} opacity={0.5} />
+                  <circle cx={dot.x} cy={dot.y} r={10} fill="none" stroke={RED} strokeWidth={1} opacity={0.5} />
                 )}
               </g>
             )}
           </g>
         );
       })}
-      {/* "12" numeral */}
-      <text {...polarObj(R_CHAP - 22, 0)} textAnchor="middle" dominantBaseline="central"
-        fill={SILVER} fontSize="16" fontWeight="800" style={{ fontFamily: 'var(--font-mono), monospace' }}>
-        12
-      </text>
     </g>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   ), [slots, hoveredHour]);
@@ -366,8 +291,8 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
   const pressOffset = (dir: 'next' | 'prev') => {
     if (pressed !== dir) return 'translate(0,0)';
     const p = dir === 'next' ? polar(CX, CY, R_CASE, 62) : polar(CX, CY, R_CASE, 118);
-    const dx = (CX - p.x) * 0.06;
-    const dy = (CY - p.y) * 0.06;
+    const dx = r3((CX - p.x) * 0.06);
+    const dy = r3((CY - p.y) * 0.06);
     return `translate(${dx},${dy})`;
   };
 
@@ -379,149 +304,110 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
     <div className="w-full max-w-[560px] mx-auto select-none">
       <div className="relative">
         <svg
-          viewBox={`0 0 ${VB_W} ${VB_H}`}
+          viewBox={`0 78 ${VB_W} ${VB_H - 176}`}
           className="w-full h-auto block"
           style={{ overflow: 'visible' }}
-          aria-label="Solaria grand-complication — interactive portfolio centerpiece"
+          aria-label="Corsa chronograph — interactive portfolio centerpiece"
         >
           <defs>
-            <radialGradient id="caseGrad" cx="50%" cy="38%" r="65%">
-              <stop offset="0%" stopColor="#3a3a40" />
-              <stop offset="55%" stopColor="#1c1c20" />
+            <radialGradient id="caseGrad" cx="50%" cy="36%" r="66%">
+              <stop offset="0%" stopColor="#43454c" />
+              <stop offset="55%" stopColor="#202227" />
               <stop offset="100%" stopColor="#0a0a0c" />
             </radialGradient>
-            <linearGradient id="bezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#5a5a62" />
-              <stop offset="45%" stopColor="#2a2a2e" />
-              <stop offset="100%" stopColor="#16161a" />
+            <radialGradient id="bezelDark" cx="50%" cy="38%" r="68%">
+              <stop offset="0%" stopColor="#26282d" />
+              <stop offset="60%" stopColor="#141519" />
+              <stop offset="100%" stopColor="#0a0b0d" />
+            </radialGradient>
+            <linearGradient id="bezelRim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#6a6c74" />
+              <stop offset="50%" stopColor="#2a2c31" />
+              <stop offset="100%" stopColor="#17181c" />
             </linearGradient>
-            <radialGradient id="dialGreen" cx="50%" cy="40%" r="72%">
-              <stop offset="0%" stopColor="#15604a" />
-              <stop offset="55%" stopColor="#0c3a2e" />
-              <stop offset="100%" stopColor="#06231a" />
+            <radialGradient id="dialDark" cx="50%" cy="40%" r="74%">
+              <stop offset="0%" stopColor="#1d2027" />
+              <stop offset="58%" stopColor="#0e1013" />
+              <stop offset="100%" stopColor="#08090b" />
             </radialGradient>
-            <radialGradient id="subGreen" cx="50%" cy="38%" r="65%">
-              <stop offset="0%" stopColor="#104534" />
-              <stop offset="100%" stopColor="#061d16" />
+            <radialGradient id="subSilver" cx="46%" cy="36%" r="70%">
+              <stop offset="0%" stopColor="#eef1f5" />
+              <stop offset="60%" stopColor="#cfd4db" />
+              <stop offset="100%" stopColor="#a9aeb8" />
             </radialGradient>
+            <linearGradient id="batonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="55%" stopColor="#d4d8de" />
+              <stop offset="100%" stopColor="#9aa0aa" />
+            </linearGradient>
             <linearGradient id="handGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#f6f9f4" />
-              <stop offset="100%" stopColor="#aeb4ac" />
+              <stop offset="0%" stopColor="#fbfdff" />
+              <stop offset="100%" stopColor="#aeb4bd" />
             </linearGradient>
-            <linearGradient id="steelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#cfd8c8" />
-              <stop offset="100%" stopColor="#3a3a40" />
-            </linearGradient>
-            <radialGradient id="moonLit" cx="42%" cy="38%" r="70%">
-              <stop offset="0%" stopColor="#eef2dd" />
-              <stop offset="100%" stopColor="#c4cf9e" />
-            </radialGradient>
-            <clipPath id="moonClip">
-              <circle cx={MOON_C.x} cy={MOON_C.y} r={MOON_R} />
-            </clipPath>
           </defs>
 
           {staticArt}
           {markers}
 
-          {/* === Moonphase aperture === */}
+          {/* === 9 o'clock register — Claude activity === */}
           <g>
-            <circle cx={MOON_C.x} cy={MOON_C.y} r={MOON_R} fill="#06201a" stroke="#1f4636" strokeWidth="1" />
-            <g clipPath="url(#moonClip)">
-              <circle cx={MOON_C.x + (0.5 - phase) * 4 * MOON_R} cy={MOON_C.y} r={MOON_R} fill="url(#moonLit)" />
-            </g>
-            <circle cx={MOON_C.x} cy={MOON_C.y} r={MOON_R} fill="none" stroke="#0a2a20" strokeWidth="0.5" />
-            <text x={MOON_C.x} y={MOON_C.y + MOON_R + 8} textAnchor="middle" fill={MUTED} fontSize="4.5"
-              letterSpacing="1.5" style={{ fontFamily: 'var(--font-mono), monospace' }}>
-              LUNE
-            </text>
-          </g>
-
-          {/* === 24h day/night indicator === */}
-          <g>
-            <circle cx={SUN_C.x} cy={SUN_C.y} r={SUN_R} fill="url(#subGreen)" stroke="#1f4636" strokeWidth="1" />
-            {[0, 90, 180, 270].map((d) => {
-              const a = polar(SUN_C.x, SUN_C.y, SUN_R, d);
-              const b = polar(SUN_C.x, SUN_C.y, SUN_R - 3, d);
-              return <line key={d} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={MUTED} strokeWidth="0.6" opacity="0.6" />;
-            })}
-            {(() => {
-              const p = polar(SUN_C.x, SUN_C.y, SUN_R - 5, dayNight * 360);
-              const isDay = now.getHours() >= 6 && now.getHours() < 18;
-              return (
-                <>
-                  <line x1={SUN_C.x} y1={SUN_C.y} x2={p.x} y2={p.y} stroke={isDay ? LIME : MUTED} strokeWidth="1" />
-                  <circle cx={p.x} cy={p.y} r="2.5" fill={isDay ? LIME : SILVER} />
-                </>
-              );
-            })()}
-            <text x={SUN_C.x} y={SUN_C.y + SUN_R + 8} textAnchor="middle" fill={MUTED} fontSize="4.5"
-              letterSpacing="1.5" style={{ fontFamily: 'var(--font-mono), monospace' }}>
-              24H
-            </text>
-          </g>
-
-          {/* === DATE sub-dial (live) === */}
-          <g>
-            <text x={DATE_C.x} y={DATE_C.y - 11} textAnchor="middle" fill={MUTED} fontSize="5.5" letterSpacing="2"
-              style={{ fontFamily: 'var(--font-mono), monospace' }}>{dayShort}</text>
-            <text x={DATE_C.x} y={DATE_C.y + 9} textAnchor="middle" fill={SILVER} fontSize="19" fontWeight="600"
-              style={{ fontFamily: 'var(--font-mono), monospace' }}>{dateNum}</text>
-          </g>
-
-          {/* === WORK sub-dial (live Claude activity) === */}
-          <g>
-            <text x={WORK_C.x} y={WORK_C.y - 11} textAnchor="middle" fill={MUTED} fontSize="5.5" letterSpacing="2"
-              style={{ fontFamily: 'var(--font-mono), monospace' }}>WORK</text>
-            <text x={WORK_C.x} y={WORK_C.y + 6} textAnchor="middle" fill={LIME} fontSize="15" fontWeight="700"
+            <text x={ACT_C.x} y={ACT_C.y - 12} textAnchor="middle" fill={SUB_MUTE} fontSize="4.6" letterSpacing="1.5"
+              style={{ fontFamily: 'var(--font-mono), monospace' }}>ACTIVITY</text>
+            <text x={ACT_C.x} y={ACT_C.y + 4} textAnchor="middle" fill={RED} fontSize="12.5" fontWeight="700"
               style={{ fontFamily: 'var(--font-mono), monospace' }}>{todayActivity}</text>
-            <text x={WORK_C.x} y={WORK_C.y + 16} textAnchor="middle" fill={MUTED} fontSize="4.5" letterSpacing="1.2"
+            <text x={ACT_C.x} y={ACT_C.y + 14} textAnchor="middle" fill={SUB_MUTE} fontSize="3.9" letterSpacing="1"
               style={{ fontFamily: 'var(--font-mono), monospace' }}>MSG · TODAY</text>
           </g>
 
-          {/* === PULSE sub-dial (Spotify live) === */}
+          {/* === 3 o'clock register — Spotify pulse === */}
           <g>
-            <text x={PULSE_C.x} y={PULSE_C.y - 11} textAnchor="middle" fill={MUTED} fontSize="5.5" letterSpacing="2"
+            <text x={PULSE_C.x} y={PULSE_C.y - 12} textAnchor="middle" fill={SUB_MUTE} fontSize="4.6" letterSpacing="1.5"
               style={{ fontFamily: 'var(--font-mono), monospace' }}>PULSE</text>
-            <circle cx={PULSE_C.x} cy={PULSE_C.y + 2} r={5.5}
-              fill={isPlaying ? '#34d399' : '#16302a'} stroke={isPlaying ? '#34d399' : '#1f4636'} strokeWidth="1">
-              {isPlaying && <animate attributeName="r" values="5.5;8;5.5" dur="1.4s" repeatCount="indefinite" />}
+            <circle cx={PULSE_C.x} cy={PULSE_C.y + 1} r={4.5}
+              fill={isPlaying ? RED : '#b2b7c0'} stroke={isPlaying ? RED : '#8b909a'} strokeWidth="1">
+              {isPlaying && <animate attributeName="r" values="4.5;7;4.5" dur="1.4s" repeatCount="indefinite" />}
             </circle>
-            <text x={PULSE_C.x} y={PULSE_C.y + 18} textAnchor="middle" fill={MUTED} fontSize="4.5" letterSpacing="1.2"
-              style={{ fontFamily: 'var(--font-mono), monospace' }}>{isPlaying ? 'LIVE' : 'SILENT'}</text>
+            <text x={PULSE_C.x} y={PULSE_C.y + 14} textAnchor="middle" fill={SUB_MUTE} fontSize="3.9" letterSpacing="1.1"
+              style={{ fontFamily: 'var(--font-mono), monospace' }}>{isPlaying ? 'LIVE' : 'QUIET'}</text>
           </g>
 
-          {/* === Hands (live) === */}
+          {/* === 6 o'clock register — date === */}
+          <g>
+            <text x={DATE_C.x} y={DATE_C.y - 11} textAnchor="middle" fill={SUB_MUTE} fontSize="4.6" letterSpacing="1.6"
+              style={{ fontFamily: 'var(--font-mono), monospace' }}>{dayShort}</text>
+            <text x={DATE_C.x} y={DATE_C.y + 7} textAnchor="middle" fill={SUB_INK} fontSize="14.5" fontWeight="700"
+              style={{ fontFamily: 'var(--font-mono), monospace' }}>{dateNum}</text>
+          </g>
+
+          {/* === Hands === */}
           {(() => {
             const h = polar(CX, CY, R_HAND_HOUR, hourAngle);
             const m = polar(CX, CY, R_HAND_MIN, minuteAngle);
             const s = polar(CX, CY, R_HAND_SEC, secondAngle);
-            const sBack = polar(CX, CY, -22, secondAngle);
-            const hLume = polar(CX, CY, R_HAND_HOUR - 6, hourAngle);
-            const mLume = polar(CX, CY, R_HAND_MIN - 6, minuteAngle);
+            const sBack = polar(CX, CY, -24, secondAngle);
+            const hLume = polar(CX, CY, R_HAND_HOUR - 7, hourAngle);
+            const mLume = polar(CX, CY, R_HAND_MIN - 7, minuteAngle);
             return (
               <>
-                <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="url(#handGrad)" strokeWidth={7} strokeLinecap="round" />
-                <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="#06231a" strokeWidth={1.8} strokeLinecap="round" />
-                <circle cx={hLume.x} cy={hLume.y} r={3.2} fill={LIME} />
-                <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="url(#handGrad)" strokeWidth={4} strokeLinecap="round" />
-                <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="#06231a" strokeWidth={1.2} strokeLinecap="round" />
-                <circle cx={mLume.x} cy={mLume.y} r={2.4} fill={LIME} />
-                <line x1={sBack.x} y1={sBack.y} x2={s.x} y2={s.y} stroke={LIME} strokeWidth={1.4} strokeLinecap="round" />
-                <circle cx={sBack.x} cy={sBack.y} r={4} fill={LIME} />
-                <circle cx={CX} cy={CY} r={7.5} fill={SILVER} />
-                <circle cx={CX} cy={CY} r={4} fill={LIME} />
-                <circle cx={CX} cy={CY} r={1.4} fill="#06231a" />
+                {/* hour + minute baton hands with red lume pips */}
+                <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="url(#handGrad)" strokeWidth={6} strokeLinecap="round" />
+                <line x1={CX} y1={CY} x2={h.x} y2={h.y} stroke="#0a0c10" strokeWidth={1.6} strokeLinecap="round" />
+                <circle cx={hLume.x} cy={hLume.y} r={3} fill={RED} />
+                <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="url(#handGrad)" strokeWidth={3.6} strokeLinecap="round" />
+                <line x1={CX} y1={CY} x2={m.x} y2={m.y} stroke="#0a0c10" strokeWidth={1.1} strokeLinecap="round" />
+                <circle cx={mLume.x} cy={mLume.y} r={2.3} fill={RED} />
+                {/* central chronograph seconds — the long red sweep */}
+                <line x1={sBack.x} y1={sBack.y} x2={s.x} y2={s.y} stroke={RED} strokeWidth={1.5} strokeLinecap="round" />
+                <circle cx={sBack.x} cy={sBack.y} r={4} fill={RED} />
+                {/* centre cap */}
+                <circle cx={CX} cy={CY} r={6.5} fill={SILVER} />
+                <circle cx={CX} cy={CY} r={3.4} fill={RED} />
+                <circle cx={CX} cy={CY} r={1.3} fill="#0a0c10" />
               </>
             );
           })()}
 
           {/* === Crown + chronograph pushers (layer switcher) === */}
-          <text x={crownP.x + 18} y={CY - 58} fill={LIME} fontSize="5.5" letterSpacing="1.2" textAnchor="end"
-            style={{ fontFamily: 'var(--font-mono), monospace' }}>
-            PUSHERS · SWITCH LAYER
-          </text>
-
           {/* NEXT pusher (≈2 o'clock) */}
           <g
             onClick={() => pushLayer(1)}
@@ -532,8 +418,8 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
           >
             <title>Next layer · → key</title>
             <rect x={pTop.x - 7} y={pTop.y - 8} width={18} height={16} rx={3}
-              fill="#2a2a2e" stroke="#06231a" strokeWidth="0.6" />
-            <circle cx={pTop.x + 2} cy={pTop.y} r="2.4" fill={pressed === 'next' ? LIME : MUTED} />
+              fill="url(#bezelRim)" stroke="#0a0c10" strokeWidth="0.6" />
+            <circle cx={pTop.x + 2} cy={pTop.y} r="2.4" fill={pressed === 'next' ? RED : MUTED} />
           </g>
 
           {/* PREV pusher (≈4 o'clock) */}
@@ -546,11 +432,11 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
           >
             <title>Previous layer · ← key</title>
             <rect x={pBot.x - 7} y={pBot.y - 8} width={18} height={16} rx={3}
-              fill="#2a2a2e" stroke="#06231a" strokeWidth="0.6" />
-            <circle cx={pBot.x + 2} cy={pBot.y} r="2.4" fill={pressed === 'prev' ? LIME : MUTED} />
+              fill="url(#bezelRim)" stroke="#0a0c10" strokeWidth="0.6" />
+            <circle cx={pBot.x + 2} cy={pBot.y} r="2.4" fill={pressed === 'prev' ? RED : MUTED} />
           </g>
 
-          {/* Crown (decorative; also cycles forward) */}
+          {/* Screw-down crown (decorative; also cycles forward) */}
           <g onClick={() => pushLayer(1)} className="cursor-pointer" aria-label="Crown">
             <title>Crown · cycle layer</title>
             <path d={`M ${crownP.x - 4} ${CY - 18} Q ${crownP.x + 22} ${CY - 22} ${crownP.x + 26} ${CY - 10}
@@ -558,13 +444,13 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
               fill="url(#caseGrad)" stroke="#16161a" strokeWidth="0.5" />
             <g transform={`rotate(${crownSpin} ${crownP.x + 12} ${CY})`}
               style={{ transition: 'transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1)' }}>
-              <rect x={crownP.x} y={CY - 11} width={22} height={22} rx={3}
-                fill="#2a2a2e" stroke="#06231a" strokeWidth="0.6" />
+              <rect x={crownP.x} y={CY - 11} width={22} height={22} rx={4}
+                fill="url(#bezelRim)" stroke="#0a0c10" strokeWidth="0.6" />
               {[0, 1, 2, 3, 4].map((i) => (
                 <line key={i} x1={crownP.x + 2 + i * 4} y1={CY - 9} x2={crownP.x + 2 + i * 4} y2={CY + 9}
-                  stroke="#06231a" strokeWidth="0.8" />
+                  stroke="#0a0c10" strokeWidth="0.8" />
               ))}
-              <circle cx={crownP.x + 11} cy={CY} r="2.5" fill={LIME} />
+              <circle cx={crownP.x + 11} cy={CY} r="2.5" fill={RED} />
             </g>
           </g>
         </svg>
@@ -613,21 +499,29 @@ export function WatchFace({ isPlaying = false, todayActivity = 0 }: WatchFacePro
         )}
       </div>
 
-      {/* --- Layer selector pills --- */}
-      <div className="mt-2 flex items-center justify-center gap-2 flex-wrap">
-        {LAYER_ORDER.map((key) => (
-          <button
-            key={key}
-            onClick={() => { setLayerKey(key); setHoveredHour(null); }}
-            className={`px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest border transition-colors ${
-              key === layerKey
-                ? 'bg-rose-400 text-bg border-rose-400'
-                : 'bg-bg/60 text-muted border-divider hover:text-primary hover:border-muted'
-            }`}
-          >
-            {LAYERS[key].label}
-          </button>
-        ))}
+      {/* --- Layer selector pills + explicit instructions --- */}
+      <div className="mt-3 text-center">
+        <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-2.5">
+          Click a button to switch the dial&apos;s data layer
+          <span className="text-divider mx-1.5">·</span>
+          or the watch pushers / <kbd className="text-primary">←</kbd> <kbd className="text-primary">→</kbd>
+        </div>
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          {LAYER_ORDER.map((key) => (
+            <button
+              key={key}
+              onClick={() => { setLayerKey(key); setHoveredHour(null); }}
+              aria-pressed={key === layerKey}
+              className={`px-3.5 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-widest border transition-colors ${
+                key === layerKey
+                  ? 'bg-rose-400 text-bg border-rose-400'
+                  : 'bg-bg/60 text-muted border-divider hover:text-primary hover:border-muted'
+              }`}
+            >
+              {LAYERS[key].label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

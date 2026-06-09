@@ -1,18 +1,23 @@
 import { strong, proficient, learning, type Skill } from '@/data/skills';
 import { Kicker } from './Kicker';
+import { RevealText } from './RevealText';
 
+// Corsa palette: red signature + gold + steel, kept deliberately monochrome-ish
+// so the stack reads premium rather than like a rainbow legend.
 const KIND_DOT: Record<Skill['kind'], string> = {
-  language: 'bg-rose-400',
-  framework: 'bg-amber-400',
-  tool: 'bg-indigo-400',
-  domain: 'bg-emerald-400',
+  language: 'bg-rose-400',          // signature red
+  framework: 'bg-[#d4af37]',        // gold
+  tool: 'bg-[#8b9099]',             // graphite steel
+  domain: 'bg-rose-300',            // light red
 };
 
 export function SkillsDashboard() {
   return (
     <section id="stack" className="max-w-3xl mx-auto px-6 py-24">
       <Kicker cn="零五" num="05" en="Stack" zh="技术栈" />
-      <h2 className="font-serif text-4xl md:text-5xl mb-3">The honest stack.</h2>
+      <h2 className="font-serif text-4xl md:text-5xl mb-3">
+        <RevealText text="The honest stack." />
+      </h2>
       <p className="text-muted mb-12 max-w-xl">
         No 10-out-of-10 expert ratings. Three buckets only — what I&apos;d reach for in
         production, what I&apos;ve shipped with, what I&apos;m actively learning.

@@ -94,7 +94,10 @@ export async function RecentPlays() {
                     {play.track.artists}
                   </div>
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0 tabular">
+                <div
+                  className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0 tabular"
+                  suppressHydrationWarning
+                >
                   {timeAgo(play.playedAt)}
                 </div>
                 <span

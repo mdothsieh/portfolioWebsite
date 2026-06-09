@@ -6,8 +6,10 @@ import { ClaudeUsageHeatmap } from '@/components/ClaudeUsageHeatmap';
 import { ListeningSection } from '@/components/ListeningSection';
 import { BoardingPass } from '@/components/BoardingPass';
 import { SkillsDashboard } from '@/components/SkillsDashboard';
+import { SpecStrip } from '@/components/SpecStrip';
 import { Hobbies } from '@/components/Hobbies';
 import { Reveal } from '@/components/Reveal';
+import { RevealText } from '@/components/RevealText';
 import { Kicker } from '@/components/Kicker';
 import { getAllProjects } from '@/lib/projects';
 import { getClaudeUsage } from '@/lib/claude-usage';
@@ -41,6 +43,9 @@ export default async function Home() {
       {/* 01 — Calibre (Watch hero) */}
       <Hero isPlaying={nowPlaying.isPlaying} todayActivity={todayActivity} />
 
+      {/* Recruiter proof strip — scannable above-the-fold spec row */}
+      <SpecStrip />
+
       {/* 02 — About + Currently */}
       <Reveal><About /></Reveal>
 
@@ -57,7 +62,9 @@ export default async function Home() {
         <Reveal>
           <Kicker cn="零四" num="04" en="Builds" zh="作品" />
           <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
-            <h2 className="font-serif text-4xl md:text-5xl">Selected projects.</h2>
+            <h2 className="font-serif text-4xl md:text-5xl">
+              <RevealText text="Selected projects." />
+            </h2>
             <Link
               href="/projects"
               className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors"
@@ -123,7 +130,7 @@ export default async function Home() {
         <Reveal>
           <Kicker cn="零七" num="07" en="Claude usage" zh="Claude 使用" />
           <h2 className="font-serif text-4xl md:text-5xl mb-3">
-            Claude usage{suffix}.
+            <RevealText text={`Claude usage${suffix}.`} accentWords={['Claude']} />
           </h2>
           <p className="text-muted mb-12 max-w-xl">
             How often Claude and I actually work together. Quiet weeks are usually travel
@@ -140,7 +147,7 @@ export default async function Home() {
         <Reveal>
           <Kicker cn="零八" num="08" en="Listening" zh="在听" />
           <h2 className="font-serif text-4xl md:text-5xl mb-3">
-            What I&apos;m listening to.
+            <RevealText text="What I'm listening to." />
           </h2>
           <p className="text-muted mb-12 max-w-xl">
             Two libraries, two languages. Spotify shows what&apos;s playing right now and

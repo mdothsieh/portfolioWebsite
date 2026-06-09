@@ -10,35 +10,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ---- Aston Martin F1 — dark racing-green base ----
-        bg: '#08160f',       // near-black, deep racing-green tint
-        surface: '#0e2219',  // dark green panel
-        divider: '#1b3a2c',  // green-tinted border
-        primary: '#eaf2ee',  // soft off-white
-        muted: '#7f978b',    // sage muted
+        // ---- Corsa — Apple × Ferrari: near-black base, one red ----
+        bg: '#08090b',       // near-black, faint cool tint
+        surface: '#121419',  // graphite panel
+        divider: '#20242b',  // neutral hairline border
+        primary: '#f4f6f8',  // crisp off-white
+        muted: '#9aa0a9',    // neutral secondary gray
         // Signature accent override: every existing `rose-*` utility across the
-        // site now renders as the Aston Martin lime → racing-green ramp, so the
-        // whole palette flips to AM colors without touching each component.
+        // site now renders as the Corsa red ramp (Apple system red ≈ Ferrari
+        // Rosso), so the whole palette flips with no per-component changes.
         rose: {
-          50:  '#f6fbd5',
-          100: '#ecf4a8',
-          200: '#e0ee72',
-          300: '#d4e84a',   // light lime (secondary accent)
-          400: '#cedc00',   // ★ Aston Martin lime — the signature
-          500: '#b4c200',
-          600: '#93a300',   // deep olive-lime
-          700: '#0d6d57',   // racing green
-          800: '#0c3a2e',   // deep racing green
-          900: '#08231b',
+          50:  '#fff1f0',
+          100: '#ffdcd9',
+          200: '#ffb8b1',
+          300: '#ff8079',   // light red (secondary accent)
+          400: '#ff3b30',   // ★ Apple system red ≈ Ferrari Rosso — the signature
+          500: '#ec2b21',
+          600: '#c81f17',   // deep red
+          700: '#3a1411',   // dark maroon panel
+          800: '#26110f',   // deeper maroon-graphite
+          900: '#160b0a',
         },
         accent: {
-          project: '#cedc00',     // lime
-          skill: '#21b6a8',       // teal
-          experience: '#34d399',  // emerald
-          hobby: '#7fb800',       // yellow-green
-          award: '#d4af37',       // gold (AM badge accent)
-          place: '#5bc8e0',       // sky-teal
-          course: '#3ddc97',      // mint
+          project: '#ff3b30',     // red — the signature
+          skill: '#c2c6cc',       // neutral silver
+          experience: '#ff6a5a',  // light red
+          hobby: '#9aa0a9',       // muted gray
+          award: '#d4af37',       // gold (kept — premium badge accent)
+          place: '#8b9099',       // graphite
+          course: '#d0d3d8',      // pale steel
         },
       },
       fontFamily: {

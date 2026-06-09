@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Direction A2 — Corsa · Apple × Ferrari · Martin Hsieh (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#08090b;
+    --bg-2:#0d0f12;
+    --surface:#121419;
+    --surface-2:#171a20;
+    --ink:#f4f6f8;
+    --muted:#9aa0a9;
+    --faint:#5a606b;
+    --hair:#20242b;
+    --hair-2:#2b3039;
+    --red:#ff3b30;        /* Apple system red ≈ Ferrari Rosso */
+    --red-deep:#d62b22;
+    --red-soft:#ff3b3022;
+    --display:'Schibsted Grotesk',sans-serif;
+    --mono:'Spline Sans Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--display);
+    -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;letter-spacing:-.005em;
+  }
+  /* clean cinematic light — no grain, soft depth (Apple) */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(90% 55% at 50% -8%, #14171c 0%, transparent 60%),
+      radial-gradient(60% 50% at 84% 8%, rgba(255,59,48,.10) 0%, transparent 55%);
+  }
+  .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0}
+  .logo{font-weight:700;font-size:15px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  .logo .mark{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+  .nav .links{display:flex;gap:30px}
+  .nav .links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0;transition:color .2s}
+  .nav .links a:hover{color:var(--ink)}
+  .nav .resume{color:var(--ink);border:1px solid var(--hair-2);padding:8px 16px;border-radius:100px;font-size:12px;
+    font-family:var(--mono);letter-spacing:.04em;text-decoration:none;transition:all .2s}
+  .nav .resume:hover{border-color:var(--red);color:var(--red)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:82vh;padding:40px 0}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--muted);
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:30px;
+    border:1px solid var(--hair-2);border-radius:100px;padding:7px 14px}
+  .eyebrow .live{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);
+    animation:beat 1.8s ease-in-out infinite}
+  @keyframes beat{0%,100%{opacity:.45}50%{opacity:1}}
+  h1{font-weight:800;font-size:clamp(3.2rem,7vw,6rem);line-height:.95;letter-spacing:-.04em;margin-bottom:22px}
+  h1 .red{color:var(--red)}
+  .tagline{font-size:1.3rem;font-weight:400;color:var(--muted);max-width:30ch;line-height:1.35;margin-bottom:20px;letter-spacing:-.01em}
+  .subnote{font-family:var(--mono);font-size:12.5px;color:var(--faint);letter-spacing:0;max-width:38ch;line-height:1.6;margin-bottom:36px}
+  .subnote b{color:var(--muted);font-weight:500}
+
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{font-size:14px;font-weight:600;padding:14px 26px;border-radius:100px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:9px;transition:all .25s;letter-spacing:-.01em}
+  .btn-primary{background:var(--red);color:#fff;box-shadow:0 8px 30px -8px var(--red-soft)}
+  .btn-primary:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 14px 40px -10px var(--red-soft)}
+  .btn-ghost{color:var(--ink);border:1px solid var(--hair-2)}
+  .btn-ghost:hover{border-color:var(--faint);background:var(--surface)}
+  .btn-text{color:var(--muted);font-size:13px;font-weight:500;text-decoration:none;padding:14px 6px}
+  .btn-text:hover{color:var(--red)}
+
+  /* WATCH — clean instrument with red sweep */
+  .watch-stage{display:flex;align-items:center;justify-content:center;position:relative}
+  .glow{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,59,48,.18),transparent 65%);filter:blur(20px)}
+  .watch{position:relative;width:min(440px,82vw);aspect-ratio:1;border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 32%, #1a1d23 0%, #0d0f13 58%, #090a0d 100%);
+    box-shadow:
+      0 0 0 1px #2c313a,
+      0 0 0 9px #0e1014,
+      0 0 0 10px #1c2027,
+      inset 0 1px 1px rgba(255,255,255,.06),
+      0 50px 90px -30px #000;
+    display:flex;align-items:center;justify-content:center;
+    animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:none}}
+  /* minute track */
+  .ticks{position:absolute;inset:0}
+  .tick{position:absolute;top:6.5%;left:50%;width:1.5px;height:9px;background:var(--faint);
+    transform-origin:50% 480%;border-radius:2px}
+  .tick.major{height:16px;width:2px;background:var(--muted)}
+  /* numerals */
+  .num{position:absolute;font-family:var(--mono);font-weight:500;font-size:14px;color:var(--muted)}
+  /* hands */
+  .hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:6px}
+  .hand.hour{width:6px;height:22%;background:linear-gradient(var(--ink),#c9ccd2);margin-left:-3px;transform:rotate(305deg)}
+  .hand.min{width:3.5px;height:33%;background:linear-gradient(var(--ink),#c9ccd2);margin-left:-1.75px;transform:rotate(118deg)}
+  .hand.sec{width:2px;height:39%;background:var(--red);margin-left:-1px;transform-origin:50% 82%;
+    transform:rotate(210deg);box-shadow:0 0 10px var(--red);animation:sweep 60s linear infinite}
+  .hand.sec::after{content:"";position:absolute;bottom:-18%;left:50%;transform:translateX(-50%);
+    width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+  @keyframes sweep{to{transform:rotate(570deg)}}
+  .pivot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--ink);
+    box-shadow:0 0 0 3px var(--bg);z-index:6}
+  /* complications — crisp, minimal */
+  .comp{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--mono)}
+  .comp .lab{font-size:7.5px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase}
+  .comp .val{font-size:15px;font-weight:600;color:var(--ink);line-height:1}
+  .comp.date{top:50%;right:15%;transform:translateY(-50%)}
+  .comp.date .val{color:var(--ink)}
+  .comp.act{bottom:18%;left:50%;transform:translateX(-50%)}
+  .comp.act .val{color:var(--red)}
+  .signature{position:absolute;top:31%;left:50%;transform:translateX(-50%);
+    font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--muted)}
+  .signature .scuderia{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.3em;color:var(--faint);text-align:center;margin-top:3px;text-transform:uppercase}
+
+  /* APPLE-STYLE SPEC STRIP */
+  .specs{display:grid;grid-template-columns:repeat(4,1fr);margin-top:10px;
+    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .spec{padding:30px 26px;border-left:1px solid var(--hair)}
+  .spec:first-child{border-left:none;padding-left:0}
+  .spec .v{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .spec .v .red{color:var(--red)}
+  .spec .v.sm{font-size:1.45rem;letter-spacing:-.02em}
+  .spec .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);margin-top:12px}
+  .spec .sub{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px;letter-spacing:0}
+
+  /* builds — clean cards */
+  .section{padding:110px 0 20px}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:46px;flex-wrap:wrap;gap:16px}
+  .sec-head .kick{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--red);margin-bottom:14px}
+  .sec-head h2{font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+  .sec-head .all{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none}
+  .sec-head .all:hover{color:var(--red)}
+  .builds{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:14px;overflow:hidden}
+  .build{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;
+    padding:30px 30px;background:var(--bg-2);text-decoration:none;color:inherit;transition:background .25s}
+  .build:hover{background:var(--surface)}
+  .build .idx{font-family:var(--mono);font-size:13px;color:var(--faint)}
+  .build:hover .idx{color:var(--red)}
+  .build .ttl{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .build .tag{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--red);border:1px solid var(--red-soft);background:var(--red-soft);padding:4px 9px;border-radius:100px}
+  .build .tag.neutral{color:var(--muted);border-color:var(--hair-2);background:transparent}
+  .build .desc{font-size:.97rem;color:var(--muted);margin-top:8px;max-width:56ch;line-height:1.5;font-weight:400}
+  .build .metric{text-align:right;white-space:nowrap}
+  .build .metric .m{font-size:1.5rem;font-weight:800;color:var(--red);letter-spacing:-.02em;line-height:1}
+  .build .metric .ml{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .build .chev{color:var(--faint);transition:transform .25s,color .25s}
+  .build:hover .chev{transform:translateX(4px);color:var(--red)}
+
+  footer{padding:70px 0;border-top:1px solid var(--hair);margin-top:70px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:0}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--red)}
+
+  .preview-flag{position:fixed;bottom:16px;left:16px;z-index:60;font-family:var(--mono);font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--red);padding:7px 13px;border-radius:100px}
+
+  @media(max-width:880px){
+    .hero{grid-template-columns:1fr;gap:48px;padding-top:20px}
+    .watch-stage{order:-1}
+    .specs{grid-template-columns:1fr 1fr}
+    .spec{border-left:none;border-top:1px solid var(--hair);padding-left:0}
+    .spec:nth-child(2){border-left:1px solid var(--hair);padding-left:26px}
+    .spec:nth-child(4){border-left:1px solid var(--hair);padding-left:26px}
+    .nav .links{display:none}
+    .build{grid-template-columns:auto 1fr;gap:16px}
+    .build .metric{grid-column:2;text-align:left}
+    .build .chev{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="preview-flag">Direction A2 · Corsa</div>
+  <div class="wrap">
+
+    <nav class="nav">
+      <div class="logo"><span class="mark"></span> Martin Hsieh</div>
+      <div class="links">
+        <a href="#">Work</a><a href="#">Stack</a><a href="#">Now</a><a href="#">Contact</a>
+      </div>
+      <a class="resume" href="#">Résumé ↓</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live"></span> USC '28 · open to Summer 2027 — SWE / Applied AI</div>
+        <h1>Full-stack,<br>end&nbsp;to&nbsp;<span class="red">end.</span></h1>
+        <p class="tagline">Martin Hsieh builds whole systems — front end, back end, and the applied-AI in between.</p>
+        <p class="subnote"><b>Three internships shipped.</b> The dial at right is a live instrument — date, today's Claude activity, and a Spotify pulse, all from real feeds.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">Résumé</a>
+          <a class="btn btn-ghost" href="#">Get in touch</a>
+          <a class="btn-text" href="#">See the work ↓</a>
+        </div>
+      </div>
+
+      <div class="watch-stage">
+        <div class="glow"></div>
+        <div class="watch" id="watch">
+          <div class="ticks" id="ticks"></div>
+          <div class="signature">CALIBRE<span class="scuderia">live · in motion</span></div>
+          <div class="comp date"><div class="lab">Date</div><div class="val">09</div></div>
+          <div class="comp act"><div class="lab">Claude · today</div><div class="val">7</div></div>
+          <div class="hand hour"></div>
+          <div class="hand min"></div>
+          <div class="hand sec"></div>
+          <div class="pivot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple-style spec strip -->
+    <section class="specs">
+      <div class="spec"><div class="v">03</div><div class="k">internships shipped</div><div class="sub">Kenmou · Far Eastern · Flex '26</div></div>
+      <div class="spec"><div class="v"><span class="red">+40%</span></div><div class="k">throughput</div><div class="sub">order dashboard · −35% overhead</div></div>
+      <div class="spec"><div class="v sm">TS · React · Next<br>Node · Python</div><div class="k">core stack</div><div class="sub">+ agentic AI frameworks</div></div>
+      <div class="spec"><div class="v sm">Summer <span class="red">2027</span></div><div class="k">available</div><div class="sub">Los Angeles ⇄ Taipei</div></div>
+    </section>
+
+    <!-- builds, AI first -->
+    <section class="section">
+      <div class="sec-head">
+        <div>
+          <div class="kick">作品 — Selected work</div>
+          <h2>Led by the metric it moved.</h2>
+        </div>
+        <a class="all" href="#">all projects ↗</a>
+      </div>
+
+      <div class="builds">
+        <a class="build" href="#">
+          <div class="idx">01</div>
+          <div>
+            <div class="ttl">Trojan Rooms <span class="tag">Applied AI</span></div>
+            <div class="desc">USC housing recommender — pgvector amenity embeddings, an upvote-weighted Bayesian average to smooth cold starts, and a Redis-cached top-K search behind magic-link auth.</div>
+          </div>
+          <div class="metric"><div class="m">&lt;80ms</div><div class="ml">cached top-k p50</div></div>
+          <div class="chev">→</div>
+        </a>
+        <a class="build" href="#">
+          <div class="idx">02</div>
+          <div>
+            <div class="ttl">Order-Processing Dashboard <span class="tag neutral">Full-stack</span></div>
+            <div class="desc">React + Node dashboard wired into Kenmou's production floor, with Docker-based CI/CD that shortened release cycles by 40%.</div>
+          </div>
+          <div class="metric"><div class="m">+40%</div><div class="ml">throughput</div></div>
+          <div class="chev">→</div>
+        </a>
+        <a class="build" href="#">
+          <div class="idx">03</div>
+          <div>
+            <div class="ttl">Four Production Tools <span class="tag neutral">Systems</span></div>
+            <div class="desc">RPA bots, a React engagement portal, an Android app (300 users), and a Python data-quality pipeline across a 20-person team at Far Eastern Apparel.</div>
+          </div>
+          <div class="metric"><div class="m">+25%</div><div class="ml">weekly active users</div></div>
+          <div class="chev">→</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2026 Martin Hsieh — preview mock · not the live site</div>
+      <div><a href="#">Email</a> · <a href="#">GitHub</a> · <a href="#">LinkedIn</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const ticks=document.getElementById('ticks');
+    for(let i=0;i<60;i++){
+      const t=document.createElement('div');
+      t.className='tick'+(i%5===0?' major':'');
+      t.style.transform=`translateX(-50%) rotate(${i*6}deg)`;
+      ticks.appendChild(t);
+    }
+    const watch=document.getElementById('watch');
+    const nums=[[12,'50%','11%'],[3,'89%','50%'],[6,'50%','89%'],[9,'11%','50%']];
+    nums.forEach(([n,l,t])=>{
+      const e=document.createElement('div');
+      e.className='num';e.textContent=String(n).padStart(2,'0');
+      e.style.left=l;e.style.top=t;e.style.transform='translate(-50%,-50%)';
+      watch.appendChild(e);
+    });
+  </script>
+</body>
+</html>

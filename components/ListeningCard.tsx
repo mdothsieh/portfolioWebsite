@@ -118,7 +118,10 @@ export function ListeningCard({ spotify, netease }: Props) {
                           {play.track.artists}
                         </div>
                       </div>
-                      <div className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0 tabular-nums">
+                      <div
+                        className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0 tabular-nums"
+                        suppressHydrationWarning
+                      >
                         {timeAgo(play.playedAt)}
                       </div>
                     </a>

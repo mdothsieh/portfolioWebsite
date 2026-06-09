@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Direction B — Editorial Broadsheet · Martin Hsieh (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..600&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f3ede1;        /* warm bone */
+    --paper-2:#ece4d4;
+    --ink:#1a1611;
+    --ink-soft:#4a4136;
+    --muted:#7c7060;
+    --rule:#cdc2ad;
+    --ox:#a8331f;           /* oxblood / vermillion accent */
+    --ox-soft:#a8331f22;
+    --display:'Bodoni Moda',serif;
+    --body:'Spectral',serif;
+    --mono:'Spline Sans Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+    -webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+  /* paper grain */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+  /* masthead bar */
+  .masthead-bar{display:flex;justify-content:space-between;align-items:center;
+    padding:16px 0;border-bottom:3px double var(--ink);font-family:var(--mono);
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .masthead-bar .ed{color:var(--ox)}
+  .masthead-bar nav{display:flex;gap:20px}
+  .masthead-bar a{color:var(--ink-soft);text-decoration:none}
+  .masthead-bar a:hover{color:var(--ox)}
+
+  /* the name as a magazine masthead */
+  .masthead{padding:30px 0 12px;text-align:center;border-bottom:1px solid var(--rule)}
+  .masthead .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--ox);margin-bottom:14px}
+  .masthead h1{font-family:var(--display);font-weight:600;font-size:clamp(3rem,11vw,8.5rem);
+    line-height:.9;letter-spacing:-.02em;text-transform:uppercase}
+  .masthead .dek{font-family:var(--body);font-style:italic;font-size:clamp(1rem,2vw,1.45rem);
+    color:var(--ink-soft);margin-top:16px}
+  .masthead .meta{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:18px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+  /* feature: lede column + annotated figure */
+  .feature{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;padding:48px 0;border-bottom:1px solid var(--rule);align-items:center}
+  .lede-col p.standfirst{font-size:1.35rem;line-height:1.5;color:var(--ink);margin-bottom:22px}
+  .lede-col p.standfirst .dropcap{float:left;font-family:var(--display);font-weight:700;font-size:4.1rem;line-height:.72;
+    padding:6px 12px 0 0;color:var(--ox)}
+  .lede-col p.body{font-size:1.02rem;color:var(--ink-soft);max-width:46ch;margin-bottom:26px}
+  .byline{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    border-top:1px solid var(--rule);padding-top:14px;margin-bottom:26px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    padding:13px 22px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--ox)}
+  .btn-ghost{border:1px solid var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn-text{color:var(--ox);text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:13px 4px;border-bottom:1px solid var(--ox)}
+
+  /* annotated watch figure */
+  .figure{position:relative;display:flex;align-items:center;justify-content:center}
+  .figcap{position:absolute;bottom:-30px;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted)}
+  .figcap b{color:var(--ox)}
+  .dial{position:relative;width:min(360px,74vw);aspect-ratio:1;border-radius:50%;
+    border:2px solid var(--ink);background:var(--paper);
+    box-shadow:6px 8px 0 -2px var(--ink);animation:rise 1s cubic-bezier(.16,1,.3,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .dial .ring{position:absolute;inset:16px;border-radius:50%;border:1px solid var(--rule)}
+  .tick{position:absolute;top:6%;left:50%;width:1.5px;height:12px;background:var(--ink-soft);transform-origin:50% 350%}
+  .tick.major{height:18px;width:2px;background:var(--ink)}
+  .num{position:absolute;font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink)}
+  .hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;background:var(--ink);border-radius:3px}
+  .hand.hour{width:4px;height:23%;margin-left:-2px;transform:rotate(305deg)}
+  .hand.min{width:2.5px;height:33%;margin-left:-1.25px;transform:rotate(120deg)}
+  .hand.sec{width:1.5px;height:36%;margin-left:-.75px;background:var(--ox);transform:rotate(210deg);animation:spin 60s steps(60) infinite}
+  @keyframes spin{to{transform:rotate(570deg)}}
+  .pivot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--ox);z-index:4}
+  .sub{position:absolute;border:1px solid var(--ink-soft);border-radius:50%;background:var(--paper);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--mono)}
+  .sub .l{font-size:6.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+  .sub .v{font-size:13px;font-weight:500;color:var(--ink)}
+  .sub.date{width:20%;aspect-ratio:1;top:50%;right:14%;transform:translateY(-50%)}
+  .sub.act{width:20%;aspect-ratio:1;bottom:16%;left:50%;transform:translateX(-50%)}
+  .sub.act .v{color:var(--ox)}
+  /* callout annotations */
+  .callout{position:absolute;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .callout::before{content:"";position:absolute;background:var(--ox)}
+  .callout.c1{top:14%;right:-46px}
+  .callout.c1::before{width:40px;height:1px;top:50%;left:-44px}
+  .callout.c2{bottom:24%;left:-58px;text-align:right}
+  .callout.c2::before{width:42px;height:1px;top:50%;right:-46px}
+  .callout.c3{top:-30px;left:46%}
+  .callout.c3::before{width:1px;height:24px;left:50%;bottom:-26px}
+
+  /* index / selected work as a contents table */
+  .index{padding:54px 0}
+  .index .head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:12px;margin-bottom:8px}
+  .index .head h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;letter-spacing:-.01em}
+  .index .head .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .row{display:grid;grid-template-columns:42px 1fr auto;gap:24px;align-items:baseline;
+    padding:24px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit;transition:background .2s,padding-left .2s}
+  .row:hover{padding-left:12px}
+  .row .no{font-family:var(--mono);font-size:12px;color:var(--ox)}
+  .row .t{font-family:var(--display);font-size:1.55rem;font-weight:600;line-height:1.1}
+  .row:hover .t{color:var(--ox)}
+  .row .tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:3px 7px;margin-left:10px;vertical-align:middle}
+  .row .d{font-size:.98rem;color:var(--ink-soft);margin-top:6px;max-width:54ch}
+  .row .pull{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--ox);text-align:right;white-space:nowrap;line-height:1}
+  .row .pull small{display:block;font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+  footer{padding:40px 0;border-top:3px double var(--ink);margin-top:30px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center}
+
+  .preview-flag{position:fixed;bottom:16px;left:16px;z-index:80;font-family:var(--mono);font-size:10px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--ox);padding:7px 12px}
+
+  @media(max-width:880px){
+    .feature{grid-template-columns:1fr;gap:64px}
+    .figure{order:-1;margin-bottom:20px}
+    .masthead-bar nav{display:none}
+    .row{grid-template-columns:32px 1fr;gap:14px}
+    .row .pull{grid-column:2;text-align:left;margin-top:8px}
+    .callout{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="preview-flag">Direction B · Broadsheet</div>
+  <div class="wrap">
+
+    <div class="masthead-bar">
+      <div><span class="ed">Vol. 03</span> · The Builder's Quarterly</div>
+      <nav><a href="#">Work</a><a href="#">Stack</a><a href="#">Now</a><a href="#">Résumé</a></nav>
+      <div>Los Angeles ⇄ Taipei</div>
+    </div>
+
+    <header class="masthead">
+      <div class="kicker">Full-stack &amp; applied-AI engineer · USC '28</div>
+      <h1>Martin&nbsp;Hsieh</h1>
+      <p class="dek">He builds the whole system — front end, back end, and the AI in between.</p>
+      <div class="meta">
+        <span>3 internships shipped</span><span>·</span>
+        <span>Joining Flex Ltd · Summer 2026</span><span>·</span>
+        <span>Open to Summer 2027</span>
+      </div>
+    </header>
+
+    <section class="feature">
+      <div class="lede-col">
+        <div class="byline">Profile — by the metric it moved · Updated live</div>
+        <p class="standfirst"><span class="dropcap">A</span> rising USC junior from Taipei who treats pedagogy and API design as the same skill: both reduce cognitive load at the boundary. Three software internships, four production tools, and a housing recommender that runs on real embeddings.</p>
+        <p class="body">The dial to the right is not decoration — it's a live instrument. It reads the date, today's Claude activity, and a Spotify pulse straight from real feeds, the same way the work reads from real production systems.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">↓ Résumé</a>
+          <a class="btn btn-ghost" href="#">Get in touch</a>
+          <a class="btn-text" href="#">read the work ↓</a>
+        </div>
+      </div>
+
+      <div class="figure">
+        <div class="dial" id="dial">
+          <div class="ring"></div>
+          <div class="sub date"><div class="l">Date</div><div class="v">09</div></div>
+          <div class="sub act"><div class="l">Claude</div><div class="v">7</div></div>
+          <div class="hand hour"></div>
+          <div class="hand min"></div>
+          <div class="hand sec"></div>
+          <div class="pivot"></div>
+          <div class="callout c1">live date window</div>
+          <div class="callout c2">today's Claude activity</div>
+          <div class="callout c3">Spotify pulse · running seconds</div>
+        </div>
+        <div class="figcap"><b>Fig. 01</b> — The instrument runs on live data feeds.</div>
+      </div>
+    </section>
+
+    <section class="index">
+      <div class="head">
+        <h2>Selected Work</h2>
+        <div class="lbl">作品 · 2023 – 2026</div>
+      </div>
+
+      <a class="row" href="#">
+        <div class="no">01</div>
+        <div>
+          <div class="t">Trojan Rooms <span class="tag">Applied AI</span></div>
+          <div class="d">A USC housing recommender: pgvector amenity embeddings, an upvote-weighted Bayesian average to smooth cold starts, and a Redis-cached top-K search behind magic-link auth.</div>
+        </div>
+        <div class="pull">&lt;80ms<small>cached top-k p50</small></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">02</div>
+        <div>
+          <div class="t">Order-Processing Dashboard <span class="tag">Full-stack</span></div>
+          <div class="d">React + Node dashboard wired into Kenmou's production floor, with Docker-based CI/CD that shortened release cycles by 40%.</div>
+        </div>
+        <div class="pull">+40%<small>throughput · −35% overhead</small></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">03</div>
+        <div>
+          <div class="t">Four Production Tools <span class="tag">Systems</span></div>
+          <div class="d">RPA bots, a React engagement portal, an internal Android app (300 users), and a Python data-quality pipeline across a 20-person team at Far Eastern Apparel.</div>
+        </div>
+        <div class="pull">+25%<small>weekly active users</small></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">04</div>
+        <div>
+          <div class="t">PulsePrep Academy <span class="tag">Founder</span></div>
+          <div class="d">A tutoring micro-business: 200+ adaptive worksheets, three IGCSE curricula, 50+ students across two years.</div>
+        </div>
+        <div class="pull">+15%<small>measured score lift</small></div>
+      </a>
+    </section>
+
+    <footer>© 2026 Martin Hsieh · The Builder's Quarterly — preview mock, not the live site</footer>
+  </div>
+
+  <script>
+    const dial=document.getElementById('dial');
+    for(let i=0;i<60;i++){
+      const t=document.createElement('div');
+      t.className='tick'+(i%5===0?' major':'');
+      t.style.transform=`translateX(-50%) rotate(${i*6}deg)`;
+      dial.appendChild(t);
+    }
+    // numerals at 12/3/6/9
+    const nums=[[12,'50%','9%'],[3,'88%','50%'],[6,'50%','88%'],[9,'9%','50%']];
+    nums.forEach(([n,l,t])=>{
+      const e=document.createElement('div');
+      e.className='num';e.textContent=n;
+      e.style.left=l;e.style.top=t;e.style.transform='translate(-50%,-50%)';
+      dial.appendChild(e);
+    });
+  </script>
+</body>
+</html>

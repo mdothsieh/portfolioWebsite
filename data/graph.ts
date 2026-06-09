@@ -48,6 +48,7 @@ export const graphData: GraphData = {
     { id: 'data-structures', kind: 'course', label: 'Data Structures', weight: 4 },
 
     // --- Projects (clickable when slug is set) ---
+    { id: 'usc-fit', kind: 'project', slug: 'usc-fit', label: 'USC FIT', weight: 5, meta: { description: 'Java/JSP + MySQL — campus fitness matching' } },
     { id: 'basketball-stats', kind: 'project', label: "Coach K's Stat Console", weight: 5, meta: { description: 'Java/JavaFX + MySQL' } },
 
     // --- Skills ---
