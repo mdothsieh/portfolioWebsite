@@ -21,9 +21,10 @@ interface Props {
 // left-to-right — the Apple-keynote feel. Triggers when the element scrolls into
 // view (so it fires on load for above-the-fold copy, and on scroll for the rest).
 //
-// SEO / accessibility safe: the full text is always present in the DOM, and
-// prefers-reduced-motion shows every word instantly (see .reveal-text rules in
-// app/globals.css). Mirrors the discipline of Reveal.tsx / DecodeText.tsx.
+// SEO / accessibility safe: the full text is always present in the DOM; the
+// hidden-until-animated state only applies under html.js (set in app/layout.tsx),
+// so no-JS visitors see everything, and prefers-reduced-motion shows every word
+// instantly (see .rt-word rules in app/globals.css). Mirrors Reveal.tsx.
 export function RevealText({
   text,
   className = '',

@@ -20,7 +20,7 @@ export const experiences: Experience[] = [
     period: 'Summer 2026',
     upcoming: true,
     bullets: [
-      'Joining the hardware–software integration team. This section gets rewritten in real time from the factory floor.',
+      'Joining the hardware–software integration team in Suzhou. Details land here once the internship starts.',
     ],
   },
   {
@@ -30,10 +30,10 @@ export const experiences: Experience[] = [
     location: 'Taipei, Taiwan',
     period: 'May – Sep 2025',
     bullets: [
-      'Shipped a React + Node order-processing dashboard. Throughput +40%, cross-team coordination overhead −35%.',
-      'Wired ArtiosCAD into the internal approval workflow. Prototype turnaround −30%, design-stage error rate −25%.',
-      'Authored Docker-based CI/CD. Release cycles shortened 40%.',
-      'Replaced paper inspection sheets with a digital checklist. Measurable −12% paper usage; immeasurable −100% lost forms.',
+      'Shipped a React + Node order-processing dashboard the production floor ran on daily — order throughput up 40%.',
+      'Wired ArtiosCAD into the internal approval workflow so packaging prototypes stopped waiting on email chains.',
+      'Authored the team’s first Docker-based CI/CD pipeline; releases went from a manual afternoon to a push.',
+      'Replaced paper inspection sheets with a digital checklist. Measurable: −12% paper usage. Immeasurable: −100% lost forms.',
     ],
   },
   {
@@ -43,8 +43,8 @@ export const experiences: Experience[] = [
     location: 'Suzhou, China',
     period: 'Jul – Sep 2023',
     bullets: [
-      'Built four production tools across a 20-person team: UiPath RPA bots (−20% workflow time), React engagement portal (+25% WAU), internal Android app (300 users), Python data-quality pipeline (−35% errors).',
-      'Designed the CI/CD that dropped deployment cycles 40% and manual ops 60%.',
+      'Built four production tools for a 20-person team: UiPath RPA bots, a React engagement portal, an internal Android app with 300 users, and a Python data-quality pipeline.',
+      'Designed the CI/CD that took deployments from a manual checklist to push-button.',
     ],
   },
   {
@@ -56,7 +56,6 @@ export const experiences: Experience[] = [
     bullets: [
       'Ran a tutoring micro-business: 200+ adaptive worksheets, 14 weekly contact hours, three IGCSE curricula, 50+ students.',
       'Average measured test-score lift of 15% within 3 months across the cohort.',
-      'Where I learned that pedagogy and API design are the same skill — both reduce cognitive load at the boundary.',
     ],
   },
 ];

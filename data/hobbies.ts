@@ -1,11 +1,6 @@
-// Personality vignettes. Each entry is one short editorial paragraph + one
-// specific artifact that grounds it.
-//
-// PLACEHOLDERS BELOW — swap with your actual current obsessions:
-//   - horology: which movement/reference are you studying right now?
-//   - philosophy: which paper / thinker are you reading?
-//   - markets: which platform + which strategy?
-//   - djing: which controller, which sets are you spinning?
+// Personality vignettes. Each entry is one short editorial line + one
+// specific artifact that grounds it. The voice is deliberately self-deprecating
+// and specific — real gear, real names — that's the authenticity signal.
 
 export interface HobbyVignette {
   id: string;
@@ -46,10 +41,10 @@ export const hobbies: HobbyVignette[] = [
     label: 'DJing',
     romanNumeral: 'III',
     body:
-      'I play at USC frat Parties and Student orgs, best set was at a Club',
+      'Still bad — but the transitions are getting smoother',
     artifact: {
       label: 'Setup',
-      value: 'Pioneer REV-7 · Serato DJ Pro',
+      value: 'Pioneer REV-1 · Serato DJ Pro',
     },
   },
 

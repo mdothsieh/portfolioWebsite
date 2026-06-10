@@ -1,10 +1,12 @@
 // Projects index (/projects). Lists every project from lib/projects
 // getAllProjects() (drafts dropped, newest first). Each entry links to /projects/[slug].
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllProjects } from '@/lib/projects';
 
 export const metadata = {
-  title: 'Projects · Martin Hsieh',
+  // The root layout's title template appends "· Martin Hsieh".
+  title: 'Projects',
   description:
     'Selected software projects by Martin Hsieh — full-stack systems, applied-AI tooling, RPA bots, and internal platforms, each led by the metric it moved.',
 };
@@ -15,7 +17,7 @@ export default function ProjectsPage() {
   return (
     <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
       <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-        03 — Builds
+        04 — Builds
       </div>
       <h1 className="font-serif text-5xl mb-3">Selected projects.</h1>
       <p className="text-muted mb-16">
@@ -33,6 +35,17 @@ export default function ProjectsPage() {
           {projects.map(p => (
             <li key={p.slug}>
               <Link href={`/projects/${p.slug}`} className="block group">
+                {p.frontmatter.cover && (
+                  <div className="relative aspect-video mb-4 rounded-lg overflow-hidden border border-divider bg-surface">
+                    <Image
+                      src={p.frontmatter.cover}
+                      alt={`${p.frontmatter.title} — screenshot`}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 672px, 100vw"
+                    />
+                  </div>
+                )}
                 <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
                   <div className="font-serif text-3xl group-hover:text-accent-project transition-colors">
                     {p.frontmatter.title}

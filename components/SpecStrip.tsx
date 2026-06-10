@@ -13,8 +13,8 @@ interface Spec {
 // Recruiter proof strip — Apple-style spec row. Big numbers, hairline dividers,
 // generous air. The first thing a fast big-tech skim lands on under the hero.
 const SPECS: Spec[] = [
-  { value: '03', label: 'internships shipped', sub: 'Kenmou · Far Eastern · Flex ’26' },
-  { value: '+40%', accent: '+40%', accentFirst: true, label: 'throughput', sub: 'order dashboard · −35% overhead' },
+  { value: '02', label: 'internships shipped', sub: 'Kenmou · Far Eastern — Flex ’26 next' },
+  { value: '+40%', accent: '+40%', accentFirst: true, label: 'throughput', sub: 'order dashboard, Kenmou 2025' },
   { value: 'TS · React · Next\nNode · Python', label: 'core stack', sub: '+ agentic AI frameworks', small: true },
   { value: 'Summer 2027', accent: '2027', label: 'available', sub: 'Los Angeles ⇄ Taipei', small: true },
 ];

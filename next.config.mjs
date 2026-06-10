@@ -2,16 +2,21 @@
 // - script/style allow 'unsafe-inline': Next.js hydration scripts and Tailwind's
 //   injected styles are inline; locking these down would require a nonce-injecting
 //   middleware. The other directives below still harden the app meaningfully.
+// - dev only: react-refresh needs 'unsafe-eval' and HMR needs a websocket;
+//   without these the dev client bundle dies and nothing hydrates. Prod CSP
+//   stays strict — neither relaxation ships.
 // - img-src https: NetEase album art is served from rotating *.music.126.net hosts
 //   and Leaflet map tiles from *.cartocdn.com; an allowlist would be brittle.
 // - frame-src is scoped to the Spotify track embed (components/SpotifyPlayer.tsx).
+const isDev = process.env.NODE_ENV === 'development';
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  `connect-src 'self'${isDev ? ' ws:' : ''}`,
   "frame-src https://open.spotify.com https://*.spotify.com",
   "frame-ancestors 'self'",
   "object-src 'none'",

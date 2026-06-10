@@ -5,6 +5,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getProjectBySlug, getAllProjects } from '@/lib/projects';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
   return getAllProjects().map(p => ({ slug: p.slug }));
@@ -15,7 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = getProjectBySlug(slug);
   if (!project) return {};
   return {
-    title: `${project.frontmatter.title} · Martin Hsieh`,
+    // The root layout's title template already appends "· Martin Hsieh".
+    title: project.frontmatter.title,
     description: project.frontmatter.tagline,
   };
 }
@@ -40,6 +42,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <h1 className="font-serif text-5xl leading-[1.05] mb-3">{frontmatter.title}</h1>
         <p className="text-xl text-muted leading-snug">{frontmatter.tagline}</p>
       </header>
+
+      {frontmatter.cover && (
+        <figure className="mb-10">
+          <div className="relative aspect-video rounded-lg overflow-hidden border border-divider bg-surface">
+            <Image
+              src={frontmatter.cover}
+              alt={`${frontmatter.title} — screenshot`}
+              fill
+              className="object-cover"
+              sizes="(min-width: 768px) 672px, 100vw"
+              priority
+            />
+          </div>
+        </figure>
+      )}
 
       {frontmatter.metrics && frontmatter.metrics.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">

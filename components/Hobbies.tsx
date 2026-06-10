@@ -9,10 +9,10 @@ export function Hobbies() {
     <section id="off-hours" className="max-w-3xl mx-auto px-6 py-24">
       <Kicker cn="零六" num="06" en="Off-Hours" zh="工余" />
       <h2 className="font-serif text-4xl md:text-5xl mb-3">
-        <RevealText text="What I do when the IDE is closed." />
+        <RevealText text="Off hours." />
       </h2>
       <p className="text-muted mb-12 max-w-xl">
-        Four practices, each unrelated to software, each quietly shaping how I think about it.
+        Golf, markets, decks, and a basketball — none of it billable, all of it real.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-divider rounded-xl overflow-hidden border border-divider">

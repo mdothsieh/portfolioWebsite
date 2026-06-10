@@ -17,7 +17,7 @@ describe('SpecStrip', () => {
 
   it('shows the headline proof values', () => {
     const { container } = render(<SpecStrip />);
-    expect(container.textContent).toContain('03');
+    expect(container.textContent).toContain('02');
     expect(container.textContent).toContain('+40%');
     expect(container.textContent).toContain('Summer 2027');
     expect(container.textContent).toContain('Kenmou');

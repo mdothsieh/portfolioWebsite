@@ -1,0 +1,642 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "MARTIN HSIEH" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "about" [ref=e7] [cursor=pointer]:
+            - /url: /#about
+            - text: about
+          - link "builds" [ref=e8] [cursor=pointer]:
+            - /url: /projects
+            - text: builds
+          - link "stack" [ref=e9] [cursor=pointer]:
+            - /url: /#stack
+            - text: stack
+          - link "off-hours" [ref=e10] [cursor=pointer]:
+            - /url: /#off-hours
+            - text: off-hours
+          - link "listening" [ref=e11] [cursor=pointer]:
+            - /url: /#listening
+            - text: listening
+          - link "/now" [ref=e12] [cursor=pointer]:
+            - /url: /now
+            - text: /now
+          - link "tea" [ref=e13] [cursor=pointer]:
+            - /url: /tea
+            - text: tea
+          - link "cv" [ref=e14] [cursor=pointer]:
+            - /url: /cv.pdf
+            - text: cv
+        - generic [ref=e15]: ·
+        - button "Toggle language between English and Chinese" [ref=e16] [cursor=pointer]: EN/中
+        - generic [ref=e17]:
+          - link "LinkedIn" [ref=e18] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/martin-hsieh/
+            - img [ref=e19]
+          - link "GitHub" [ref=e23] [cursor=pointer]:
+            - /url: https://github.com/mdothsieh
+            - img [ref=e24]
+          - link "Email" [ref=e27] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e28]
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]: Wed, Jun 10
+        - generic [ref=e35]: ·
+        - generic [ref=e36]: LAX ↔ TPE
+      - generic [ref=e37]:
+        - generic [ref=e40]: spotify quiet
+        - generic [ref=e41]: ·
+        - generic [ref=e42]:
+          - generic [ref=e43]: "993"
+          - generic [ref=e44]: msgs today
+        - generic [ref=e45]: ·
+        - generic [ref=e46]:
+          - generic [ref=e47]: "44"
+          - generic [ref=e48]: sessions
+  - main [ref=e50]:
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]: CS · USC · class of 2028 · open to Summer 2027 SWE / Applied AI
+        - heading "Martin Hsieh — I build full-stack systems and applied-AI tooling. Three internships shipped, joining Flex Ltd for Summer 2026." [level=1] [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]: Martin
+            - generic [ref=e58]: Hsieh
+            - generic [ref=e59]: —
+            - generic [ref=e60]: I
+            - generic [ref=e61]: build
+            - generic [ref=e62]: full-stack
+            - generic [ref=e63]: systems
+            - generic [ref=e64]: and
+            - generic [ref=e65]: applied-AI
+            - generic [ref=e66]: tooling.
+            - generic [ref=e67]: Three
+            - generic [ref=e68]: internships
+            - generic [ref=e69]: shipped,
+            - generic [ref=e70]: joining
+            - generic [ref=e71]: Flex
+            - generic [ref=e72]: Ltd
+            - generic [ref=e73]: for
+            - generic [ref=e74]: Summer
+            - generic [ref=e75]: "2026."
+        - paragraph [ref=e76]: USC computer science junior, originally from Taipei. The dial is live — date, today's Claude activity, and a Spotify pulse, all from real feeds. Hover the hour markers to inspect; press the chronograph pushers to switch layers.
+        - generic [ref=e77]:
+          - link "Resume" [ref=e78] [cursor=pointer]:
+            - /url: /cv.pdf
+            - img [ref=e79]
+            - text: Resume
+          - link "Get in touch" [ref=e81] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e82]
+            - text: Get in touch
+          - link "see the work ↓" [ref=e85] [cursor=pointer]:
+            - /url: "#projects"
+            - text: see the work
+            - generic [ref=e86]: ↓
+      - generic [ref=e89]:
+        - img "Corsa chronograph — interactive portfolio centerpiece" [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e154]: "400"
+            - generic [ref=e157]: "300"
+            - generic [ref=e159]: "240"
+            - generic [ref=e162]: "200"
+            - generic [ref=e165]: "175"
+            - generic [ref=e168]: "150"
+            - generic [ref=e171]: "130"
+            - generic [ref=e173]: "120"
+            - generic [ref=e176]: "110"
+            - generic [ref=e179]: "100"
+            - generic [ref=e182]: "90"
+            - generic [ref=e184]: "80"
+            - generic [ref=e187]: "70"
+            - generic [ref=e190]: "65"
+            - generic [ref=e192]: "60"
+            - generic [ref=e193]: TACHYMÈTRE
+            - generic [ref=e302]: CORSA
+            - generic [ref=e303]: PRECISION · CHRONOGRAPH
+            - generic [ref=e304]: CHRONOGRAPHE
+          - generic [ref=e330]:
+            - generic [ref=e331]: ACTIVITY
+            - generic [ref=e332]: "993"
+            - generic [ref=e333]: MSG · TODAY
+          - generic [ref=e334]:
+            - generic [ref=e335]: PULSE
+            - generic [ref=e337]: QUIET
+          - generic [ref=e338]:
+            - generic [ref=e339]: WED
+            - generic [ref=e340]: "1"
+          - generic "Pusher — next layer" [ref=e351] [cursor=pointer]
+          - generic "Pusher — previous layer" [ref=e354] [cursor=pointer]
+          - generic "Crown" [ref=e357] [cursor=pointer]
+        - generic [ref=e364]: Hover a marker to inspect · press the chronograph pushers to switch layer
+        - generic [ref=e365]:
+          - generic [ref=e366]: Click a button to switch the dial's data layer·or the watch pushers / ← →
+          - generic [ref=e367]:
+            - button "builds" [pressed] [ref=e368] [cursor=pointer]
+            - button "experience" [ref=e369] [cursor=pointer]
+            - button "stack" [ref=e370] [cursor=pointer]
+            - button "hobbies" [ref=e371] [cursor=pointer]
+    - generic [ref=e373]:
+      - generic [ref=e374]:
+        - definition [ref=e375]: "03"
+        - generic [ref=e376]:
+          - term [ref=e377]: internships shipped
+          - generic [ref=e378]: Kenmou · Far Eastern · Flex ’26
+      - generic [ref=e379]:
+        - definition [ref=e380]: +40%
+        - generic [ref=e381]:
+          - term [ref=e382]: throughput
+          - generic [ref=e383]: order dashboard · −35% overhead
+      - generic [ref=e384]:
+        - definition [ref=e385]: TS · React · Next Node · Python
+        - generic [ref=e386]:
+          - term [ref=e387]: core stack
+          - generic [ref=e388]: + agentic AI frameworks
+      - generic [ref=e389]:
+        - definition [ref=e390]: Summer 2027
+        - generic [ref=e391]:
+          - term [ref=e392]: available
+          - generic [ref=e393]: Los Angeles ⇄ Taipei
+    - generic [ref=e395]:
+      - generic [ref=e396]: 零二02 — About
+      - generic [ref=e397]:
+        - generic [ref=e398]:
+          - paragraph [ref=e399]: I'm a rising junior at USC studying computer science. I grew up in Taipei, spent the last two summers shipping software in Taiwan and mainland China, and now spend most of my days somewhere between LA and a laptop.
+          - paragraph [ref=e400]: My instinct is to build the system, not just the screen. Last summer at Kenmou Enterprise in Taipei I wired a React + Node order-processing dashboard into the production floor and watched cross-team coordination overhead drop 35%. The summer before, at Far Eastern Apparel in Suzhou, I shipped four production tools — RPA bots, a React engagement portal, an Android app, and a Python data pipeline — across a 20-person team. Before college I founded PulsePrep Academy, teaching 50+ middle and high schoolers across three IGCSE curricula for two years.
+          - paragraph [ref=e401]: Joining Flex Ltd's Suzhou facility for Summer 2026 as an engineering intern. Looking for Summer 2027 roles in software engineering or applied AI — teams that ship things, measure them, and iterate. Especially drawn to agentic systems, full-stack work where the line between front and back is intentionally blurred, and infrastructure that quietly makes ten other engineers faster.
+        - complementary [ref=e402]:
+          - generic [ref=e403]:
+            - generic [ref=e408]: Currently
+            - generic [ref=e409]:
+              - generic [ref=e410]:
+                - term [ref=e411]: This week
+                - definition [ref=e412]: Launching This Portfolio · Building CrateMate
+              - generic [ref=e413]:
+                - term [ref=e414]: This semester
+                - definition [ref=e415]: "Software Engineering · AI: Principles and Foundations · Western Music as Sounding History · Beach Volleyball · Introduction to American Popular Culture · Weight Training"
+              - generic [ref=e416]:
+                - term [ref=e417]: Reading
+                - definition [ref=e418]: I try to
+              - generic [ref=e419]:
+                - term [ref=e420]: Learning
+                - definition [ref=e421]: Agentic frameworks · System design at scale · Utilize LLMs to make my life easier
+    - generic [ref=e423]:
+      - generic [ref=e424]: 零三03 — Experience
+      - heading "Three summers, three cities." [level=2] [ref=e425]:
+        - generic [ref=e426]:
+          - generic [ref=e427]: Three
+          - generic [ref=e428]: summers,
+          - generic [ref=e429]: three
+          - generic [ref=e430]: cities.
+      - paragraph [ref=e431]: Hardware-floor pragmatism in Suzhou, full-stack iteration speed in Taipei, applied-AI ambition in Los Angeles.
+      - list [ref=e432]:
+        - listitem [ref=e433]:
+          - generic [ref=e435]:
+            - generic [ref=e436]: SWE Intern (incoming) · Flex Ltd
+            - generic [ref=e437]: Summer 2026
+          - generic [ref=e438]: Suzhou, China· upcoming
+          - list [ref=e439]:
+            - listitem [ref=e440]: — Joining the hardware–software integration team. This section gets rewritten in real time from the factory floor.
+        - listitem [ref=e441]:
+          - generic [ref=e443]:
+            - generic [ref=e444]: SWE Intern · Kenmou Enterprise
+            - generic [ref=e445]: May – Sep 2025
+          - generic [ref=e446]: Taipei, Taiwan
+          - list [ref=e447]:
+            - listitem [ref=e448]: — Shipped a React + Node order-processing dashboard. Throughput +40%, cross-team coordination overhead −35%.
+            - listitem [ref=e449]: — Wired ArtiosCAD into the internal approval workflow. Prototype turnaround −30%, design-stage error rate −25%.
+            - listitem [ref=e450]: — Authored Docker-based CI/CD. Release cycles shortened 40%.
+            - listitem [ref=e451]: — Replaced paper inspection sheets with a digital checklist. Measurable −12% paper usage; immeasurable −100% lost forms.
+        - listitem [ref=e452]:
+          - generic [ref=e454]:
+            - generic [ref=e455]: SWE Intern · Far Eastern Apparel
+            - generic [ref=e456]: Jul – Sep 2023
+          - generic [ref=e457]: Suzhou, China
+          - list [ref=e458]:
+            - listitem [ref=e459]: "— Built four production tools across a 20-person team: UiPath RPA bots (−20% workflow time), React engagement portal (+25% WAU), internal Android app (300 users), Python data-quality pipeline (−35% errors)."
+            - listitem [ref=e460]: — Designed the CI/CD that dropped deployment cycles 40% and manual ops 60%.
+        - listitem [ref=e461]:
+          - generic [ref=e463]:
+            - generic [ref=e464]: Founder · PulsePrep Academy
+            - generic [ref=e465]: Mar 2022 – Mar 2024
+          - generic [ref=e466]: Suzhou, China
+          - list [ref=e467]:
+            - listitem [ref=e468]: "— Ran a tutoring micro-business: 200+ adaptive worksheets, 14 weekly contact hours, three IGCSE curricula, 50+ students."
+            - listitem [ref=e469]: — Average measured test-score lift of 15% within 3 months across the cohort.
+            - listitem [ref=e470]: — Where I learned that pedagogy and API design are the same skill — both reduce cognitive load at the boundary.
+    - link "Boarding Pass · CV-2026 Seat — Anywhere From TPE Taipei · 桃園 To LAX Los Angeles · USC Passenger Martin Hsieh Class CS · '28 Flight CV-2026 Boarding Now Resume Download" [ref=e472] [cursor=pointer]:
+      - /url: /cv.pdf
+      - generic [ref=e474]:
+        - generic [ref=e475]:
+          - generic [ref=e476]:
+            - generic [ref=e477]: Boarding Pass · CV-2026
+            - generic [ref=e478]: Seat — Anywhere
+          - generic [ref=e479]:
+            - generic [ref=e480]:
+              - generic [ref=e481]: From
+              - generic [ref=e482]: TPE
+              - generic [ref=e483]: Taipei · 桃園
+            - img [ref=e485]
+            - generic [ref=e487]:
+              - generic [ref=e488]: To
+              - generic [ref=e489]: LAX
+              - generic [ref=e490]: Los Angeles · USC
+          - generic [ref=e491]:
+            - generic [ref=e492]:
+              - generic [ref=e493]: Passenger
+              - generic [ref=e494]: Martin Hsieh
+            - generic [ref=e495]:
+              - generic [ref=e496]: Class
+              - generic [ref=e497]: CS · '28
+            - generic [ref=e498]:
+              - generic [ref=e499]: Flight
+              - generic [ref=e500]: CV-2026
+            - generic [ref=e501]:
+              - generic [ref=e502]: Boarding
+              - generic [ref=e503]: Now
+        - generic [ref=e508]:
+          - generic [ref=e509]: Resume
+          - generic [ref=e533]:
+            - img [ref=e534]
+            - generic [ref=e536]: Download
+    - generic [ref=e537]:
+      - generic [ref=e538]:
+        - generic [ref=e539]: 零四04 — Builds
+        - generic [ref=e540]:
+          - heading "Selected projects." [level=2] [ref=e541]:
+            - generic [ref=e542]:
+              - generic [ref=e543]: Selected
+              - generic [ref=e544]: projects.
+          - link "all projects ↗" [ref=e545] [cursor=pointer]:
+            - /url: /projects
+      - list [ref=e546]:
+        - listitem [ref=e547]:
+          - link "CrateMate 2026-06 -> current A DJ's crate-digging companion — a local-first desktop app that analyzes your actual music library, finds the tracks that mix well together, and exports straight to a Serato crate. Electron TypeScript React Tailwind Essentia.js (WASM) ONNX Runtime" [ref=e548] [cursor=pointer]:
+            - /url: /projects/cratemate
+            - generic [ref=e550]:
+              - generic [ref=e551]: CrateMate
+              - generic [ref=e552]: 2026-06 -> current
+            - generic [ref=e553]: A DJ's crate-digging companion — a local-first desktop app that analyzes your actual music library, finds the tracks that mix well together, and exports straight to a Serato crate.
+            - generic [ref=e554]:
+              - generic [ref=e555]: Electron
+              - generic [ref=e556]: TypeScript
+              - generic [ref=e557]: React
+              - generic [ref=e558]: Tailwind
+              - generic [ref=e559]: Essentia.js (WASM)
+              - generic [ref=e560]: ONNX Runtime
+        - listitem [ref=e561]:
+          - link "USC FIT 2026-01 -> 2026-05 USC's First Fitness Matching Platform — a campus web app that helps students find, schedule, and join fitness activities together. Java JSP / Servlets MySQL JDBC Maven Tomcat" [ref=e562] [cursor=pointer]:
+            - /url: /projects/usc-fit
+            - generic [ref=e564]:
+              - generic [ref=e565]: USC FIT
+              - generic [ref=e566]: 2026-01 -> 2026-05
+            - generic [ref=e567]: USC's First Fitness Matching Platform — a campus web app that helps students find, schedule, and join fitness activities together.
+            - generic [ref=e568]:
+              - generic [ref=e569]: Java
+              - generic [ref=e570]: JSP / Servlets
+              - generic [ref=e571]: MySQL
+              - generic [ref=e572]: JDBC
+              - generic [ref=e573]: Maven
+              - generic [ref=e574]: Tomcat
+        - listitem [ref=e575]:
+          - link "Courtside 2023-04 -> 2024-12 A desktop basketball team-management system — coaches and players track games, per-player statistics, rankings, and scheduling from one role-aware JavaFX app backed by MySQL. Java JavaFX MySQL JDBC Druid Maven" [ref=e576] [cursor=pointer]:
+            - /url: /projects/courtside
+            - generic [ref=e578]:
+              - generic [ref=e579]: Courtside
+              - generic [ref=e580]: 2023-04 -> 2024-12
+            - generic [ref=e581]: A desktop basketball team-management system — coaches and players track games, per-player statistics, rankings, and scheduling from one role-aware JavaFX app backed by MySQL.
+            - generic [ref=e582]:
+              - generic [ref=e583]: Java
+              - generic [ref=e584]: JavaFX
+              - generic [ref=e585]: MySQL
+              - generic [ref=e586]: JDBC
+              - generic [ref=e587]: Druid
+              - generic [ref=e588]: Maven
+    - generic [ref=e590]:
+      - generic [ref=e591]: 零五05 — Stack
+      - heading "The honest stack." [level=2] [ref=e592]:
+        - generic [ref=e593]:
+          - generic [ref=e594]: The
+          - generic [ref=e595]: honest
+          - generic [ref=e596]: stack.
+      - paragraph [ref=e597]: No 10-out-of-10 expert ratings. Three buckets only — what I'd reach for in production, what I've shipped with, what I'm actively learning.
+      - generic [ref=e598]:
+        - generic [ref=e599]:
+          - generic [ref=e600]:
+            - generic [ref=e601]: Strong
+            - generic [ref=e602]: I'd reach for these in production without hesitation
+          - generic [ref=e603]:
+            - generic [ref=e604]: React
+            - generic [ref=e606]: Node.js
+            - generic [ref=e608]: JavaScript
+            - generic [ref=e610]: Python
+            - generic [ref=e612]: Java
+            - generic [ref=e614]: SQL
+            - generic [ref=e616]: Git
+        - generic [ref=e618]:
+          - generic [ref=e619]:
+            - generic [ref=e620]: Proficient
+            - generic [ref=e621]: Shipped with these, look things up when needed
+          - generic [ref=e622]:
+            - generic [ref=e623]: TypeScript
+            - generic [ref=e625]: Next.js
+            - generic [ref=e627]: C++
+            - generic [ref=e629]: Docker
+            - generic [ref=e631]: HTML / CSS
+            - generic [ref=e633]: Full-Stack Web
+            - generic [ref=e635]: Algorithms
+            - generic [ref=e637]: Prompt Engineering
+        - generic [ref=e639]:
+          - generic [ref=e640]:
+            - generic [ref=e641]: Learning
+            - generic [ref=e642]: Actively studying / using on side projects
+          - generic [ref=e643]:
+            - generic [ref=e644]: LLM / Agent Workflows
+            - generic [ref=e646]: Computer Vision
+            - generic [ref=e648]: System Design at Scale
+            - generic [ref=e650]: Embedded Systems
+      - generic [ref=e652]:
+        - generic [ref=e653]: Dot color = category
+        - generic [ref=e654]:
+          - generic [ref=e655]: language
+          - generic [ref=e657]: framework
+          - generic [ref=e659]: tool
+          - generic [ref=e661]: domain
+    - generic [ref=e664]:
+      - generic [ref=e665]: 零六06 — Off-Hours
+      - heading "What I do when the IDE is closed." [level=2] [ref=e666]:
+        - generic [ref=e667]:
+          - generic [ref=e668]: What
+          - generic [ref=e669]: I
+          - generic [ref=e670]: do
+          - generic [ref=e671]: when
+          - generic [ref=e672]: the
+          - generic [ref=e673]: IDE
+          - generic [ref=e674]: is
+          - generic [ref=e675]: closed.
+      - paragraph [ref=e676]: Four practices, each unrelated to software, each quietly shaping how I think about it.
+      - generic [ref=e677]:
+        - article [ref=e678]:
+          - generic [ref=e679]:
+            - generic [ref=e680]: Golf
+            - generic [ref=e681]: I
+          - paragraph [ref=e682]: Attempting to be good
+          - generic [ref=e683]:
+            - generic [ref=e684]: What is in the bag
+            - generic [ref=e685]: QI35 Driver
+        - article [ref=e686]:
+          - generic [ref=e687]:
+            - generic [ref=e688]: Markets
+            - generic [ref=e689]: II
+          - paragraph [ref=e690]: Trying to break even
+          - generic [ref=e691]:
+            - generic [ref=e692]: Watching
+            - generic [ref=e693]: $TSM · $NVDA · the IV term structure on $SPX
+        - article [ref=e694]:
+          - generic [ref=e695]:
+            - generic [ref=e696]: DJing
+            - generic [ref=e697]: III
+          - paragraph [ref=e698]: I suck
+          - generic [ref=e699]:
+            - generic [ref=e700]: Setup
+            - generic [ref=e701]: Pioneer REV-1 · Serato DJ Pro
+        - article [ref=e702]:
+          - generic [ref=e703]:
+            - generic [ref=e704]: Basketball
+            - generic [ref=e705]: IV
+          - paragraph [ref=e706]: Currently training with Oliver Xu (HK national team player)
+          - generic [ref=e707]:
+            - generic [ref=e708]: Focus
+            - generic [ref=e709]: Ball-handling, shooting form, and defensive footwork.
+    - generic [ref=e710]:
+      - generic [ref=e711]:
+        - generic [ref=e712]: 零七07 — Claude usage
+        - heading "Claude usage, since April 25." [level=2] [ref=e713]:
+          - generic [ref=e714]:
+            - generic [ref=e715]: Claude
+            - generic [ref=e716]: usage,
+            - generic [ref=e717]: since
+            - generic [ref=e718]: April
+            - generic [ref=e719]: "25."
+        - paragraph [ref=e720]: How often Claude and I actually work together. Quiet weeks are usually travel or exams; spikes are hackathons and project crunches.
+      - generic [ref=e722]:
+        - generic [ref=e723]:
+          - generic [ref=e724]:
+            - generic [ref=e725]: "24"
+            - generic [ref=e726]: active days
+          - generic [ref=e727]:
+            - generic [ref=e728]: 3d
+            - generic [ref=e729]: current streak
+          - generic [ref=e730]:
+            - generic [ref=e731]: "44"
+            - generic [ref=e732]: sessions
+          - generic [ref=e733]:
+            - generic [ref=e734]: 1.9B
+            - generic [ref=e735]: tokens processed
+        - generic [ref=e736]:
+          - generic [ref=e737]:
+            - generic [ref=e740]: Cowork
+            - generic [ref=e741]:
+              - generic [ref=e742]: "19"
+              - generic [ref=e743]: sessions
+            - generic [ref=e744]: 19 transcripts
+          - generic [ref=e745]:
+            - generic [ref=e748]: Claude Code
+            - generic [ref=e749]:
+              - generic [ref=e750]: "25"
+              - generic [ref=e751]: sessions
+            - generic [ref=e752]: 25 transcripts
+          - generic [ref=e753]:
+            - generic [ref=e756]: claude.ai
+            - generic [ref=e757]:
+              - generic [ref=e758]: —
+              - generic [ref=e759]: not imported
+            - generic [ref=e760]: drop conversations.json →
+        - generic [ref=e762]:
+          - generic [ref=e763]:
+            - generic [ref=e764]: Apr
+            - generic [ref=e765]: May
+            - generic [ref=e766]: Jun
+          - generic [ref=e767]:
+            - generic [ref=e768]:
+              - generic [ref=e770]: M
+              - generic [ref=e772]: W
+              - generic [ref=e774]: F
+            - generic [ref=e776]:
+              - generic "2026-04-25, 298 messages, 20.1M tokens" [ref=e784]
+              - generic [ref=e785]:
+                - generic "2026-04-26, 0 messages, 0 tokens" [ref=e786]
+                - generic "2026-04-27, 156 messages, 20.2M tokens" [ref=e787]
+                - generic "2026-04-28, 0 messages, 0 tokens" [ref=e788]
+                - generic "2026-04-29, 180 messages, 5.5M tokens" [ref=e789]
+                - generic "2026-04-30, 325 messages, 18.3M tokens" [ref=e790]
+                - generic "2026-05-01, 70 messages, 3.5M tokens" [ref=e791]
+                - generic "2026-05-02, 0 messages, 0 tokens" [ref=e792]
+              - generic [ref=e793]:
+                - generic "2026-05-03, 273 messages, 14.8M tokens" [ref=e794]
+                - generic "2026-05-04, 64 messages, 1.7M tokens" [ref=e795]
+                - generic "2026-05-05, 38 messages, 1.6M tokens" [ref=e796]
+                - generic "2026-05-06, 98 messages, 2.9M tokens" [ref=e797]
+                - generic "2026-05-07, 0 messages, 0 tokens" [ref=e798]
+                - generic "2026-05-08, 105 messages, 1.6M tokens" [ref=e799]
+                - generic "2026-05-09, 40 messages, 865.2K tokens" [ref=e800]
+              - generic [ref=e801]:
+                - generic "2026-05-10, 0 messages, 0 tokens" [ref=e802]
+                - generic "2026-05-11, 170 messages, 25.0M tokens" [ref=e803]
+                - generic "2026-05-12, 68 messages, 13.9M tokens" [ref=e804]
+                - generic "2026-05-13, 0 messages, 0 tokens" [ref=e805]
+                - generic "2026-05-14, 0 messages, 0 tokens" [ref=e806]
+                - generic "2026-05-15, 0 messages, 0 tokens" [ref=e807]
+                - generic "2026-05-16, 0 messages, 0 tokens" [ref=e808]
+              - generic [ref=e809]:
+                - generic "2026-05-17, 0 messages, 0 tokens" [ref=e810]
+                - generic "2026-05-18, 0 messages, 0 tokens" [ref=e811]
+                - generic "2026-05-19, 0 messages, 0 tokens" [ref=e812]
+                - generic "2026-05-20, 0 messages, 0 tokens" [ref=e813]
+                - generic "2026-05-21, 0 messages, 0 tokens" [ref=e814]
+                - generic "2026-05-22, 1088 messages, 62.4M tokens" [ref=e815]
+                - generic "2026-05-23, 956 messages, 107.2M tokens" [ref=e816]
+              - generic [ref=e817]:
+                - generic "2026-05-24, 0 messages, 0 tokens" [ref=e818]
+                - generic "2026-05-25, 0 messages, 0 tokens" [ref=e819]
+                - generic "2026-05-26, 538 messages, 81.0M tokens" [ref=e820]
+                - generic "2026-05-27, 0 messages, 0 tokens" [ref=e821]
+                - generic "2026-05-28, 0 messages, 0 tokens" [ref=e822]
+                - generic "2026-05-29, 2418 messages, 628.2M tokens" [ref=e823]
+                - generic "2026-05-30, 0 messages, 0 tokens" [ref=e824]
+              - generic [ref=e825]:
+                - generic "2026-05-31, 0 messages, 0 tokens" [ref=e826]
+                - generic "2026-06-01, 520 messages, 203.1M tokens" [ref=e827]
+                - generic "2026-06-02, 0 messages, 0 tokens" [ref=e828]
+                - generic "2026-06-03, 0 messages, 0 tokens" [ref=e829]
+                - generic "2026-06-04, 676 messages, 210.0M tokens" [ref=e830]
+                - generic "2026-06-05, 305 messages, 82.3M tokens" [ref=e831]
+                - generic "2026-06-06, 43 messages, 2.4M tokens" [ref=e832]
+              - generic [ref=e833]:
+                - generic "2026-06-07, 0 messages, 0 tokens" [ref=e834]
+                - generic "2026-06-08, 1769 messages, 171.4M tokens" [ref=e835]
+                - generic "2026-06-09, 1896 messages, 158.4M tokens" [ref=e836]
+                - generic "2026-06-10, 993 messages, 57.0M tokens" [ref=e837]
+        - generic [ref=e841]:
+          - generic [ref=e842]: Hover for details·scanned just now
+          - generic [ref=e843]:
+            - generic [ref=e844]: less
+            - generic [ref=e850]: more
+    - generic [ref=e851]:
+      - generic [ref=e852]:
+        - generic [ref=e853]: 零八08 — Listening
+        - heading "What I'm listening to." [level=2] [ref=e854]:
+          - generic [ref=e855]:
+            - generic [ref=e856]: What
+            - generic [ref=e857]: I'm
+            - generic [ref=e858]: listening
+            - generic [ref=e859]: to.
+        - paragraph [ref=e860]: Two libraries, two languages. Spotify shows what's playing right now and the recent tail; 网易云音乐 shows my most-played tracks. Switch sources with the toggle.
+      - generic [ref=e862]:
+        - generic [ref=e863]:
+          - generic [ref=e864]:
+            - button "Spotify" [ref=e865] [cursor=pointer]: Spotify
+            - button "网易云" [ref=e867] [cursor=pointer]: 网易云
+          - generic [ref=e869]: recent · spotify
+        - generic [ref=e870]:
+          - generic [ref=e871]:
+            - generic [ref=e872]:
+              - link "Open Which One (feat. Central Cee) in Spotify" [ref=e873] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/4qLHbbVJjNsOqWxHrTtvgx
+                - img "MAID OF HONOUR" [ref=e874]
+              - link "from recent Which One (feat. Central Cee) Drake, Central Cee" [ref=e875] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/4qLHbbVJjNsOqWxHrTtvgx
+                - text: from recent
+                - generic [ref=e876]: Which One (feat. Central Cee)
+                - generic [ref=e877]: Drake, Central Cee
+              - button "Collapse player" [ref=e878] [cursor=pointer]:
+                - img [ref=e879]
+            - generic [ref=e883]:
+              - iframe [ref=e884]
+              - generic [ref=e885]:
+                - button "← prev" [disabled] [ref=e886]
+                - button "next →" [ref=e887] [cursor=pointer]
+              - generic [ref=e888]:
+                - link "open on spotify" [ref=e889] [cursor=pointer]:
+                  - /url: https://open.spotify.com/track/4qLHbbVJjNsOqWxHrTtvgx
+                  - img [ref=e890]
+                  - text: open on spotify
+                - generic [ref=e894]: 1/7
+          - generic [ref=e895]:
+            - generic [ref=e896]:
+              - generic [ref=e897]: Earlier — chronological tail
+              - generic [ref=e900]: live
+            - generic [ref=e901]:
+              - link "Drama aespa 2d ago" [ref=e902] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/0SE1qlvZVknGGKTwuXBPKz
+                - img [ref=e903]
+                - generic [ref=e904]:
+                  - generic [ref=e905]: Drama
+                  - generic [ref=e906]: aespa
+                - generic [ref=e907]: 2d ago
+              - link "Drama aespa 3d ago" [ref=e908] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/0SE1qlvZVknGGKTwuXBPKz
+                - img [ref=e909]
+                - generic [ref=e910]:
+                  - generic [ref=e911]: Drama
+                  - generic [ref=e912]: aespa
+                - generic [ref=e913]: 3d ago
+              - link "Magnetic ILLIT 3d ago" [ref=e914] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG
+                - img [ref=e915]
+                - generic [ref=e916]:
+                  - generic [ref=e917]: Magnetic
+                  - generic [ref=e918]: ILLIT
+                - generic [ref=e919]: 3d ago
+              - link "Whiplash aespa 3d ago" [ref=e920] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/6uPnrBgweGOcwjFL4ItAvV
+                - img [ref=e921]
+                - generic [ref=e922]:
+                  - generic [ref=e923]: Whiplash
+                  - generic [ref=e924]: aespa
+                - generic [ref=e925]: 3d ago
+              - link "UP - KARINA Solo aespa 3d ago" [ref=e926] [cursor=pointer]:
+                - /url: https://open.spotify.com/track/5sjnkOfTLCLNfkkchI2re2
+                - img [ref=e927]
+                - generic [ref=e928]:
+                  - generic [ref=e929]: UP - KARINA Solo
+                  - generic [ref=e930]: aespa
+                - generic [ref=e931]: 3d ago
+  - contentinfo [ref=e932]:
+    - region "Ask an AI about me." [ref=e933]:
+      - generic [ref=e934]: Ask AI
+      - heading "Ask an AI about me." [level=2] [ref=e935]
+      - paragraph [ref=e936]: Rather than read every page, ask your assistant of choice. It opens in a new tab with a prompt about who I am, what I build, and how to reach me — already filled in.
+      - navigation "Ask an AI assistant about Martin Hsieh" [ref=e937]:
+        - list [ref=e938]:
+          - listitem [ref=e939]:
+            - link "Ask ChatGPT about Martin Hsieh" [ref=e940] [cursor=pointer]:
+              - /url: https://chatgpt.com/?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+              - text: ChatGPT
+              - generic [ref=e942]: ↗
+          - listitem [ref=e943]:
+            - link "Ask Claude about Martin Hsieh" [ref=e944] [cursor=pointer]:
+              - /url: https://claude.ai/new?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+              - text: Claude
+              - generic [ref=e946]: ↗
+          - listitem [ref=e947]:
+            - link "Ask Perplexity about Martin Hsieh" [ref=e948] [cursor=pointer]:
+              - /url: https://www.perplexity.ai/search?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+              - text: Perplexity
+              - generic [ref=e950]: ↗
+          - listitem [ref=e951]:
+            - link "Ask Gemini about Martin Hsieh" [ref=e952] [cursor=pointer]:
+              - /url: https://gemini.google.com/app
+              - text: Gemini
+              - generic [ref=e954]: ↗
+    - generic [ref=e957]:
+      - generic [ref=e958]: © 2026 Martin Hsieh
+      - generic [ref=e959]:
+        - text: Built with Next.js · Tailwind ·
+        - link "source ↗" [ref=e960] [cursor=pointer]:
+          - /url: https://github.com/mdothsieh
+  - button "Open command palette" [ref=e961] [cursor=pointer]:
+    - generic [ref=e962]: ⌘
+    - text: K

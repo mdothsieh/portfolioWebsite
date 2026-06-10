@@ -94,3 +94,12 @@ no payments — all dynamic data comes from external APIs (fetched server-side) 
 
 `next.config.mjs` ships a real Content-Security-Policy + `X-Frame-Options`. If you add a
 new external embed or asset host, update the CSP there (e.g. `frame-src`, `img-src`).
+The CSP adds `'unsafe-eval'` + `ws:` **in development only** — react-refresh/HMR need
+them; removing the dev branch makes `npm run dev` render a black page (no hydration).
+
+## Progressive enhancement
+
+Content must stay readable without JavaScript: hidden-until-animated states in
+`app/globals.css` are scoped under `html.js` (set by the inline bootstrap script in
+`app/layout.tsx`). If you add a new scroll/entrance animation with a hidden initial
+state, scope it under `html.js` too.

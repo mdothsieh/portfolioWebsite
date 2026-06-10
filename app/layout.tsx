@@ -2,7 +2,9 @@
 // legacy --font-inter/serif/mono CSS vars that Tailwind reads), defines site-wide
 // SEO/OpenGraph metadata, and mounts the persistent chrome wrapping all pages:
 // AmbientWash, Atmosphere, LiveFavicon, ScrollProgress, Nav, SiteFooter,
-// CommandPalette. Per-navigation entrance animation lives in app/template.tsx.
+// CommandPalette. Also injects the inline html.js bootstrap script that gates
+// all hidden-until-animated CSS (progressive enhancement — see globals.css).
+// Per-navigation entrance animation lives in app/template.tsx.
 import type { Metadata } from 'next';
 import { Hanken_Grotesk, Spline_Sans_Mono, Schibsted_Grotesk } from 'next/font/google';
 import './globals.css';
@@ -40,7 +42,7 @@ const serif = Schibsted_Grotesk({
 const SITE_URL = 'https://martinhsieh.com';
 const TITLE = 'Martin Hsieh — CS @ USC';
 const DESCRIPTION =
-  'USC computer science junior building full-stack systems and applied-AI tooling. Three internships shipped. Open to Summer 2027 roles.';
+  'USC computer science junior building full-stack systems and applied-AI tooling. Two internships shipped, Flex Ltd incoming. Open to Summer 2027 roles.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,8 +91,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${sans.variable} ${mono.variable} ${serif.variable}`}
+      // The inline bootstrap script below adds the `js` class before React
+      // hydrates; suppress the expected html-attribute mismatch warning.
+      suppressHydrationWarning
     >
       <body className="relative bg-bg text-primary font-sans antialiased">
+        {/* Progressive-enhancement gate: animation hidden-states in globals.css
+            are scoped under html.js, so content stays visible when JS is off
+            or unsupported. Runs before first paint (CSS blocks rendering). */}
+        <script>{`if('IntersectionObserver' in window)document.documentElement.classList.add('js')`}</script>
         <AmbientWash />
         <Atmosphere />
         <LiveFavicon />

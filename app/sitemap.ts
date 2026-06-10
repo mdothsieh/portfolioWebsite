@@ -14,12 +14,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/tea`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = getAllProjects().map((p) => ({
-    url: `${SITE_URL}/projects/${p.slug}`,
-    lastModified: p.frontmatter.date ? new Date(p.frontmatter.date) : now,
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
+  const projectRoutes: MetadataRoute.Sitemap = getAllProjects().map((p) => {
+    // Frontmatter dates are ranges like '2026-06 -> current', not parseable
+    // timestamps — try the leading token and fall back to the build date.
+    const parsed = new Date(p.frontmatter.date?.split(/\s*->\s*/)[0] ?? '');
+    return {
+      url: `${SITE_URL}/projects/${p.slug}`,
+      lastModified: Number.isNaN(parsed.getTime()) ? now : parsed,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
 
   return [...staticRoutes, ...projectRoutes];
 }

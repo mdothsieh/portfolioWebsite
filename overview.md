@@ -71,8 +71,14 @@ portfolioWebsite/
 
 **Section order on the landing page** (`app/page.tsx`):
 `01 Hero` → `SpecStrip` → `02 About` → `03 ExperienceTimeline` → `BoardingPass` →
-`04 Builds (projects)` → `05 SkillsDashboard` → `06 Hobbies` → `07 ClaudeUsageHeatmap`
-→ `08 ListeningSection`. Most are wrapped in `<Reveal>` for scroll-in animation.
+`04 Builds (projects)` → `05 SkillsDashboard` → `06 Hobbies` → `07 ListeningSection`
+→ unnumbered Claude-usage "telemetry" strip (deliberately demoted — AI fluency as
+evidence, not identity). Most are wrapped in `<Reveal>` for scroll-in animation.
+
+**Progressive enhancement:** an inline bootstrap script in `layout.tsx` adds the
+`js` class to `<html>` before first paint; every hidden-until-animated state in
+`globals.css` (`.reveal`, `.rt-word`, `.hero-enter`) is scoped under `html.js`,
+so no-JS visitors, scrapers, and broken-hydration cases see the full page.
 
 ---
 
@@ -101,14 +107,15 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 - `Hero.tsx` (server) — section 01; centerpiece is `WatchFace`.
 - `WatchFace.tsx` (client) — animated watch-face hero centerpiece (replaced the retired `LivingGraph`).
 - `SpecStrip.tsx` (server) — Apple-style recruiter "spec row" of big numbers. *(tested)*
-- `About.tsx` (server) — bio + "currently" list, from `data/about.ts`.
+- `About.tsx` (server) — bio + "currently" list from `data/about.ts`, plus a
+  portrait card that renders only if `public/me.jpg` exists (checked at render).
 - `ExperienceTimeline.tsx` (server) — vertical timeline from `data/experience.ts`.
 - `BoardingPass.tsx` (server) — boarding-pass-styled CV interlude (links to `public/cv.pdf`).
 - `SkillsDashboard.tsx` (server) — skills grid from `data/skills.ts`.
 - `Hobbies.tsx` (server) — off-hours vignettes from `data/hobbies.ts`.
 
 ### Live data widgets
-- `ClaudeUsageHeatmap.tsx` (client) — GitHub-style year heatmap; consumes `UsageData` from `lib/claude-usage.ts`.
+- `ClaudeUsageHeatmap.tsx` (client) — GitHub-style year heatmap; consumes `UsageData` from `lib/claude-usage.ts`. Rendered as a compact unnumbered "telemetry" strip at the end of the landing page (demoted by design).
 - `GitHubHeatmap.tsx` (client) — 365-day contribution grid; fetches `/api/github/contributions`.
 - `ListeningSection.tsx` (server) — fetches Spotify + NetEase in parallel, passes to client cards.
 - `ListeningCard.tsx` (client) — renders a track card.
@@ -124,7 +131,7 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 - `Reveal.tsx` (client) — IntersectionObserver fade-in wrapper (no animation lib).
 - `RevealText.tsx` (client) — word-by-word staggered text reveal. *(tested)*
 - `DecodeText.tsx` (client) — scramble-to-resolve text effect.
-- `AskAI.tsx` (client) — visitor-facing "ask AI about me" prompt block.
+- `AskAI.tsx` (client) — compact "in a hurry?" row above the footer: provider links with a pre-filled prompt (deliberately not a headline section).
 
 ### Retired (not rendered — do not extend)
 - `LivingGraph.tsx` — old 3D force-graph hero, replaced by `WatchFace`.
@@ -140,8 +147,14 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 ### `content/projects/*.mdx` — the project "CMS"
 Each `.mdx` file is one project case study. Frontmatter shape (see `lib/projects.ts`):
 `title, slug, tagline, date, stack[], metrics[], github_repo?, cover?, draft?`.
-Currently: `usc-fit.mdx`, `courtside.mdx`. **To add a project:** drop a new `.mdx` here — it auto-appears
-at `/projects` and gets its own `/projects/<slug>` page.
+Currently: `usc-fit.mdx`, `courtside.mdx`, `cratemate.mdx`. **To add a project:** drop a new `.mdx`
+here — it auto-appears at `/projects` and gets its own `/projects/<slug>` page.
+
+**Cover images:** put a screenshot at `public/projects/<slug>/cover.png` and set
+`cover: /projects/<slug>/cover.png` in the frontmatter — it then renders on the
+landing project card, the `/projects` index, and as the detail-page hero figure.
+No `cover` → text-only layout (the current look). Same idea for the About
+portrait: drop `public/me.jpg` and it appears, no code change.
 
 ### `data/*.ts` — typed content modules
 - `about.ts` — `bio[]` + `currently[]`.
@@ -221,6 +234,8 @@ Tea Atlas: /tea → TeaAtlasClient (ssr:false) → Leaflet + data/tea.ts
 
 **Security posture** (verified): secrets are server-side only; the one `NEXT_PUBLIC_`
 var is a non-secret username. `next.config.mjs` ships a real CSP + `X-Frame-Options`.
+The CSP is relaxed **in development only** (`'unsafe-eval'` + `ws:` for react-refresh
+/ HMR — without them the dev bundle dies and nothing hydrates); prod stays strict.
 No `dangerouslySetInnerHTML`/`eval`. MDX source is author-authored only. When touching
 `claude-usage.ts`, **keep the output aggregate-only** — adding any field carrying message
 text or paths would leak personal data onto a public page.

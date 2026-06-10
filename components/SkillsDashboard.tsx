@@ -16,10 +16,10 @@ export function SkillsDashboard() {
     <section id="stack" className="max-w-3xl mx-auto px-6 py-24">
       <Kicker cn="零五" num="05" en="Stack" zh="技术栈" />
       <h2 className="font-serif text-4xl md:text-5xl mb-3">
-        <RevealText text="The honest stack." />
+        <RevealText text="Stack." />
       </h2>
       <p className="text-muted mb-12 max-w-xl">
-        No 10-out-of-10 expert ratings. Three buckets only — what I&apos;d reach for in
+        No 10-out-of-10 expert ratings. Three buckets: what I&apos;d reach for in
         production, what I&apos;ve shipped with, what I&apos;m actively learning.
       </p>
 

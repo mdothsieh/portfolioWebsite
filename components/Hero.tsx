@@ -24,13 +24,13 @@ export function Hero({ isPlaying, todayActivity }: Props) {
             className="hero-enter text-[10px] font-mono uppercase tracking-widest text-muted mb-6"
             style={{ animationDelay: '0ms' }}
           >
-            CS · USC · class of 2028 · open to Summer 2027 SWE / Applied AI
+            Martin Hsieh · CS @ USC · class of 2028
           </div>
 
           <h1 className="font-serif text-4xl md:text-5xl leading-[1.04]">
             <RevealText
-              text="Martin Hsieh — I build full-stack systems and applied-AI tooling. Three internships shipped, joining Flex Ltd for Summer 2026."
-              accentWords={['Flex', 'Ltd']}
+              text="I build full-stack systems and applied-AI tooling."
+              accentWords={['applied-AI']}
               startDelay={120}
               stagger={34}
             />
@@ -40,10 +40,10 @@ export function Hero({ isPlaying, todayActivity }: Props) {
             className="hero-enter text-muted mt-6 max-w-md text-sm leading-relaxed"
             style={{ animationDelay: '320ms' }}
           >
-            USC computer science junior, originally from Taipei. The dial is live —
-            date, today&apos;s Claude activity, and a Spotify pulse, all from real
-            feeds. Hover the hour markers to inspect; press the chronograph pushers
-            to switch layers.
+            Junior at USC, originally from Taipei. I&apos;ve shipped production
+            software at two manufacturers — Kenmou in Taipei and Far Eastern in
+            Suzhou — and join Flex Ltd&apos;s Suzhou facility next summer. Open to
+            Summer 2027 SWE / applied-AI internships.
           </p>
 
           {/* CTAs */}
@@ -78,12 +78,16 @@ export function Hero({ isPlaying, todayActivity }: Props) {
 
         {/* --- right: live watch --- */}
         <div
-          className="hero-enter relative w-full flex items-center justify-center lg:justify-end"
+          className="hero-enter relative w-full flex flex-col items-center lg:items-end gap-4"
           style={{ animationDelay: '600ms' }}
         >
           <Parallax speed={40} className="w-full flex items-center justify-center">
             <WatchFace isPlaying={isPlaying} todayActivity={todayActivity} />
           </Parallax>
+          <p className="text-[10px] font-mono uppercase tracking-widest text-muted/60 text-center lg:text-right max-w-xs">
+            The dial is live — date, today&apos;s Claude activity, a Spotify pulse.
+            Press the pushers to switch layers.
+          </p>
         </div>
       </div>
     </section>

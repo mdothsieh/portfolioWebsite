@@ -69,8 +69,11 @@ body {
 }
 
 /* ============ Scroll-reveal (components/Reveal.tsx) ============ */
-/* "Pronounced": fade + 32px rise + slight scale, expressive easing. */
-.reveal {
+/* "Pronounced": fade + 32px rise + slight scale, expressive easing.
+   All hidden-until-animated states are scoped under `html.js` (set by the
+   inline bootstrap script in app/layout.tsx) so that no-JS visitors, scrapers,
+   and broken-hydration cases still see the fully rendered page. */
+html.js .reveal {
   opacity: 0;
   transform: translateY(32px) scale(0.985);
   transition:
@@ -78,7 +81,9 @@ body {
     transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-.reveal[data-shown='true'] {
+/* shown state must carry the html.js scope too, or the hidden rule above
+   out-specifies it and revealed sections stay invisible */
+html.js .reveal[data-shown='true'] {
   opacity: 1;
   transform: none;
 }
@@ -89,6 +94,8 @@ body {
    while still wrapping naturally. */
 .rt-word {
   display: inline-block;
+}
+html.js .rt-word {
   opacity: 0;
   transform: translateY(0.42em);
   transition:
@@ -96,12 +103,13 @@ body {
     transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-.reveal-text[data-shown='true'] .rt-word {
+html.js .reveal-text[data-shown='true'] .rt-word {
   opacity: 1;
   transform: none;
 }
 
-/* Always show content for users who prefer less motion or have JS disabled */
+/* Always show content for users who prefer less motion (no-JS visitors are
+   covered separately: the hidden states above only apply under html.js) */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1 !important;
@@ -135,12 +143,13 @@ body {
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Orchestrated hero entrance — elements carry their own animation-delay. */
+/* Orchestrated hero entrance — elements carry their own animation-delay.
+   Scoped under html.js so the hero copy is visible without JavaScript. */
 @keyframes hero-rise {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.hero-enter {
+html.js .hero-enter {
   opacity: 0;
   animation: hero-rise 0.85s var(--ease-out-expo) both;
 }

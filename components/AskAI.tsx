@@ -70,55 +70,53 @@ export function AskAI() {
     }
   }
 
+  // Deliberately compact: one quiet row above the footer, not a headline
+  // section — a convenience for visitors in a hurry, not part of the pitch.
   return (
     <section
       aria-labelledby="ask-ai-heading"
-      className="max-w-3xl mx-auto px-6 py-20 border-t border-divider"
+      className="max-w-3xl mx-auto px-6 py-10 border-t border-divider"
     >
-      <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-4">
-        Ask AI
-      </div>
-      <h2 id="ask-ai-heading" className="font-serif text-3xl md:text-4xl mb-3">
-        Ask an AI about me.
-      </h2>
-      <p className="text-muted text-sm max-w-xl mb-8 leading-relaxed">
-        Rather than read every page, ask your assistant of choice. It opens in a
-        new tab with a prompt about who I am, what I build, and how to reach me —
-        already filled in.
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+        <div>
+          <h2
+            id="ask-ai-heading"
+            className="text-[10px] font-mono uppercase tracking-widest text-muted"
+          >
+            In a hurry?
+          </h2>
+          <p className="text-sm text-muted mt-1">
+            Ask your assistant about me — the prompt is pre-filled.
+          </p>
+        </div>
 
-      <nav aria-label="Ask an AI assistant about Martin Hsieh">
-        <ul className="flex flex-wrap gap-3">
-          {PROVIDERS.map((p) => (
-            <li key={p.id}>
-              <a
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => handleClick(p)}
-                aria-label={`Ask ${p.name} about ${NAME}`}
-                className="btn-glow group inline-flex items-center gap-2.5 rounded-full border border-divider bg-surface/80 px-4 py-2.5 text-xs font-mono uppercase tracking-widest text-muted hover:text-primary hover:border-muted"
-              >
-                <span
-                  aria-hidden
-                  className="h-2 w-2 rounded-full shrink-0 transition-transform duration-300 group-hover:scale-125"
-                  style={{ backgroundColor: p.dot }}
-                />
-                {p.name}
-                <span
-                  aria-hidden
-                  className="inline-block text-divider transition-all duration-300 group-hover:text-muted group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        <nav aria-label="Ask an AI assistant about Martin Hsieh">
+          <ul className="flex flex-wrap gap-2">
+            {PROVIDERS.map((p) => (
+              <li key={p.id}>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => handleClick(p)}
+                  aria-label={`Ask ${p.name} about ${NAME}`}
+                  className="group inline-flex items-center gap-2 rounded-full border border-divider bg-surface/80 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary hover:border-muted transition-colors"
                 >
-                  ↗
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 rounded-full shrink-0"
+                    style={{ backgroundColor: p.dot }}
+                  />
+                  {p.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
 
       {/* Live region so the clipboard feedback is announced, not just shown */}
-      <div aria-live="polite" className="min-h-[1.25rem] mt-4">
+      <div aria-live="polite" className="min-h-[1.25rem] mt-3">
         {toast && (
           <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400">
             {toast}

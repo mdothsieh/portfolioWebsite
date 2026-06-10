@@ -4,6 +4,7 @@
 // serves a cached snapshot while keeping live feeds fresh. Full section order is
 // documented in overview.md §3.
 import Link from 'next/link';
+import Image from 'next/image';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { ExperienceTimeline } from '@/components/ExperienceTimeline';
@@ -94,6 +95,17 @@ export default async function Home() {
                 >
                   {/* hover accent bar */}
                   <span className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-rose-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  {p.frontmatter.cover && (
+                    <div className="relative aspect-video mb-4 rounded-lg overflow-hidden border border-divider bg-surface">
+                      <Image
+                        src={p.frontmatter.cover}
+                        alt={`${p.frontmatter.title} — screenshot`}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 768px) 672px, 100vw"
+                      />
+                    </div>
+                  )}
                   <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
                     <div className="font-serif text-2xl group-hover:text-rose-300 transition-colors">
                       {p.frontmatter.title}
@@ -130,27 +142,10 @@ export default async function Home() {
       {/* 06 — Off-Hours */}
       <Reveal><Hobbies /></Reveal>
 
-      {/* 07 — Claude usage */}
-      <section className="max-w-3xl mx-auto px-6 py-24">
-        <Reveal>
-          <Kicker cn="零七" num="07" en="Claude usage" zh="Claude 使用" />
-          <h2 className="font-serif text-4xl md:text-5xl mb-3">
-            <RevealText text={`Claude usage${suffix}.`} accentWords={['Claude']} />
-          </h2>
-          <p className="text-muted mb-12 max-w-xl">
-            How often Claude and I actually work together. Quiet weeks are usually travel
-            or exams; spikes are hackathons and project crunches.
-          </p>
-        </Reveal>
-        <Reveal delay={120}>
-          <ClaudeUsageHeatmap data={usage} />
-        </Reveal>
-      </section>
-
-      {/* 08 — Listening */}
+      {/* 07 — Listening */}
       <section id="listening" className="max-w-3xl mx-auto px-6 py-24">
         <Reveal>
-          <Kicker cn="零八" num="08" en="Listening" zh="在听" />
+          <Kicker cn="零七" num="07" en="Listening" zh="在听" />
           <h2 className="font-serif text-4xl md:text-5xl mb-3">
             <RevealText text="What I'm listening to." />
           </h2>
@@ -162,6 +157,22 @@ export default async function Home() {
         </Reveal>
         <Reveal delay={120}>
           <ListeningSection />
+        </Reveal>
+      </section>
+
+      {/* Telemetry — Claude usage, deliberately demoted from a numbered section
+          to a quiet instrument strip: AI fluency as evidence, not identity. */}
+      <section className="max-w-3xl mx-auto px-6 pb-24">
+        <Reveal>
+          <div className="flex items-baseline justify-between flex-wrap gap-2 mb-6 border-t border-divider pt-8">
+            <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted">
+              Telemetry · Claude usage{suffix}
+            </h2>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">
+              quiet weeks are travel or exams
+            </span>
+          </div>
+          <ClaudeUsageHeatmap data={usage} />
         </Reveal>
       </section>
     </main>

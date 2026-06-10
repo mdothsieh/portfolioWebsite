@@ -14,8 +14,9 @@ interface Props {
 }
 
 // Lightweight IntersectionObserver reveal — no animation library.
-// Visual styling lives in .reveal (app/globals.css), which also disables
-// itself under prefers-reduced-motion.
+// Visual styling lives in .reveal (app/globals.css); the hidden initial state
+// is scoped under html.js (set in app/layout.tsx) so no-JS visitors see all
+// content, and it disables itself under prefers-reduced-motion.
 export function Reveal({
   children,
   className = '',

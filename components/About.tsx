@@ -1,9 +1,17 @@
 // Section 02 "About" (server). Renders the bio + "currently" lists from
-// data/about.ts. Uses the shared <Kicker> bilingual section header.
+// data/about.ts, plus a portrait (public/me.jpg) when present — the component
+// checks the filesystem at render time and degrades to text-only if the photo
+// hasn't been added yet. Uses the shared <Kicker> bilingual section header.
+import { existsSync } from 'fs';
+import path from 'path';
+import Image from 'next/image';
 import { bio, currently } from '@/data/about';
 import { Kicker } from './Kicker';
 
 export function About() {
+  // Drop a portrait at public/me.jpg and it appears here — no code change.
+  const hasPhoto = existsSync(path.join(process.cwd(), 'public', 'me.jpg'));
+
   return (
     <section id="about" className="max-w-5xl mx-auto px-6 py-24">
       <Kicker cn="零二" num="02" en="About" zh="关于" />
@@ -23,8 +31,25 @@ export function About() {
           ))}
         </div>
 
-        {/* --- Currently block --- */}
-        <aside className="lg:pt-3">
+        {/* --- Portrait + Currently block --- */}
+        <aside className="lg:pt-3 space-y-6">
+          {hasPhoto && (
+            <figure className="rounded-xl border border-divider bg-surface/40 overflow-hidden">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/me.jpg"
+                  alt="Martin Hsieh"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 360px, 100vw"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-[10px] font-mono uppercase tracking-widest text-muted border-t border-divider">
+                Taipei ⇄ Los Angeles
+              </figcaption>
+            </figure>
+          )}
+
           <div className="sticky top-24 rounded-xl border border-divider bg-surface/40 p-6">
             <div className="flex items-center gap-2 mb-5">
               <span className="relative flex h-2 w-2" aria-hidden>
