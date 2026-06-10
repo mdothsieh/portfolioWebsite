@@ -1,0 +1,46 @@
+---
+title: CrateMate
+slug: cratemate
+tagline: A DJ's crate-digging companion — a local-first desktop app that analyzes your actual music library, finds the tracks that mix well together, and exports straight to a Serato crate.
+date: '2026-06-10'
+stack:
+  - Electron
+  - TypeScript
+  - React
+  - Tailwind
+  - Essentia.js (WASM)
+  - ONNX Runtime
+  - SQLite
+  - ffmpeg
+metrics:
+  - label: type
+    value: Electron desktop
+  - label: analysis
+    value: ffmpeg → Essentia → ONNX
+  - label: indexed
+    value: 1,664 real tracks
+  - label: status
+    value: v1 slice, evals next
+github_repo: mdothsieh/CrateMate
+---
+
+> Drop an MP3 onto CrateMate and it returns the 5 most *mixable* tracks from your own library — with the reasons shown (style match, BPM, harmonic key, energy) — then exports a Serato `.crate` you can open and play. Everything runs locally: your audio, your play history, and the learned index never leave your machine.
+
+## The problem
+
+DJs spend enormous time crate-digging for tracks that mix well — harmonic key, BPM, energy, *and* vibe. The tooling for this barely exists: Spotify removed its audio-features API for new apps in 2024, and Serato and rekordbox expose no official APIs at all. As a DJ, I wanted the question "what mixes with this?" answered from the music I actually own. So CrateMate takes the honest path: analyze the real audio files on disk, and read (and write) the DJ software's own library formats directly.
+
+## The interesting engineering
+
+- **Reverse-engineered Serato's binary formats.** Serato's `database V2`, `.crate` subcrates, and play-history sessions share an undocumented TLV layout — 4-char tags, big-endian lengths, UTF-16BE strings. CrateMate parses all three, and writes byte-compatible `.crate` files verified by round-tripping through its own parser. Reading is strictly read-only, and the exporter refuses *in code* to write inside a live `_Serato_` folder — you don't corrupt a working DJ's library.
+- **Real audio ML, fully local.** Every track is decoded with ffmpeg, mel-spectrogrammed with Essentia.js (WASM), and embedded into a 1280-dimension style vector with Discogs-EffNet via ONNX Runtime — across a pool of worker processes with incremental re-indexing. My real 1,664-track library indexes in minutes and lives in SQLite.
+- **Similarity that respects how DJs actually mix.** Ranking blends style-embedding cosine similarity, BPM proximity (half/double-time counts as the same groove), Camelot key compatibility, and energy. Every signal is a soft weight rather than a hard filter — open-format and KPOP sets break textbook harmonic-mixing rules on purpose, and the engine is designed to honor that.
+- **Measured, not vibes.** The v1 gate is an evaluation harness: hand-labeled "mixes well / doesn't" pairs from my own sets, scored as precision@5 plus harmonic and BPM-compatibility rates, re-run after every engine change so tuning is deliberate instead of hopeful.
+
+## How it's built
+
+Two programs talking through a wall. The Electron main process (trusted) owns the SQLite index, the analysis worker pool, and the Serato readers/exporter; the React renderer (sandboxed, no Node access) only sees a small, fully-typed IPC bridge — one file defines every channel and type, so the entire attack surface is reviewable in one sitting. Where Serato has already analyzed a track's BPM and key, CrateMate imports those values so it never disagrees with what the DJ sees on their own screen; Essentia fills the gaps, using a key profile validated at 92% mix-compatible agreement against Serato's analysis.
+
+## Where it's going
+
+v1 is the deliberately narrow slice: index → find similar → export crate → measure quality. The roadmap behind it — an always-on-top companion widget that suggests the next track while you're building a set in Serato, theme-based set curation, and a personal style model learned from play history — stays untouched until the core recommendation is *proven* good. Scope is the enemy; depth on the hard part is the asset.
