@@ -1,0 +1,600 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "MARTIN HSIEH" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "作品" [ref=e880] [cursor=pointer]:
+            - /url: /#projects
+            - text: 作品
+          - link "经历" [ref=e881] [cursor=pointer]:
+            - /url: /#experience
+            - text: 经历
+          - link "技术栈" [ref=e882] [cursor=pointer]:
+            - /url: /#stack
+            - text: 技术栈
+          - link "关于" [ref=e883] [cursor=pointer]:
+            - /url: /#about
+            - text: 关于
+          - link "个人" [ref=e884] [cursor=pointer]:
+            - /url: /personal
+            - text: 个人
+          - link "简历" [ref=e885] [cursor=pointer]:
+            - /url: /cv.pdf
+            - text: 简历
+        - generic [ref=e13]: ·
+        - group "Language" [ref=e14]:
+          - button "EN" [ref=e16] [cursor=pointer]
+          - generic [ref=e17]:
+            - generic [ref=e18]: /
+            - button "简" [active] [pressed] [ref=e19] [cursor=pointer]
+          - generic [ref=e20]:
+            - generic [ref=e21]: /
+            - button "繁" [ref=e22] [cursor=pointer]
+        - generic [ref=e23]:
+          - link "LinkedIn" [ref=e24] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/martin-hsieh/
+            - img [ref=e25]
+          - link "GitHub" [ref=e29] [cursor=pointer]:
+            - /url: https://github.com/mdothsieh
+            - img [ref=e30]
+          - link "Email" [ref=e33] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e34]
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: Thu, Jun 11
+        - generic [ref=e41]: ·
+        - generic [ref=e42]: LAX ↔ TPE
+      - generic [ref=e43]:
+        - generic [ref=e46]: spotify 安静中
+        - generic [ref=e47]: ·
+        - generic [ref=e48]:
+          - generic [ref=e49]: "802"
+          - generic [ref=e50]: 条今日消息
+        - generic [ref=e51]: ·
+        - generic [ref=e52]:
+          - generic [ref=e53]: "45"
+          - generic [ref=e54]: 次会话
+  - main [ref=e56]:
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]: Martin Hsieh · USC 计算机科学 · 全栈系统 · 应用 AI 工具
+        - heading "我 为 真 实 世 界 的 工 作 流 构 建 全 栈 工 具 。" [level=1] [ref=e886]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: 我
+            - generic [ref=e887]: 为
+            - generic [ref=e64]: 真
+            - generic [ref=e888]: 实
+            - generic [ref=e65]: 世
+            - generic [ref=e889]: 界
+            - generic [ref=e66]: 的
+            - generic [ref=e890]: 工
+            - generic [ref=e67]: 作
+            - generic [ref=e891]: 流
+            - generic [ref=e68]: 构
+            - generic [ref=e892]: 建
+            - generic [ref=e69]: 全
+            - generic [ref=e893]: 栈
+            - generic [ref=e894]: 工
+            - generic [ref=e895]: 具
+            - generic [ref=e896]: 。
+        - paragraph [ref=e70]: 南加州大学（USC）计算机科学专业学生，专注于内部工具、仪表盘、本地优先应用和应用 AI 系统。我曾在两家制造企业交付生产软件——台北的 Kenmou 和苏州的 Far Eastern——我喜欢把混乱的运营流程变成人们真正能用的软件。
+        - generic [ref=e75]: 正在寻找 2027 年夏季软件工程 / 应用 AI 实习 · 洛杉矶 · 湾区 · 西雅图 · 纽约 · 台北 · 远程
+        - generic [ref=e76]:
+          - link "查看项目" [ref=e897] [cursor=pointer]:
+            - /url: /#projects
+          - link "简历" [ref=e898] [cursor=pointer]:
+            - /url: /cv.pdf
+            - img [ref=e79]
+            - text: 简历
+        - generic [ref=e81]:
+          - link "GitHub" [ref=e82] [cursor=pointer]:
+            - /url: https://github.com/mdothsieh
+            - text: GitHub
+            - img [ref=e83]
+          - link "LinkedIn" [ref=e86] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/martin-hsieh/
+            - text: LinkedIn
+            - img [ref=e87]
+          - link "邮箱" [ref=e899] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e91]
+            - text: 邮箱
+      - generic [ref=e94]:
+        - generic [ref=e96]:
+          - img "Corsa chronograph — interactive portfolio centerpiece" [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e161]: "400"
+              - generic [ref=e164]: "300"
+              - generic [ref=e166]: "240"
+              - generic [ref=e169]: "200"
+              - generic [ref=e172]: "175"
+              - generic [ref=e175]: "150"
+              - generic [ref=e178]: "130"
+              - generic [ref=e180]: "120"
+              - generic [ref=e183]: "110"
+              - generic [ref=e186]: "100"
+              - generic [ref=e189]: "90"
+              - generic [ref=e191]: "80"
+              - generic [ref=e194]: "70"
+              - generic [ref=e197]: "65"
+              - generic [ref=e199]: "60"
+              - generic [ref=e200]: TACHYMÈTRE
+              - generic [ref=e309]: CORSA
+              - generic [ref=e310]: PRECISION · CHRONOGRAPH
+              - generic [ref=e311]: CHRONOGRAPHE
+            - generic [ref=e337]:
+              - generic [ref=e338]: ACTIVITY
+              - generic [ref=e339]: "802"
+              - generic [ref=e340]: MSG · TODAY
+            - generic [ref=e341]:
+              - generic [ref=e342]: PULSE
+              - generic [ref=e344]: QUIET
+            - generic [ref=e345]:
+              - generic [ref=e346]: THU
+              - generic [ref=e347]: "11"
+            - generic "Pusher — next layer" [ref=e358] [cursor=pointer]
+            - generic "Pusher — previous layer" [ref=e361] [cursor=pointer]
+            - generic "Crown" [ref=e364] [cursor=pointer]
+          - generic [ref=e371]: Hover a marker to inspect · press the chronograph pushers to switch layer
+          - generic [ref=e372]:
+            - generic [ref=e373]: Click a button to switch the dial's data layer·or the watch pushers / ← →
+            - generic [ref=e374]:
+              - button "builds" [pressed] [ref=e375] [cursor=pointer]
+              - button "experience" [ref=e376] [cursor=pointer]
+              - button "stack" [ref=e377] [cursor=pointer]
+              - button "hobbies" [ref=e378] [cursor=pointer]
+        - paragraph [ref=e379]: 表盘是实时的——日期、今天的构建活动、音乐脉搏。
+    - generic [ref=e381]:
+      - generic [ref=e382]:
+        - definition [ref=e383]: "02"
+        - generic [ref=e384]:
+          - term [ref=e385]: 段实习经历
+          - generic [ref=e386]: Kenmou · Far Eastern — 下一站 Flex ’26
+      - generic [ref=e387]:
+        - definition [ref=e388]: +40%
+        - generic [ref=e389]:
+          - term [ref=e390]: 吞吐量提升
+          - generic [ref=e391]: 订单仪表盘，Kenmou 2025
+      - generic [ref=e392]:
+        - definition [ref=e393]: TS · React · Next Node · Python
+        - generic [ref=e394]:
+          - term [ref=e395]: 核心技术栈
+          - generic [ref=e396]: + 智能体 AI 框架
+      - generic [ref=e397]:
+        - definition [ref=e398]: Summer 2027
+        - generic [ref=e399]:
+          - term [ref=e400]: 可实习时间
+          - generic [ref=e401]: 洛杉矶 ⇄ 台北
+    - generic [ref=e402]:
+      - generic [ref=e403]:
+        - generic [ref=e404]: 零二作品
+        - generic [ref=e405]:
+          - heading "精 选 作 品 。" [level=2] [ref=e901]:
+            - generic [ref=e407]:
+              - generic [ref=e408]: 精
+              - generic [ref=e902]: 选
+              - generic [ref=e409]: 作
+              - generic [ref=e903]: 品
+              - generic [ref=e904]: 。
+          - link "全部项目 ↗" [ref=e905] [cursor=pointer]:
+            - /url: /projects
+        - paragraph [ref=e411]: 横跨音乐、制造、校园与内部运营的一些系统——每个项目都以规格说明的方式呈现：问题、构建内容、技术栈、佐证。
+      - list [ref=e412]:
+        - listitem [ref=e413]:
+          - article [ref=e414]:
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - link "01 /CrateMate" [ref=e417] [cursor=pointer]:
+                  - /url: /projects/cratemate
+                  - generic [ref=e418]: 01 /
+                  - text: CrateMate
+                - generic [ref=e419]: 2026-06 -> current
+              - paragraph [ref=e420]: DJ 的挖歌搭档——一款本地优先的桌面应用，分析你真实的音乐库，找出适合混在一起的曲目，并直接导出 Serato 歌单箱。
+              - generic [ref=e421]:
+                - generic [ref=e422]: 问题
+                - paragraph [ref=e423]: DJ 靠记忆和反复试听来整理曲目——找出真正能混到一起的歌，又慢又费工。
+              - generic [ref=e424]:
+                - generic [ref=e425]: 构建
+                - list [ref=e426]:
+                  - listitem [ref=e427]: — 音频分析管线（ffmpeg → Essentia.js → ONNX），跑在 1,664 首真实曲目的音乐库上
+                  - listitem [ref=e428]: — 跨风格、BPM、调性与能量的曲目兼容度评分
+                  - listitem [ref=e429]: — 字节级兼容的 Serato .crate 导出，经往返解析验证
+                  - listitem [ref=e430]: — 本地优先的桌面界面——音乐库永远不离开你的电脑
+              - generic [ref=e431]:
+                - generic [ref=e432]: Electron
+                - generic [ref=e433]: TypeScript
+                - generic [ref=e434]: React
+                - generic [ref=e435]: Tailwind
+                - generic [ref=e436]: Essentia.js (WASM)
+                - generic [ref=e437]: ONNX Runtime
+                - generic [ref=e438]: SQLite
+                - generic [ref=e439]: ffmpeg
+              - generic [ref=e440]:
+                - link "案例研究 →" [ref=e906] [cursor=pointer]:
+                  - /url: /projects/cratemate
+                - link "GitHub" [ref=e442] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/CrateMate
+                  - text: GitHub
+                  - img [ref=e443]
+        - listitem [ref=e446]:
+          - article [ref=e447]:
+            - generic [ref=e448]:
+              - generic [ref=e449]:
+                - link "02 /USC FIT" [ref=e450] [cursor=pointer]:
+                  - /url: /projects/usc-fit
+                  - generic [ref=e451]: 02 /
+                  - text: USC FIT
+                - generic [ref=e452]: 2026-01 -> 2026-05
+              - paragraph [ref=e453]: USC 第一个健身匹配平台——帮学生一起寻找、安排并加入校园健身活动的网页应用。
+              - generic [ref=e454]:
+                - generic [ref=e455]: 问题
+                - paragraph [ref=e456]: 想找到时间、场地、水平都合适的健身搭子，是没人想在群聊里处理的麻烦事。
+              - generic [ref=e457]:
+                - generic [ref=e458]: 构建
+                - list [ref=e459]:
+                  - listitem [ref=e460]: — 全栈 Java 网页应用（JSP/Servlets + MySQL），包含六大核心功能
+                  - listitem [ref=e461]: — 基于 USC 邮箱的注册登录与会话管理
+                  - listitem [ref=e462]: — 活动创建、匹配与排期，并带有取消惩罚机制
+                  - listitem [ref=e463]: — Maven → WAR 构建，部署在 Tomcat 上
+              - generic [ref=e464]:
+                - generic [ref=e465]: Java
+                - generic [ref=e466]: JSP / Servlets
+                - generic [ref=e467]: MySQL
+                - generic [ref=e468]: JDBC
+                - generic [ref=e469]: Maven
+                - generic [ref=e470]: Tomcat
+              - generic [ref=e471]:
+                - link "案例研究 →" [ref=e907] [cursor=pointer]:
+                  - /url: /projects/usc-fit
+                - link "GitHub" [ref=e473] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/CSCI201_FinalProject-
+                  - text: GitHub
+                  - img [ref=e474]
+        - listitem [ref=e477]:
+          - article [ref=e478]:
+            - generic [ref=e479]:
+              - generic [ref=e480]:
+                - link "03 /Courtside" [ref=e481] [cursor=pointer]:
+                  - /url: /projects/courtside
+                  - generic [ref=e482]: 03 /
+                  - text: Courtside
+                - generic [ref=e483]: 2023-04 -> 2024-12
+              - paragraph [ref=e484]: 一套桌面端篮球球队管理系统——教练和球员在同一个角色感知的 JavaFX 应用里管理比赛、个人数据、排名与日程，底层是 MySQL。
+              - generic [ref=e485]:
+                - generic [ref=e486]: 问题
+                - paragraph [ref=e487]: 教练要在五个永远对不上的地方维护名单、技术统计、球员趋势和日程表。
+              - generic [ref=e488]:
+                - generic [ref=e489]: 构建
+                - list [ref=e490]:
+                  - listitem [ref=e491]: — 角色感知的 JavaFX 桌面应用，教练与球员视图分离
+                  - listitem [ref=e492]: — 比赛记录、球员个人数据与赛季排名
+                  - listitem [ref=e493]: — DAO 层背后的 MySQL 持久化，使用 Druid 连接池
+                  - listitem [ref=e494]: — 日程安排，外加 CSV 名单导入/导出
+              - generic [ref=e495]:
+                - generic [ref=e496]: Java
+                - generic [ref=e497]: JavaFX
+                - generic [ref=e498]: MySQL
+                - generic [ref=e499]: JDBC
+                - generic [ref=e500]: Druid
+                - generic [ref=e501]: Maven
+              - generic [ref=e502]:
+                - link "案例研究 →" [ref=e908] [cursor=pointer]:
+                  - /url: /projects/courtside
+                - link "GitHub" [ref=e504] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/dcsz-basketball
+                  - text: GitHub
+                  - img [ref=e505]
+        - listitem [ref=e508]:
+          - article [ref=e509]:
+            - generic [ref=e510]:
+              - generic [ref=e511]:
+                - link "04 /Kenmou Dashboard" [ref=e512] [cursor=pointer]:
+                  - /url: /projects/kenmou-dashboard
+                  - generic [ref=e513]: 04 /
+                  - text: Kenmou Dashboard
+                - generic [ref=e514]: 2025-05 -> 2025-09
+              - paragraph [ref=e515]: Kenmou Enterprise 生产车间每天在用的订单处理仪表盘——订单吞吐量提升 40%。
+              - generic [ref=e516]:
+                - generic [ref=e517]: 问题
+                - paragraph [ref=e518]: 运营团队靠邮件往来和纸质表单追踪订单，对订单状态和产线吞吐量没有统一视图。
+              - generic [ref=e519]:
+                - generic [ref=e520]: 构建
+                - list [ref=e521]:
+                  - listitem [ref=e522]: — 生产车间每天在用的 React + Node 订单处理仪表盘
+                  - listitem [ref=e523]: — 将 ArtiosCAD 接入审批流程——包装打样不再等邮件
+                  - listitem [ref=e524]: — 团队第一条基于 Docker 的 CI/CD 流水线——发布从一个手动的下午变成一次推送
+                  - listitem [ref=e525]: — 取代纸质检验单的数字检查清单
+              - generic [ref=e526]:
+                - generic [ref=e527]: React
+                - generic [ref=e528]: Node.js
+                - generic [ref=e529]: SQL
+                - generic [ref=e530]: Docker
+                - generic [ref=e531]: ArtiosCAD
+              - generic [ref=e532]:
+                - link "案例研究 →" [ref=e909] [cursor=pointer]:
+                  - /url: /projects/kenmou-dashboard
+                - generic [ref=e534]:
+                  - img [ref=e535]
+                  - text: 专有项目 · 代码不公开
+        - listitem [ref=e538]:
+          - article [ref=e539]:
+            - generic [ref=e540]:
+              - generic [ref=e541]:
+                - link "05 /Internal Tools Suite" [ref=e542] [cursor=pointer]:
+                  - /url: /projects/internal-tools
+                  - generic [ref=e543]: 05 /
+                  - text: Internal Tools Suite
+                - generic [ref=e544]: 2023-07 -> 2023-09
+              - paragraph [ref=e545]: 为 Far Eastern Apparel 一支 20 人运营团队打造的四个生产工具——RPA 机器人、React 门户、300 名用户的 Android 应用和 Python 数据管道。
+              - generic [ref=e546]:
+                - generic [ref=e547]: 问题
+                - paragraph [ref=e548]: 重复的手工流程——录数据、做报表、追踪员工活动——拖慢了 20 人的运营团队，制造了不必要的协调成本。
+              - generic [ref=e549]:
+                - generic [ref=e550]: 构建
+                - list [ref=e551]:
+                  - listitem [ref=e552]: — 自动化重复数据录入流程的 UiPath RPA 机器人
+                  - listitem [ref=e553]: — React 员工互动门户
+                  - listitem [ref=e554]: — 拥有 300 名用户的内部 Android 应用
+                  - listitem [ref=e555]: — Python 数据质量管道，外加一键 CI/CD
+              - generic [ref=e556]:
+                - generic [ref=e557]: Python
+                - generic [ref=e558]: React
+                - generic [ref=e559]: Android
+                - generic [ref=e560]: UiPath
+                - generic [ref=e561]: SQL
+              - generic [ref=e562]:
+                - link "案例研究 →" [ref=e910] [cursor=pointer]:
+                  - /url: /projects/internal-tools
+                - generic [ref=e564]:
+                  - img [ref=e565]
+                  - text: 专有项目 · 代码不公开
+    - generic [ref=e569]:
+      - generic [ref=e570]: 零三经历
+      - heading "三 个 夏 天 ， 三 座 城 市 。" [level=2] [ref=e911]:
+        - generic [ref=e572]:
+          - generic [ref=e573]: 三
+          - generic [ref=e912]: 个
+          - generic [ref=e574]: 夏
+          - generic [ref=e913]: 天
+          - generic [ref=e575]: ，
+          - generic [ref=e914]: 三
+          - generic [ref=e576]: 座
+          - generic [ref=e915]: 城
+          - generic [ref=e916]: 市
+          - generic [ref=e917]: 。
+      - paragraph [ref=e577]: 苏州的硬件现场实用主义，台北的全栈迭代速度，洛杉矶的应用 AI 雄心。
+      - list [ref=e578]:
+        - listitem [ref=e579]:
+          - generic [ref=e581]:
+            - generic [ref=e582]: 软件工程实习生（即将入职） · Flex Ltd
+            - generic [ref=e583]: 2026 年夏
+          - generic [ref=e584]: 中国苏州· 即将开始
+          - list [ref=e585]:
+            - listitem [ref=e586]: — 即将加入苏州的硬件–软件集成团队。实习开始后这里会更新细节。
+        - listitem [ref=e587]:
+          - generic [ref=e589]:
+            - generic [ref=e590]: 软件工程实习生 · Kenmou Enterprise
+            - generic [ref=e591]: 2025 年 5 月 – 9 月
+          - generic [ref=e592]: 台湾台北
+          - list [ref=e593]:
+            - listitem [ref=e594]: — 交付了一套 React + Node 订单处理仪表盘，生产车间每天都在用——订单吞吐量提升 40%。
+            - listitem [ref=e595]: — 把 ArtiosCAD 接入内部审批流程，包装打样不再卡在邮件往来里。
+            - listitem [ref=e596]: — 搭建了团队第一条基于 Docker 的 CI/CD 流水线；发布从一个手动的下午变成一次推送。
+            - listitem [ref=e597]: — 用数字检查清单取代纸质检验单。可量化的：纸张用量 −12%。不可量化的：丢失的表单 −100%。
+        - listitem [ref=e598]:
+          - generic [ref=e600]:
+            - generic [ref=e601]: 科技社与科学社社长 · Dulwich College Suzhou
+            - generic [ref=e602]: 2023 年 8 月 – 2024 年 6 月
+          - generic [ref=e603]: 中国苏州
+          - list [ref=e604]:
+            - listitem [ref=e605]: — 带领学校科技社（40+ 名成员）——围绕编程基础、硬件系统与网络概念设计互动课程，并组织编程与基础电子的动手工作坊。
+            - listitem [ref=e606]: — 同时运营科学社，发展到 70+ 名活跃成员——全校最大的学生社团之一——为 7–11 年级开展了 50+ 场 STEM 课程。
+            - listitem [ref=e607]: — 针对不同水平的学生调整技术内容，并与指导老师协作规划课程、提升参与度、保障实验安全。
+        - listitem [ref=e608]:
+          - generic [ref=e610]:
+            - generic [ref=e611]: 软件工程实习生 · Far Eastern Apparel
+            - generic [ref=e612]: 2023 年 7 月 – 9 月
+          - generic [ref=e613]: 中国苏州
+          - list [ref=e614]:
+            - listitem [ref=e615]: — 为一支 20 人团队构建了四个生产工具：UiPath RPA 机器人、React 员工互动门户、拥有 300 名用户的内部 Android 应用，以及 Python 数据质量管道。
+            - listitem [ref=e616]: — 设计了 CI/CD，把部署从手动清单变成一键完成。
+        - listitem [ref=e617]:
+          - generic [ref=e619]:
+            - generic [ref=e620]: 创始人 · PulsePrep Academy
+            - generic [ref=e621]: 2022 年 3 月 – 2024 年 3 月
+          - generic [ref=e622]: 中国苏州
+          - list [ref=e623]:
+            - listitem [ref=e624]: — 运营一家家教微型企业：200+ 份自适应练习册、每周 14 小时授课、三套 IGCSE 课程体系、50+ 名学生。
+            - listitem [ref=e625]: — 三个月内学员平均测验成绩提升 15%。
+    - generic [ref=e627]:
+      - generic [ref=e628]: 零四技术栈
+      - heading "技 术 栈 。" [level=2] [ref=e918]:
+        - generic [ref=e630]:
+          - generic [ref=e631]: 技
+          - generic [ref=e919]: 术
+          - generic [ref=e920]: 栈
+          - generic [ref=e921]: 。
+      - paragraph [ref=e632]: 按证据组织，而不是自我评分：今天就敢用在生产环境的，真实项目交付过的，以及我正在探索的。
+      - generic [ref=e633]:
+        - generic [ref=e634]:
+          - generic [ref=e635]:
+            - generic [ref=e636]: 生产可用
+            - generic [ref=e637]: 在生产环境里会毫不犹豫地使用
+          - generic [ref=e638]:
+            - generic [ref=e639]: React
+            - generic [ref=e641]: Node.js
+            - generic [ref=e643]: TypeScript
+            - generic [ref=e645]: JavaScript
+            - generic [ref=e647]: Python
+            - generic [ref=e649]: SQL
+            - generic [ref=e651]: Git
+        - generic [ref=e653]:
+          - generic [ref=e654]:
+            - generic [ref=e655]: 实战交付
+            - generic [ref=e656]: 真实项目用它们交付过——佐证见 /projects
+          - generic [ref=e657]:
+            - generic [ref=e658]: Next.js
+            - generic [ref=e660]: Electron
+            - generic [ref=e662]: Java
+            - generic [ref=e664]: C++
+            - generic [ref=e666]: MySQL
+            - generic [ref=e668]: Docker
+            - generic [ref=e670]: Tailwind
+            - generic [ref=e672]: JSP / Servlets
+            - generic [ref=e674]: Android
+        - generic [ref=e676]:
+          - generic [ref=e677]:
+            - generic [ref=e678]: 探索中
+            - generic [ref=e679]: 现在正用它们做东西
+          - generic [ref=e680]:
+            - generic [ref=e681]: LLM / Agent Workflows
+            - generic [ref=e683]: Applied AI Systems
+            - generic [ref=e685]: Computer Vision
+            - generic [ref=e687]: Embedded Systems
+            - generic [ref=e689]: System Design at Scale
+        - generic [ref=e691]:
+          - generic [ref=e692]:
+            - generic [ref=e693]: 辅助工具
+            - generic [ref=e694]: 核心技术栈周边的日常工具
+          - generic [ref=e695]:
+            - generic [ref=e696]: UiPath RPA
+            - generic [ref=e698]: Data Pipelines
+            - generic [ref=e700]: API Integrations
+            - generic [ref=e702]: CI/CD
+            - generic [ref=e704]: Vitest
+      - generic [ref=e706]:
+        - generic [ref=e707]: 圆点颜色 = 类别
+        - generic [ref=e708]:
+          - generic [ref=e709]: 语言
+          - generic [ref=e711]: 框架
+          - generic [ref=e713]: 工具
+          - generic [ref=e715]: 领域
+    - generic [ref=e718]:
+      - generic [ref=e719]: 零五关于
+      - generic [ref=e720]:
+        - generic [ref=e721]:
+          - paragraph [ref=e722]: 我是南加州大学（USC）计算机科学专业的大三学生。在台北长大，过去两个夏天在台湾和中国大陆做软件，如今大部分时间在洛杉矶和一台笔记本电脑之间度过。
+          - paragraph [ref=e723]: 我的本能是构建整个系统，而不只是界面。在台北的 Kenmou Enterprise，我把一套 React + Node 订单处理仪表盘接入了生产车间——那种好用到没人再注意它的工具。在苏州的 Far Eastern Apparel，我为一支 20 人团队交付了四个内部工具——RPA 机器人、React 互动门户、Android 应用和 Python 数据管道。这些环境塑造了我对软件的理解：它必须可靠、易懂，并且对非工程师同样有用。大学之前，我创办了 PulsePrep Academy，用两年时间教了 50+ 名学生、横跨三套 IGCSE 课程体系。
+          - paragraph [ref=e724]: 2026 年夏天将以工程实习生身份加入 Flex 苏州园区。正在寻找 2027 年夏季的软件工程或应用 AI 实习——那种把东西做出来、量化它、再迭代的团队。尤其喜欢智能体系统、前后端边界刻意模糊的全栈工作，以及能默默让另外十个工程师更快的基础设施。
+        - complementary [ref=e725]:
+          - generic [ref=e726]:
+            - generic [ref=e731]: 当前
+            - generic [ref=e732]:
+              - generic [ref=e733]:
+                - term [ref=e734]: 本周
+                - definition [ref=e735]: 上线这个作品集 · 开发 CrateMate
+              - generic [ref=e736]:
+                - term [ref=e737]: 本学期
+                - definition [ref=e738]: 软件工程 · AI：原理与基础 · 西方音乐与声音中的历史 · 沙滩排球 · 美国流行文化导论 · 力量训练
+              - generic [ref=e739]:
+                - term [ref=e740]: 在读
+                - definition [ref=e741]: 说实话，主要是技术文档
+              - generic [ref=e742]:
+                - term [ref=e743]: 在学
+                - definition [ref=e744]: 智能体框架 · 大规模系统设计 · 让 LLM 去干无聊的部分
+    - link "登机牌 · CV-2026 座位 — 任意 从 TPE 台北 · 桃園 至 LAX 洛杉矶 · USC 乘客 Martin Hsieh 舱位 CS · '28 航班 CV-2026 登机 现在 简历 下载" [ref=e922] [cursor=pointer]:
+      - /url: /cv.pdf
+      - generic [ref=e748]:
+        - generic [ref=e749]:
+          - generic [ref=e750]:
+            - generic [ref=e751]: 登机牌 · CV-2026
+            - generic [ref=e752]: 座位 — 任意
+          - generic [ref=e753]:
+            - generic [ref=e754]:
+              - generic [ref=e755]: 从
+              - generic [ref=e756]: TPE
+              - generic [ref=e757]: 台北 · 桃園
+            - img [ref=e759]
+            - generic [ref=e761]:
+              - generic [ref=e762]: 至
+              - generic [ref=e763]: LAX
+              - generic [ref=e764]: 洛杉矶 · USC
+          - generic [ref=e765]:
+            - generic [ref=e766]:
+              - generic [ref=e767]: 乘客
+              - generic [ref=e768]: Martin Hsieh
+            - generic [ref=e769]:
+              - generic [ref=e770]: 舱位
+              - generic [ref=e771]: CS · '28
+            - generic [ref=e772]:
+              - generic [ref=e773]: 航班
+              - generic [ref=e774]: CV-2026
+            - generic [ref=e775]:
+              - generic [ref=e776]: 登机
+              - generic [ref=e777]: 现在
+        - generic [ref=e782]:
+          - generic [ref=e783]: 简历
+          - generic [ref=e807]:
+            - img [ref=e808]
+            - generic [ref=e810]: 下载
+    - generic [ref=e813]:
+      - generic [ref=e814]: 个人层
+      - paragraph [ref=e815]: 这个网站安静的一面：我在听什么、喝什么、学什么，以及代码之外的生活。欢迎个性，拒绝混乱。
+      - generic [ref=e816]:
+        - link "在听 Spotify + 网易云音乐" [ref=e923] [cursor=pointer]:
+          - /url: /personal#listening
+          - generic [ref=e818]:
+            - generic [ref=e819]: 在听
+            - img [ref=e820]
+          - generic [ref=e823]: Spotify + 网易云音乐
+        - link "工余 高尔夫、市场、打碟、篮球" [ref=e924] [cursor=pointer]:
+          - /url: /personal#off-hours
+          - generic [ref=e825]:
+            - generic [ref=e826]: 工余
+            - img [ref=e827]
+          - generic [ref=e830]: 高尔夫、市场、打碟、篮球
+        - link "/now 这个季节在做什么" [ref=e925] [cursor=pointer]:
+          - /url: /now
+          - generic [ref=e832]:
+            - generic [ref=e833]: /now
+            - img [ref=e834]
+          - generic [ref=e837]: 这个季节在做什么
+        - link "茶图鉴 洛杉矶 ⇄ 台北，逐家标注" [ref=e926] [cursor=pointer]:
+          - /url: /tea
+          - generic [ref=e839]:
+            - generic [ref=e840]: 茶图鉴
+            - img [ref=e841]
+          - generic [ref=e844]: 洛杉矶 ⇄ 台北，逐家标注
+        - link "遥测 Claude 使用热力图" [ref=e927] [cursor=pointer]:
+          - /url: /personal#telemetry
+          - generic [ref=e846]:
+            - generic [ref=e847]: 遥测
+            - img [ref=e848]
+          - generic [ref=e851]: Claude 使用热力图
+  - contentinfo [ref=e852]:
+    - region "赶时间？" [ref=e928]:
+      - generic [ref=e854]:
+        - generic [ref=e855]:
+          - heading "赶时间？" [level=2] [ref=e929]
+          - paragraph [ref=e857]: 让你的 AI 助手介绍我——提示词已经填好了。
+        - navigation "Ask an AI assistant about Martin Hsieh" [ref=e858]:
+          - list [ref=e859]:
+            - listitem [ref=e860]:
+              - link "Ask ChatGPT about Martin Hsieh" [ref=e861] [cursor=pointer]:
+                - /url: https://chatgpt.com/?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: ChatGPT
+            - listitem [ref=e863]:
+              - link "Ask Claude about Martin Hsieh" [ref=e864] [cursor=pointer]:
+                - /url: https://claude.ai/new?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: Claude
+            - listitem [ref=e866]:
+              - link "Ask Perplexity about Martin Hsieh" [ref=e867] [cursor=pointer]:
+                - /url: https://www.perplexity.ai/search?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: Perplexity
+            - listitem [ref=e869]:
+              - link "Ask Gemini about Martin Hsieh" [ref=e870] [cursor=pointer]:
+                - /url: https://gemini.google.com/app
+                - text: Gemini
+    - generic [ref=e874]:
+      - generic [ref=e875]: © 2026 Martin Hsieh
+      - generic [ref=e876]:
+        - text: 由我亲自设计与构建 · 更新于 Jun 10, 2026 ·
+        - link "源码 ↗" [ref=e930] [cursor=pointer]:
+          - /url: https://github.com/mdothsieh
+  - button "Open command palette" [ref=e878] [cursor=pointer]:
+    - generic [ref=e879]: ⌘
+    - text: K
+  - alert [ref=e931]

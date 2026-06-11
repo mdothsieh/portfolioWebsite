@@ -5,6 +5,12 @@
 > usage). **Aesthetic:** Apple × Ferrari — red-on-black "Corsa" direction, precise
 > typography, instrument/telemetry styling.
 >
+> **Structure (2026 recruiter-first redesign):** two layers. The **recruiter layer**
+> (homepage: hero → featured work → experience → stack → about → resume → contact)
+> is proof-driven and scannable; the **personal layer** (`/personal`, `/now`, `/tea`)
+> holds listening (Spotify + NetEase), off-hours, and Claude telemetry. Projects are
+> presented as mini specs: problem → built → stack → real links only.
+>
 > **This file is the canonical orientation doc.** Read it first when working on this
 > project — it explains the structure, what each file does, and how the pieces connect.
 
@@ -60,6 +66,7 @@ portfolioWebsite/
 | `projects/page.tsx` | `/projects` | server | Index of all projects (from `getAllProjects()`). |
 | `projects/[slug]/page.tsx` | `/projects/:slug` | server | Renders one project's MDX via `<MDXRemote>`. Uses `generateStaticParams` + `generateMetadata`. |
 | `projects/[slug]/loading.tsx` | — | — | Suspense fallback for the project page. |
+| `personal/page.tsx` | `/personal` | server | **The personal layer.** Live status board (`PersonalStatus`), Listening (Spotify + NetEase), Off-Hours, Claude telemetry, doorway cards previewing real `data/now.ts` + `data/tea.ts` content. `revalidate = 30`. |
 | `now/page.tsx` | `/now` | server | "What I'm doing now" page, content from `data/now.ts`. |
 | `tea/page.tsx` | `/tea` | server | Tea Atlas map page. Rendered on-demand (not static) because Leaflet touches `window`. |
 | `not-found.tsx` | (404) | server | Custom 404. |
@@ -67,18 +74,29 @@ portfolioWebsite/
 | `icon.tsx` | favicon | — | Generates the tab favicon at request time from JSX. |
 | `apple-icon.tsx` | apple-touch-icon | — | Apple home-screen icon. |
 | `opengraph-image.tsx` | OG image | — | Generates the social share card. |
-| `globals.css` | — | — | Tailwind layers + custom animations/tokens. |
+| `globals.css` | — | — | Tailwind layers + custom animations/tokens + the theme system (`--c-*` RGB channel vars: `:root` = night default, `html[data-theme='day']` = day override; calmer-day rules; `@media print` pass). |
 
-**Section order on the landing page** (`app/page.tsx`):
-`01 Hero` → `SpecStrip` → `02 About` → `03 ExperienceTimeline` → `BoardingPass` →
-`04 Builds (projects)` → `05 SkillsDashboard` → `06 Hobbies` → `07 ListeningSection`
-→ unnumbered Claude-usage "telemetry" strip (deliberately demoted — AI fluency as
-evidence, not identity). Most are wrapped in `<Reveal>` for scroll-in animation.
+**Section order on the landing page** (`app/page.tsx`) — recruiter-first:
+`01 Hero` (positioning + availability + CTAs) → `SpecStrip` → `02 Work`
+(featured `ProjectSpecCard`s) → `03 ExperienceTimeline` → `04 SkillsDashboard` →
+`05 About` → `BoardingPass` (compact resume interlude) → `PersonalLayer` teaser
+(doorway to `/personal`). Listening, Hobbies, and the Claude heatmap moved to
+`/personal` (`01 Listening` → `02 Off-Hours` → telemetry strip → `/now` + `/tea`
+cards). Most sections are wrapped in `<Reveal>` for scroll-in animation.
 
 **Progressive enhancement:** an inline bootstrap script in `layout.tsx` adds the
 `js` class to `<html>` before first paint; every hidden-until-animated state in
 `globals.css` (`.reveal`, `.rt-word`, `.hero-enter`) is scoped under `html.js`,
 so no-JS visitors, scrapers, and broken-hydration cases see the full page.
+
+**Day/night theme:** night (near-black Corsa) is the default for everyone; a
+sun/moon `ThemeToggle` in the nav switches to day (Apple light gray) by setting
+`html[data-theme='day']`, persisted in `localStorage('theme')` and restored
+pre-paint by the same bootstrap script (value whitelisted — only `'day'` does
+anything). Tailwind color tokens (`bg/surface/divider/primary/muted/rose-300/400/500`)
+resolve through `--c-*` RGB channel vars in `globals.css`, so opacity modifiers
+work in both themes. Day mode hides the night atmosphere (carbon weave, grain,
+vignette, aurora, ambient wash) and skips the hero glyph scramble.
 
 ---
 
@@ -88,12 +106,13 @@ Header (`Nav`) is **server**; client components opt in with `'use client'`. Seve
 components are explicitly **retired** — kept as stubs/notes but no longer rendered.
 
 ### Layout & chrome
-- `Nav.tsx` (server) — sticky top nav; also hosts the live strip as its second row.
+- `Nav.tsx` (server) — sticky top nav (links, toggles, socials, red Resume pill → `/cv.pdf`); also hosts the live strip as its second row.
 - `NavLinks.tsx` (client) — desktop links with active-section highlighting (hash links).
 - `SiteFooter.tsx` (server) — footer.
 - `CommandPalette.tsx` (client) — ⌘K-style palette.
 - `ScrollProgress.tsx` (client) — thin rose progress bar at top of viewport.
 - `LangToggle.tsx` (client) — EN / 中 switch; sets `documentElement.dataset.lang`.
+- `ThemeToggle.tsx` (client) — night/day switch; sets `documentElement.dataset.theme`, persists in `localStorage`, fires `themechange`.
 - `Kicker.tsx` (client) — bilingual section header ornament (Chinese numeral + EN/ZH).
 
 ### Background / ambient (visual atmosphere)
@@ -104,19 +123,30 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 - `LiveFavicon.tsx` (client) — draws a live clock to canvas, swaps it in as favicon.
 
 ### Hero & landing sections
-- `Hero.tsx` (server) — section 01; centerpiece is `WatchFace`.
+- `Hero.tsx` (server) — section 01; recruiter-first copy: headline, availability
+  line, CTA row (View projects / Resume / GitHub / LinkedIn / Email); centerpiece is `WatchFace`.
 - `WatchFace.tsx` (client) — animated watch-face hero centerpiece (replaced the retired `LivingGraph`).
 - `SpecStrip.tsx` (server) — Apple-style recruiter "spec row" of big numbers. *(tested)*
-- `About.tsx` (server) — bio + "currently" list from `data/about.ts`, plus a
+- `ProjectSpecCard.tsx` (server) — mini-spec project card (index/title, problem,
+  built bullets, stack chips, real links only — GitHub/demo when present,
+  "proprietary" note otherwise). Used by `/` (02 Work) and `/projects`.
+- `About.tsx` (server) — section 05; bio + "currently" list from `data/about.ts`, plus a
   portrait card that renders only if `public/me.jpg` exists (checked at render).
-- `ExperienceTimeline.tsx` (server) — vertical timeline from `data/experience.ts`.
-- `BoardingPass.tsx` (server) — boarding-pass-styled CV interlude (links to `public/cv.pdf`).
-- `SkillsDashboard.tsx` (server) — skills grid from `data/skills.ts`.
-- `Hobbies.tsx` (server) — off-hours vignettes from `data/hobbies.ts`.
+- `ExperienceTimeline.tsx` (server) — section 03; vertical timeline from `data/experience.ts`.
+- `BoardingPass.tsx` (server) — boarding-pass-styled CV download card, demoted to a
+  compact interlude after About (links to `public/cv.pdf`).
+- `SkillsDashboard.tsx` (server) — section 04; evidence-based skill buckets from `data/skills.ts`.
+- `PersonalLayer.tsx` (server) — unnumbered homepage teaser: link cards into
+  `/personal`, `/now`, `/tea`.
+- `Hobbies.tsx` (server) — off-hours vignettes from `data/hobbies.ts`; section 02
+  of `/personal` (moved off the homepage).
 
 ### Live data widgets
-- `ClaudeUsageHeatmap.tsx` (client) — GitHub-style year heatmap; consumes `UsageData` from `lib/claude-usage.ts`. Rendered as a compact unnumbered "telemetry" strip at the end of the landing page (demoted by design).
+- `ClaudeUsageHeatmap.tsx` (client) — GitHub-style year heatmap; consumes `UsageData` from `lib/claude-usage.ts`. Rendered as a compact unnumbered "telemetry" strip on `/personal` (demoted by design).
 - `GitHubHeatmap.tsx` (client) — 365-day contribution grid; fetches `/api/github/contributions`.
+- `PersonalStatus.tsx` (client) — /personal status board: live LA/Taipei clocks
+  (client-ticked; em-dashes without JS) + now-playing + today's Claude count
+  (server-fetched props from `app/personal/page.tsx`).
 - `ListeningSection.tsx` (server) — fetches Spotify + NetEase in parallel, passes to client cards.
 - `ListeningCard.tsx` (client) — renders a track card.
 - `RecentPlays.tsx` (server) — recent Spotify tail.
@@ -146,8 +176,15 @@ components are explicitly **retired** — kept as stubs/notes but no longer rend
 
 ### `content/projects/*.mdx` — the project "CMS"
 Each `.mdx` file is one project case study. Frontmatter shape (see `lib/projects.ts`):
-`title, slug, tagline, date, stack[], metrics[], github_repo?, cover?, draft?`.
-Currently: `usc-fit.mdx`, `courtside.mdx`, `cratemate.mdx`. **To add a project:** drop a new `.mdx`
+`title, slug, tagline, date, stack[], metrics[], github_repo?, cover?, draft?,
+problem?, built[]?, featured?, proprietary?, demo?`. The mini-spec card fields:
+`problem` (one-liner), `built` (what-I-built bullets), `featured` (homepage order,
+1 = first), `proprietary` (work project, no public code — never fake a repo link),
+`demo` (only when a real URL exists).
+Currently: `cratemate.mdx` (1), `usc-fit.mdx` (2), `courtside.mdx` (3),
+then the proprietary work projects in date order: `kenmou-dashboard.mdx` (4),
+`internal-tools.mdx` (5).
+**To add a project:** drop a new `.mdx`
 here — it auto-appears at `/projects` and gets its own `/projects/<slug>` page.
 
 **Cover images:** put a screenshot at `public/projects/<slug>/cover.png` and set
@@ -159,7 +196,7 @@ portrait: drop `public/me.jpg` and it appears, no code change.
 ### `data/*.ts` — typed content modules
 - `about.ts` — `bio[]` + `currently[]`.
 - `experience.ts` — `experiences[]` (internships/founder bullets) for the timeline.
-- `skills.ts` — `strong[] / proficient[] / learning[]` skills.
+- `skills.ts` — evidence-based buckets: `productionReady[] / shippedWith[] / exploring[] / supporting[]`.
 - `hobbies.ts` — `hobbies[]` vignettes.
 - `now.ts` — `nowSections[]` + `lastUpdated` for `/now`.
 - `tea.ts` — `teaSpots[]` (LA + Taipei) for the Tea Atlas.
@@ -171,7 +208,8 @@ portrait: drop `public/me.jpg` and it appears, no code change.
 ## 6. Library / server logic (`lib/`)
 
 - `projects.ts` — reads `content/projects/*.mdx`, parses frontmatter with `gray-matter`.
-  Exports `getAllProjects()` (sorted by date, drops drafts) and `getProjectBySlug()`.
+  Exports `getAllProjects()` (sorted by date, drops drafts), `getFeaturedProjects()`
+  (recruiter-priority order via the `featured` field) and `getProjectBySlug()`.
 - `spotify.ts` — server-side Spotify client. Uses the refresh-token grant
   (`SPOTIFY_CLIENT_ID/SECRET/REFRESH_TOKEN`) to call the "now playing" + recent endpoints.
   **The access token never reaches the client.**
@@ -218,10 +256,14 @@ There is **no** NetEase API route — `ListeningSection` (a server component) ca
 
 ```
 Visitor → app/page.tsx (server, revalidate=30)
-            ├─ getAllProjects()      → lib/projects.ts  → content/projects/*.mdx
+            ├─ getFeaturedProjects() → lib/projects.ts  → content/projects/*.mdx
             ├─ getClaudeUsage()      → lib/claude-usage.ts → ~/.claude/**.jsonl OR data/claude-usage.json
             ├─ getNowPlaying()       → lib/spotify.ts   → Spotify API (refresh token)
             └─ renders sections (components/*) wrapped in <Reveal>
+
+Personal layer: /personal (server, revalidate=30)
+            ├─ getClaudeUsage()      → telemetry heatmap
+            └─ <ListeningSection>    → lib/spotify.ts + lib/netease.ts (server-side)
 
 Client widgets (in the browser):
    GitHubHeatmap  ──fetch──▶  /api/github/contributions ──▶ jogruber proxy

@@ -6,6 +6,7 @@ import { getProjectBySlug, getAllProjects } from '@/lib/projects';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { T } from '@/components/i18n';
 
 export async function generateStaticParams() {
   return getAllProjects().map(p => ({ slug: p.slug }));
@@ -35,12 +36,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         href="/projects"
         className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors"
       >
-        ← Projects
+        <T en="← Projects" zh="← 项目" />
       </Link>
 
       <header className="mt-8 mb-10">
         <h1 className="font-serif text-5xl leading-[1.05] mb-3">{frontmatter.title}</h1>
-        <p className="text-xl text-muted leading-snug">{frontmatter.tagline}</p>
+        <p className="text-xl text-muted leading-snug">
+          <T en={frontmatter.tagline} zh={frontmatter.tagline_zh} />
+        </p>
+        {/* The long-form case-study body below is English-only by design —
+            say so in Chinese modes instead of leaving readers to wonder. */}
+        <p className="text-[10px] font-mono uppercase tracking-widest text-muted/70 mt-3">
+          <T en="" zh="（案例研究正文为英文）" />
+        </p>
       </header>
 
       {frontmatter.cover && (
@@ -91,6 +99,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         >
           github.com/{frontmatter.github_repo} ↗
         </a>
+      )}
+
+      {frontmatter.proprietary && (
+        <div className="text-[10px] font-mono uppercase tracking-widest text-muted/70 mb-12">
+          <T
+            en="Proprietary — built on the job; the code isn't public. This page is the spec."
+            zh="专有项目——在职期间构建，代码不公开。这一页就是它的规格说明。"
+          />
+        </div>
       )}
 
       <article

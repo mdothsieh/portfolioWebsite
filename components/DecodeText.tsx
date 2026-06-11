@@ -6,7 +6,8 @@ const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*/<>';
 
 // Renders text that resolves from scrambled glyphs into the final string on
 // mount. SSR/no-JS and reduced-motion both render the final text immediately,
-// so it's SEO-safe and accessible.
+// so it's SEO-safe and accessible. Day theme also skips the scramble — the
+// effect belongs to the night atmosphere (calmer day mode, see globals.css).
 export function DecodeText({
   text,
   className = '',
@@ -20,6 +21,7 @@ export function DecodeText({
 
   useEffect(() => {
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    if (document.documentElement.dataset.theme === 'day') return;
 
     const start = performance.now();
     let raf = 0;

@@ -5,6 +5,7 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
+import { useZhText } from './i18n';
 
 export interface NeteaseTrackView {
   id: string;
@@ -38,6 +39,7 @@ export function NeteaseTopTracks({ weekly, allTime }: Props) {
     () => tracks.reduce((m, t) => Math.max(m, t.playCount), 0) || 1,
     [tracks],
   );
+  const byPlayCount = useZhText('by play count', '按播放次数');
 
   if (!hasWeekly && !hasAllTime) {
     return (
@@ -61,16 +63,18 @@ export function NeteaseTopTracks({ weekly, allTime }: Props) {
             disabled={!hasWeekly}
             onClick={() => setRange('weekly')}
             label="last 7 days"
+            label_zh="最近 7 天"
           />
           <RangeTab
             active={range === 'allTime'}
             disabled={!hasAllTime}
             onClick={() => setRange('allTime')}
             label="all time"
+            label_zh="所有时间"
           />
         </div>
         <span className="text-[10px] font-mono lowercase tracking-wider text-muted">
-          by play count
+          {byPlayCount}
         </span>
       </div>
 
@@ -164,12 +168,15 @@ function RangeTab({
   disabled,
   onClick,
   label,
+  label_zh,
 }: {
   active: boolean;
   disabled?: boolean;
   onClick: () => void;
   label: string;
+  label_zh?: string;
 }) {
+  const text = useZhText(label, label_zh);
   return (
     <button
       onClick={onClick}
@@ -180,7 +187,7 @@ function RangeTab({
         ${active ? 'bg-red-600 text-white' : 'text-muted hover:text-primary'}
       `}
     >
-      {label}
+      {text}
     </button>
   );
 }

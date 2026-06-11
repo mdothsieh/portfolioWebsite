@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { T } from './i18n';
 
 // The visitor-facing prompt. Kept verbatim so every provider gets the same ask.
 const NAME = 'Martin Hsieh';
@@ -83,10 +84,13 @@ export function AskAI() {
             id="ask-ai-heading"
             className="text-[10px] font-mono uppercase tracking-widest text-muted"
           >
-            In a hurry?
+            <T en="In a hurry?" zh="赶时间？" />
           </h2>
           <p className="text-sm text-muted mt-1">
-            Ask your assistant about me — the prompt is pre-filled.
+            <T
+              en="Ask your assistant about me — the prompt is pre-filled."
+              zh="让你的 AI 助手介绍我——提示词已经填好了。"
+            />
           </p>
         </div>
 

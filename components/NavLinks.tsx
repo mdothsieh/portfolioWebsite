@@ -2,18 +2,20 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { T } from './i18n';
 
 // Desktop nav links with active-section highlighting. The hash links point at
-// on-page sections; as each scrolls into view its label lights up.
-const LINKS: { href: string; label: string; section?: string; download?: boolean }[] = [
-  { href: '/#about', label: 'about', section: 'about' },
-  { href: '/projects', label: 'builds' },
-  { href: '/#stack', label: 'stack', section: 'stack' },
-  { href: '/#off-hours', label: 'off-hours', section: 'off-hours' },
-  { href: '/#listening', label: 'listening', section: 'listening' },
-  { href: '/now', label: '/now' },
-  { href: '/tea', label: 'tea' },
-  { href: '/cv.pdf', label: 'cv', download: true },
+// on-page sections; as each scrolls into view its label lights up. Recruiter
+// path first (work → experience → stack → about), then the personal layer
+// (/personal hosts listening, off-hours, telemetry; /now and /tea link from there).
+// Labels are bilingual via <T> (components/i18n.tsx).
+const LINKS: { href: string; label: string; label_zh: string; section?: string; download?: boolean }[] = [
+  { href: '/#projects', label: 'work', label_zh: '作品', section: 'projects' },
+  { href: '/#experience', label: 'experience', label_zh: '经历', section: 'experience' },
+  { href: '/#stack', label: 'stack', label_zh: '技术栈', section: 'stack' },
+  { href: '/#about', label: 'about', label_zh: '关于', section: 'about' },
+  { href: '/personal', label: 'personal', label_zh: '个人' },
+  { href: '/cv.pdf', label: 'cv', label_zh: '简历', download: true },
 ];
 
 export function NavLinks() {
@@ -57,14 +59,14 @@ export function NavLinks() {
         if (l.download) {
           return (
             <a key={l.href} href={l.href} download className={cls}>
-              {l.label}
+              <T en={l.label} zh={l.label_zh} />
               {underline}
             </a>
           );
         }
         return (
           <Link key={l.href} href={l.href} className={cls}>
-            {l.label}
+            <T en={l.label} zh={l.label_zh} />
             {underline}
           </Link>
         );

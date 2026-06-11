@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useZhText } from './i18n';
 
 // Bilingual section kicker: always shows a Chinese numeral ornament, then the
-// label in either English ("04 — Builds") or Chinese ("作品"), driven by the
-// site-wide lang flag that LangToggle controls.
+// label in English ("04 — Builds"), 简体 or 繁體 (converted from the 简体 label),
+// driven by the site-wide language state that LangToggle controls (see
+// components/i18n.tsx).
 export function Kicker({
   cn,
   num,
@@ -15,25 +16,17 @@ export function Kicker({
   cn: string; // chinese numeral, e.g. 零四
   num: string; // arabic index, e.g. 04
   en: string; // english label
-  zh: string; // chinese label
+  zh: string; // simplified chinese label (traditional is auto-converted)
   className?: string;
 }) {
-  const [lang, setLang] = useState<'en' | 'zh'>('en');
-
-  useEffect(() => {
-    const read = () =>
-      setLang(document.documentElement.dataset.lang === 'zh' ? 'zh' : 'en');
-    read();
-    window.addEventListener('langchange', read);
-    return () => window.removeEventListener('langchange', read);
-  }, []);
+  const label = useZhText(`${num} — ${en}`, zh);
 
   return (
     <div
       className={`text-[10px] font-mono uppercase tracking-widest text-muted mb-6 ${className}`}
     >
       <span className="cn-numeral">{cn}</span>
-      {lang === 'zh' ? zh : `${num} — ${en}`}
+      {label}
     </div>
   );
 }

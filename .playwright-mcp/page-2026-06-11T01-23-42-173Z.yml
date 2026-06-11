@@ -1,0 +1,576 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "MARTIN HSIEH" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "work" [ref=e7] [cursor=pointer]:
+            - /url: /#projects
+            - text: work
+          - link "experience" [ref=e8] [cursor=pointer]:
+            - /url: /#experience
+            - text: experience
+          - link "stack" [ref=e9] [cursor=pointer]:
+            - /url: /#stack
+            - text: stack
+          - link "about" [ref=e10] [cursor=pointer]:
+            - /url: /#about
+            - text: about
+          - link "personal" [ref=e11] [cursor=pointer]:
+            - /url: /personal
+            - text: personal
+          - link "cv" [ref=e12] [cursor=pointer]:
+            - /url: /cv.pdf
+            - text: cv
+        - generic [ref=e13]: ·
+        - group "Language" [ref=e14]:
+          - button "EN" [pressed] [ref=e16] [cursor=pointer]
+          - generic [ref=e17]:
+            - generic [ref=e18]: /
+            - button "简" [ref=e19] [cursor=pointer]
+          - generic [ref=e20]:
+            - generic [ref=e21]: /
+            - button "繁" [ref=e22] [cursor=pointer]
+        - generic [ref=e23]:
+          - link "LinkedIn" [ref=e24] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/martin-hsieh/
+            - img [ref=e25]
+          - link "GitHub" [ref=e29] [cursor=pointer]:
+            - /url: https://github.com/mdothsieh
+            - img [ref=e30]
+          - link "Email" [ref=e33] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e34]
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: Thu, Jun 11
+        - generic [ref=e41]: ·
+        - generic [ref=e42]: LAX ↔ TPE
+      - generic [ref=e43]:
+        - generic [ref=e46]: spotify quiet
+        - generic [ref=e47]: ·
+        - generic [ref=e48]:
+          - generic [ref=e49]: "802"
+          - generic [ref=e50]: msgs today
+        - generic [ref=e51]: ·
+        - generic [ref=e52]:
+          - generic [ref=e53]: "45"
+          - generic [ref=e54]: sessions
+  - main [ref=e56]:
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]: Martin Hsieh · CS @ USC · Full-stack systems · Applied AI tooling
+        - heading "I build full-stack tools for real-world workflows." [level=1] [ref=e61]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: I
+            - generic [ref=e64]: build
+            - generic [ref=e65]: full-stack
+            - generic [ref=e66]: tools
+            - generic [ref=e67]: for
+            - generic [ref=e68]: real-world
+            - generic [ref=e69]: workflows.
+        - paragraph [ref=e70]: USC computer science student focused on internal tools, dashboards, local-first apps, and applied AI systems. I've shipped production software at two manufacturers — Kenmou in Taipei and Far Eastern in Suzhou — and I like software that turns messy operational workflows into something people can actually use.
+        - generic [ref=e75]: Open to Summer 2027 SWE / applied-AI internships · LA · Bay Area · Seattle · NYC · Taipei · remote
+        - generic [ref=e76]:
+          - link "View projects" [ref=e77] [cursor=pointer]:
+            - /url: /#projects
+          - link "Resume" [ref=e78] [cursor=pointer]:
+            - /url: /cv.pdf
+            - img [ref=e79]
+            - text: Resume
+        - generic [ref=e81]:
+          - link "GitHub" [ref=e82] [cursor=pointer]:
+            - /url: https://github.com/mdothsieh
+            - text: GitHub
+            - img [ref=e83]
+          - link "LinkedIn" [ref=e86] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/martin-hsieh/
+            - text: LinkedIn
+            - img [ref=e87]
+          - link "Email" [ref=e90] [cursor=pointer]:
+            - /url: mailto:mdothsieh@gmail.com
+            - img [ref=e91]
+            - text: Email
+      - generic [ref=e94]:
+        - generic [ref=e96]:
+          - img "Corsa chronograph — interactive portfolio centerpiece" [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e161]: "400"
+              - generic [ref=e164]: "300"
+              - generic [ref=e166]: "240"
+              - generic [ref=e169]: "200"
+              - generic [ref=e172]: "175"
+              - generic [ref=e175]: "150"
+              - generic [ref=e178]: "130"
+              - generic [ref=e180]: "120"
+              - generic [ref=e183]: "110"
+              - generic [ref=e186]: "100"
+              - generic [ref=e189]: "90"
+              - generic [ref=e191]: "80"
+              - generic [ref=e194]: "70"
+              - generic [ref=e197]: "65"
+              - generic [ref=e199]: "60"
+              - generic [ref=e200]: TACHYMÈTRE
+              - generic [ref=e309]: CORSA
+              - generic [ref=e310]: PRECISION · CHRONOGRAPH
+              - generic [ref=e311]: CHRONOGRAPHE
+            - generic [ref=e337]:
+              - generic [ref=e338]: ACTIVITY
+              - generic [ref=e339]: "802"
+              - generic [ref=e340]: MSG · TODAY
+            - generic [ref=e341]:
+              - generic [ref=e342]: PULSE
+              - generic [ref=e344]: QUIET
+            - generic [ref=e345]:
+              - generic [ref=e346]: WED
+              - generic [ref=e347]: "1"
+            - generic "Pusher — next layer" [ref=e358] [cursor=pointer]
+            - generic "Pusher — previous layer" [ref=e361] [cursor=pointer]
+            - generic "Crown" [ref=e364] [cursor=pointer]
+          - generic [ref=e371]: Hover a marker to inspect · press the chronograph pushers to switch layer
+          - generic [ref=e372]:
+            - generic [ref=e373]: Click a button to switch the dial's data layer·or the watch pushers / ← →
+            - generic [ref=e374]:
+              - button "builds" [pressed] [ref=e375] [cursor=pointer]
+              - button "experience" [ref=e376] [cursor=pointer]
+              - button "stack" [ref=e377] [cursor=pointer]
+              - button "hobbies" [ref=e378] [cursor=pointer]
+        - paragraph [ref=e379]: The dial is live — date, today's build activity, a music pulse.
+    - generic [ref=e381]:
+      - generic [ref=e382]:
+        - definition [ref=e383]: "02"
+        - generic [ref=e384]:
+          - term [ref=e385]: internships shipped
+          - generic [ref=e386]: Kenmou · Far Eastern — Flex ’26 next
+      - generic [ref=e387]:
+        - definition [ref=e388]: +40%
+        - generic [ref=e389]:
+          - term [ref=e390]: throughput
+          - generic [ref=e391]: order dashboard, Kenmou 2025
+      - generic [ref=e392]:
+        - definition [ref=e393]: TS · React · Next Node · Python
+        - generic [ref=e394]:
+          - term [ref=e395]: core stack
+          - generic [ref=e396]: + agentic AI frameworks
+      - generic [ref=e397]:
+        - definition [ref=e398]: Summer 2027
+        - generic [ref=e399]:
+          - term [ref=e400]: available
+          - generic [ref=e401]: Los Angeles ⇄ Taipei
+    - generic [ref=e402]:
+      - generic [ref=e403]:
+        - generic [ref=e404]: 零二02 — Work
+        - generic [ref=e405]:
+          - heading "Selected work." [level=2] [ref=e406]:
+            - generic [ref=e407]:
+              - generic [ref=e408]: Selected
+              - generic [ref=e409]: work.
+          - link "all projects ↗" [ref=e410] [cursor=pointer]:
+            - /url: /projects
+        - paragraph [ref=e411]: "A few systems I've built across music, manufacturing, campus life, and internal operations — each one documented as a spec: problem, what I built, stack, proof."
+      - list [ref=e412]:
+        - listitem [ref=e413]:
+          - article [ref=e414]:
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - link "01 /CrateMate" [ref=e417] [cursor=pointer]:
+                  - /url: /projects/cratemate
+                  - generic [ref=e418]: 01 /
+                  - text: CrateMate
+                - generic [ref=e419]: 2026-06 -> current
+              - paragraph [ref=e420]: A DJ's crate-digging companion — a local-first desktop app that analyzes your actual music library, finds the tracks that mix well together, and exports straight to a Serato crate.
+              - generic [ref=e421]:
+                - generic [ref=e422]: Problem
+                - paragraph [ref=e423]: DJs organize tracks by memory and repeated listening — finding songs that actually mix well together is slow, manual work.
+              - generic [ref=e424]:
+                - generic [ref=e425]: Built
+                - list [ref=e426]:
+                  - listitem [ref=e427]: — Audio analysis pipeline (ffmpeg → Essentia.js → ONNX) run over a real 1,664-track library
+                  - listitem [ref=e428]: — Track compatibility scoring across style, BPM, harmonic key, and energy
+                  - listitem [ref=e429]: — Byte-compatible Serato .crate export, verified by round-tripping
+                  - listitem [ref=e430]: — Local-first desktop UI — the library never leaves the machine
+              - generic [ref=e431]:
+                - generic [ref=e432]: Electron
+                - generic [ref=e433]: TypeScript
+                - generic [ref=e434]: React
+                - generic [ref=e435]: Tailwind
+                - generic [ref=e436]: Essentia.js (WASM)
+                - generic [ref=e437]: ONNX Runtime
+                - generic [ref=e438]: SQLite
+                - generic [ref=e439]: ffmpeg
+              - generic [ref=e440]:
+                - link "Case study →" [ref=e441] [cursor=pointer]:
+                  - /url: /projects/cratemate
+                - link "GitHub" [ref=e442] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/CrateMate
+                  - text: GitHub
+                  - img [ref=e443]
+        - listitem [ref=e446]:
+          - article [ref=e447]:
+            - generic [ref=e448]:
+              - generic [ref=e449]:
+                - link "02 /USC FIT" [ref=e450] [cursor=pointer]:
+                  - /url: /projects/usc-fit
+                  - generic [ref=e451]: 02 /
+                  - text: USC FIT
+                - generic [ref=e452]: 2026-01 -> 2026-05
+              - paragraph [ref=e453]: USC's First Fitness Matching Platform — a campus web app that helps students find, schedule, and join fitness activities together.
+              - generic [ref=e454]:
+                - generic [ref=e455]: Problem
+                - paragraph [ref=e456]: Finding a workout partner at the right facility, time, and skill level is friction nobody wants to manage in group chats.
+              - generic [ref=e457]:
+                - generic [ref=e458]: Built
+                - list [ref=e459]:
+                  - listitem [ref=e460]: — Full-stack Java web app (JSP/Servlets + MySQL) with six core features
+                  - listitem [ref=e461]: — USC-email registration and login at the auth edge
+                  - listitem [ref=e462]: — Activity creation, matching, and scheduling with cancellation penalties
+                  - listitem [ref=e463]: — Maven → WAR build deployed on Tomcat
+              - generic [ref=e464]:
+                - generic [ref=e465]: Java
+                - generic [ref=e466]: JSP / Servlets
+                - generic [ref=e467]: MySQL
+                - generic [ref=e468]: JDBC
+                - generic [ref=e469]: Maven
+                - generic [ref=e470]: Tomcat
+              - generic [ref=e471]:
+                - link "Case study →" [ref=e472] [cursor=pointer]:
+                  - /url: /projects/usc-fit
+                - link "GitHub" [ref=e473] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/CSCI201_FinalProject-
+                  - text: GitHub
+                  - img [ref=e474]
+        - listitem [ref=e477]:
+          - article [ref=e478]:
+            - generic [ref=e479]:
+              - generic [ref=e480]:
+                - link "03 /Courtside" [ref=e481] [cursor=pointer]:
+                  - /url: /projects/courtside
+                  - generic [ref=e482]: 03 /
+                  - text: Courtside
+                - generic [ref=e483]: 2023-04 -> 2024-12
+              - paragraph [ref=e484]: A desktop basketball team-management system — coaches and players track games, per-player statistics, rankings, and scheduling from one role-aware JavaFX app backed by MySQL.
+              - generic [ref=e485]:
+                - generic [ref=e486]: Problem
+                - paragraph [ref=e487]: A coach keeps roster, box scores, player trends, and the calendar in five places that never agree with each other.
+              - generic [ref=e488]:
+                - generic [ref=e489]: Built
+                - list [ref=e490]:
+                  - listitem [ref=e491]: — Role-aware JavaFX desktop app with separate coach and player views
+                  - listitem [ref=e492]: — Game records, per-player statistics, and season rankings
+                  - listitem [ref=e493]: — MySQL persistence behind a DAO layer, pooled with Druid
+                  - listitem [ref=e494]: — Calendar scheduling plus CSV roster import/export
+              - generic [ref=e495]:
+                - generic [ref=e496]: Java
+                - generic [ref=e497]: JavaFX
+                - generic [ref=e498]: MySQL
+                - generic [ref=e499]: JDBC
+                - generic [ref=e500]: Druid
+                - generic [ref=e501]: Maven
+              - generic [ref=e502]:
+                - link "Case study →" [ref=e503] [cursor=pointer]:
+                  - /url: /projects/courtside
+                - link "GitHub" [ref=e504] [cursor=pointer]:
+                  - /url: https://github.com/mdothsieh/dcsz-basketball
+                  - text: GitHub
+                  - img [ref=e505]
+        - listitem [ref=e508]:
+          - article [ref=e509]:
+            - generic [ref=e510]:
+              - generic [ref=e511]:
+                - link "04 /Kenmou Dashboard" [ref=e512] [cursor=pointer]:
+                  - /url: /projects/kenmou-dashboard
+                  - generic [ref=e513]: 04 /
+                  - text: Kenmou Dashboard
+                - generic [ref=e514]: 2025-05 -> 2025-09
+              - paragraph [ref=e515]: Order-processing dashboard the production floor at Kenmou Enterprise ran on daily — order throughput up 40%.
+              - generic [ref=e516]:
+                - generic [ref=e517]: Problem
+                - paragraph [ref=e518]: Operational teams tracked orders through email chains and paper forms, with no shared view of order status or production throughput.
+              - generic [ref=e519]:
+                - generic [ref=e520]: Built
+                - list [ref=e521]:
+                  - listitem [ref=e522]: — React + Node order-processing dashboard used daily on the production floor
+                  - listitem [ref=e523]: — ArtiosCAD wired into the approval workflow — packaging prototypes stopped waiting on email
+                  - listitem [ref=e524]: — The team's first Docker-based CI/CD pipeline — releases went from a manual afternoon to a push
+                  - listitem [ref=e525]: — Digital inspection checklist replacing paper sheets
+              - generic [ref=e526]:
+                - generic [ref=e527]: React
+                - generic [ref=e528]: Node.js
+                - generic [ref=e529]: SQL
+                - generic [ref=e530]: Docker
+                - generic [ref=e531]: ArtiosCAD
+              - generic [ref=e532]:
+                - link "Case study →" [ref=e533] [cursor=pointer]:
+                  - /url: /projects/kenmou-dashboard
+                - generic [ref=e534]:
+                  - img [ref=e535]
+                  - text: proprietary · no public code
+        - listitem [ref=e538]:
+          - article [ref=e539]:
+            - generic [ref=e540]:
+              - generic [ref=e541]:
+                - link "05 /Internal Tools Suite" [ref=e542] [cursor=pointer]:
+                  - /url: /projects/internal-tools
+                  - generic [ref=e543]: 05 /
+                  - text: Internal Tools Suite
+                - generic [ref=e544]: 2023-07 -> 2023-09
+              - paragraph [ref=e545]: Four production tools for a 20-person operations team at Far Eastern Apparel — RPA bots, a React portal, a 300-user Android app, and a Python data pipeline.
+              - generic [ref=e546]:
+                - generic [ref=e547]: Problem
+                - paragraph [ref=e548]: Repeated manual workflows — data entry, reporting, engagement tracking — slowed a 20-person operations team and created coordination overhead.
+              - generic [ref=e549]:
+                - generic [ref=e550]: Built
+                - list [ref=e551]:
+                  - listitem [ref=e552]: — UiPath RPA bots automating repetitive data-entry workflows
+                  - listitem [ref=e553]: — React employee-engagement portal
+                  - listitem [ref=e554]: — Internal Android app with 300 users
+                  - listitem [ref=e555]: — Python data-quality pipeline, plus push-button CI/CD for all of it
+              - generic [ref=e556]:
+                - generic [ref=e557]: Python
+                - generic [ref=e558]: React
+                - generic [ref=e559]: Android
+                - generic [ref=e560]: UiPath
+                - generic [ref=e561]: SQL
+              - generic [ref=e562]:
+                - link "Case study →" [ref=e563] [cursor=pointer]:
+                  - /url: /projects/internal-tools
+                - generic [ref=e564]:
+                  - img [ref=e565]
+                  - text: proprietary · no public code
+    - generic [ref=e569]:
+      - generic [ref=e570]: 零三03 — Experience
+      - heading "Three summers, three cities." [level=2] [ref=e571]:
+        - generic [ref=e572]:
+          - generic [ref=e573]: Three
+          - generic [ref=e574]: summers,
+          - generic [ref=e575]: three
+          - generic [ref=e576]: cities.
+      - paragraph [ref=e577]: Hardware-floor pragmatism in Suzhou, full-stack iteration speed in Taipei, applied-AI ambition in Los Angeles.
+      - list [ref=e578]:
+        - listitem [ref=e579]:
+          - generic [ref=e581]:
+            - generic [ref=e582]: SWE Intern (incoming) · Flex Ltd
+            - generic [ref=e583]: Summer 2026
+          - generic [ref=e584]: Suzhou, China· upcoming
+          - list [ref=e585]:
+            - listitem [ref=e586]: — Joining the hardware–software integration team in Suzhou. Details land here once the internship starts.
+        - listitem [ref=e587]:
+          - generic [ref=e589]:
+            - generic [ref=e590]: SWE Intern · Kenmou Enterprise
+            - generic [ref=e591]: May – Sep 2025
+          - generic [ref=e592]: Taipei, Taiwan
+          - list [ref=e593]:
+            - listitem [ref=e594]: — Shipped a React + Node order-processing dashboard the production floor ran on daily — order throughput up 40%.
+            - listitem [ref=e595]: — Wired ArtiosCAD into the internal approval workflow so packaging prototypes stopped waiting on email chains.
+            - listitem [ref=e596]: — Authored the team’s first Docker-based CI/CD pipeline; releases went from a manual afternoon to a push.
+            - listitem [ref=e597]: "— Replaced paper inspection sheets with a digital checklist. Measurable: −12% paper usage. Immeasurable: −100% lost forms."
+        - listitem [ref=e598]:
+          - generic [ref=e600]:
+            - generic [ref=e601]: Tech & Science Society Leader · Dulwich College Suzhou
+            - generic [ref=e602]: Aug 2023 – Jun 2024
+          - generic [ref=e603]: Suzhou, China
+          - list [ref=e604]:
+            - listitem [ref=e605]: — Led the school’s technology society (40+ members) — interactive lessons on coding fundamentals, hardware systems, and networking, plus hands-on workshops in programming and basic electronics.
+            - listitem [ref=e606]: — Ran the science society in parallel, growing it to 70+ active members — one of the largest student-led clubs in the school — across 50+ STEM sessions for Years 7–11.
+            - listitem [ref=e607]: — Adapted technical content for every experience level and worked with faculty advisors on session planning, participation, and lab safety.
+        - listitem [ref=e608]:
+          - generic [ref=e610]:
+            - generic [ref=e611]: SWE Intern · Far Eastern Apparel
+            - generic [ref=e612]: Jul – Sep 2023
+          - generic [ref=e613]: Suzhou, China
+          - list [ref=e614]:
+            - listitem [ref=e615]: "— Built four production tools for a 20-person team: UiPath RPA bots, a React engagement portal, an internal Android app with 300 users, and a Python data-quality pipeline."
+            - listitem [ref=e616]: — Designed the CI/CD that took deployments from a manual checklist to push-button.
+        - listitem [ref=e617]:
+          - generic [ref=e619]:
+            - generic [ref=e620]: Founder · PulsePrep Academy
+            - generic [ref=e621]: Mar 2022 – Mar 2024
+          - generic [ref=e622]: Suzhou, China
+          - list [ref=e623]:
+            - listitem [ref=e624]: "— Ran a tutoring micro-business: 200+ adaptive worksheets, 14 weekly contact hours, three IGCSE curricula, 50+ students."
+            - listitem [ref=e625]: — Average measured test-score lift of 15% within 3 months across the cohort.
+    - generic [ref=e627]:
+      - generic [ref=e628]: 零四04 — Stack
+      - heading "Stack." [level=2] [ref=e629]:
+        - generic [ref=e631]: Stack.
+      - paragraph [ref=e632]: "Organized by evidence, not self-ratings: what I'd use in production today, what real projects shipped with, and what I'm exploring now."
+      - generic [ref=e633]:
+        - generic [ref=e634]:
+          - generic [ref=e635]:
+            - generic [ref=e636]: Production-ready
+            - generic [ref=e637]: I'd reach for these in production without hesitation
+          - generic [ref=e638]:
+            - generic [ref=e639]: React
+            - generic [ref=e641]: Node.js
+            - generic [ref=e643]: TypeScript
+            - generic [ref=e645]: JavaScript
+            - generic [ref=e647]: Python
+            - generic [ref=e649]: SQL
+            - generic [ref=e651]: Git
+        - generic [ref=e653]:
+          - generic [ref=e654]:
+            - generic [ref=e655]: Shipped with
+            - generic [ref=e656]: Real projects shipped with these — proof in /projects
+          - generic [ref=e657]:
+            - generic [ref=e658]: Next.js
+            - generic [ref=e660]: Electron
+            - generic [ref=e662]: Java
+            - generic [ref=e664]: C++
+            - generic [ref=e666]: MySQL
+            - generic [ref=e668]: Docker
+            - generic [ref=e670]: Tailwind
+            - generic [ref=e672]: JSP / Servlets
+            - generic [ref=e674]: Android
+        - generic [ref=e676]:
+          - generic [ref=e677]:
+            - generic [ref=e678]: Exploring
+            - generic [ref=e679]: Actively building with these right now
+          - generic [ref=e680]:
+            - generic [ref=e681]: LLM / Agent Workflows
+            - generic [ref=e683]: Applied AI Systems
+            - generic [ref=e685]: Computer Vision
+            - generic [ref=e687]: Embedded Systems
+            - generic [ref=e689]: System Design at Scale
+        - generic [ref=e691]:
+          - generic [ref=e692]:
+            - generic [ref=e693]: Supporting
+            - generic [ref=e694]: The everyday tooling around the core stack
+          - generic [ref=e695]:
+            - generic [ref=e696]: UiPath RPA
+            - generic [ref=e698]: Data Pipelines
+            - generic [ref=e700]: API Integrations
+            - generic [ref=e702]: CI/CD
+            - generic [ref=e704]: Vitest
+      - generic [ref=e706]:
+        - generic [ref=e707]: Dot color = category
+        - generic [ref=e708]:
+          - generic [ref=e709]: language
+          - generic [ref=e711]: framework
+          - generic [ref=e713]: tool
+          - generic [ref=e715]: domain
+    - generic [ref=e718]:
+      - generic [ref=e719]: 零五05 — About
+      - generic [ref=e720]:
+        - generic [ref=e721]:
+          - paragraph [ref=e722]: I'm a rising junior at USC studying computer science. I grew up in Taipei, spent the last two summers shipping software in Taiwan and mainland China, and now spend most of my days somewhere between LA and a laptop.
+          - paragraph [ref=e723]: "My instinct is to build the system, not just the screen. At Kenmou Enterprise in Taipei I wired a React + Node order-processing dashboard into the production floor — the kind of tool people stop noticing because it just runs. At Far Eastern Apparel in Suzhou, I shipped four internal tools — RPA bots, a React engagement portal, an Android app, and a Python data pipeline — for a 20-person team. Those environments shaped how I think about software: it has to be reliable, understandable, and useful to people who are not engineers. Before college I founded PulsePrep Academy, teaching 50+ students across three IGCSE curricula for two years."
+          - paragraph [ref=e724]: Joining Flex Ltd's Suzhou facility for Summer 2026 as an engineering intern. Looking for Summer 2027 roles in software engineering or applied AI — teams that ship things, measure them, and iterate. Especially drawn to agentic systems, full-stack work where the line between front and back is intentionally blurred, and infrastructure that quietly makes ten other engineers faster.
+        - complementary [ref=e725]:
+          - generic [ref=e726]:
+            - generic [ref=e731]: Currently
+            - generic [ref=e732]:
+              - generic [ref=e733]:
+                - term [ref=e734]: This week
+                - definition [ref=e735]: Launching This Portfolio · Building CrateMate
+              - generic [ref=e736]:
+                - term [ref=e737]: This semester
+                - definition [ref=e738]: "Software Engineering · AI: Principles and Foundations · Western Music as Sounding History · Beach Volleyball · Introduction to American Popular Culture · Weight Training"
+              - generic [ref=e739]:
+                - term [ref=e740]: Reading
+                - definition [ref=e741]: Mostly documentation, honestly
+              - generic [ref=e742]:
+                - term [ref=e743]: Learning
+                - definition [ref=e744]: Agentic frameworks · System design at scale · Making LLMs do the boring parts
+    - link "Boarding Pass · CV-2026 Seat — Anywhere From TPE Taipei · 桃園 To LAX Los Angeles · USC Passenger Martin Hsieh Class CS · '28 Flight CV-2026 Boarding Now Resume Download" [ref=e746] [cursor=pointer]:
+      - /url: /cv.pdf
+      - generic [ref=e748]:
+        - generic [ref=e749]:
+          - generic [ref=e750]:
+            - generic [ref=e751]: Boarding Pass · CV-2026
+            - generic [ref=e752]: Seat — Anywhere
+          - generic [ref=e753]:
+            - generic [ref=e754]:
+              - generic [ref=e755]: From
+              - generic [ref=e756]: TPE
+              - generic [ref=e757]: Taipei · 桃園
+            - img [ref=e759]
+            - generic [ref=e761]:
+              - generic [ref=e762]: To
+              - generic [ref=e763]: LAX
+              - generic [ref=e764]: Los Angeles · USC
+          - generic [ref=e765]:
+            - generic [ref=e766]:
+              - generic [ref=e767]: Passenger
+              - generic [ref=e768]: Martin Hsieh
+            - generic [ref=e769]:
+              - generic [ref=e770]: Class
+              - generic [ref=e771]: CS · '28
+            - generic [ref=e772]:
+              - generic [ref=e773]: Flight
+              - generic [ref=e774]: CV-2026
+            - generic [ref=e775]:
+              - generic [ref=e776]: Boarding
+              - generic [ref=e777]: Now
+        - generic [ref=e782]:
+          - generic [ref=e783]: Resume
+          - generic [ref=e807]:
+            - img [ref=e808]
+            - generic [ref=e810]: Download
+    - generic [ref=e813]:
+      - generic [ref=e814]: Personal layer
+      - paragraph [ref=e815]: "A quieter part of the site: what I'm listening to, drinking, learning, and doing outside of code. Personality is welcome; confusion is not."
+      - generic [ref=e816]:
+        - link "Listening Spotify + 网易云音乐" [ref=e817] [cursor=pointer]:
+          - /url: /personal#listening
+          - generic [ref=e818]:
+            - generic [ref=e819]: Listening
+            - img [ref=e820]
+          - generic [ref=e823]: Spotify + 网易云音乐
+        - link "Off-hours golf, markets, decks, hoops" [ref=e824] [cursor=pointer]:
+          - /url: /personal#off-hours
+          - generic [ref=e825]:
+            - generic [ref=e826]: Off-hours
+            - img [ref=e827]
+          - generic [ref=e830]: golf, markets, decks, hoops
+        - link "/now what this season looks like" [ref=e831] [cursor=pointer]:
+          - /url: /now
+          - generic [ref=e832]:
+            - generic [ref=e833]: /now
+            - img [ref=e834]
+          - generic [ref=e837]: what this season looks like
+        - link "Tea atlas LA ⇄ Taipei, mapped" [ref=e838] [cursor=pointer]:
+          - /url: /tea
+          - generic [ref=e839]:
+            - generic [ref=e840]: Tea atlas
+            - img [ref=e841]
+          - generic [ref=e844]: LA ⇄ Taipei, mapped
+        - link "Telemetry Claude usage heatmap" [ref=e845] [cursor=pointer]:
+          - /url: /personal#telemetry
+          - generic [ref=e846]:
+            - generic [ref=e847]: Telemetry
+            - img [ref=e848]
+          - generic [ref=e851]: Claude usage heatmap
+  - contentinfo [ref=e852]:
+    - region "In a hurry?" [ref=e853]:
+      - generic [ref=e854]:
+        - generic [ref=e855]:
+          - heading "In a hurry?" [level=2] [ref=e856]
+          - paragraph [ref=e857]: Ask your assistant about me — the prompt is pre-filled.
+        - navigation "Ask an AI assistant about Martin Hsieh" [ref=e858]:
+          - list [ref=e859]:
+            - listitem [ref=e860]:
+              - link "Ask ChatGPT about Martin Hsieh" [ref=e861] [cursor=pointer]:
+                - /url: https://chatgpt.com/?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: ChatGPT
+            - listitem [ref=e863]:
+              - link "Ask Claude about Martin Hsieh" [ref=e864] [cursor=pointer]:
+                - /url: https://claude.ai/new?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: Claude
+            - listitem [ref=e866]:
+              - link "Ask Perplexity about Martin Hsieh" [ref=e867] [cursor=pointer]:
+                - /url: https://www.perplexity.ai/search?q=Tell%20me%20about%20Martin%20Hsieh%20based%20on%20martinhsieh.com.%20Summarize%20who%20they%20are%2C%20what%20they%20do%20and%20how%20to%20get%20in%20touch.
+                - text: Perplexity
+            - listitem [ref=e869]:
+              - link "Ask Gemini about Martin Hsieh" [ref=e870] [cursor=pointer]:
+                - /url: https://gemini.google.com/app
+                - text: Gemini
+    - generic [ref=e874]:
+      - generic [ref=e875]: © 2026 Martin Hsieh
+      - generic [ref=e876]:
+        - text: Designed & built by me · updated Jun 10, 2026 ·
+        - link "source ↗" [ref=e877] [cursor=pointer]:
+          - /url: https://github.com/mdothsieh
+  - button "Open command palette" [ref=e878] [cursor=pointer]:
+    - generic [ref=e879]: ⌘
+    - text: K

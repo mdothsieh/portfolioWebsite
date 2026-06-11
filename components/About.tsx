@@ -1,12 +1,13 @@
-// Section 02 "About" (server). Renders the bio + "currently" lists from
+// Section 05 "About" (server). Renders the bio + "currently" lists from
 // data/about.ts, plus a portrait (public/me.jpg) when present — the component
 // checks the filesystem at render time and degrades to text-only if the photo
 // hasn't been added yet. Uses the shared <Kicker> bilingual section header.
 import { existsSync } from 'fs';
 import path from 'path';
 import Image from 'next/image';
-import { bio, currently } from '@/data/about';
+import { bio, bio_zh, currently } from '@/data/about';
 import { Kicker } from './Kicker';
+import { T } from './i18n';
 
 export function About() {
   // Drop a portrait at public/me.jpg and it appears here — no code change.
@@ -14,7 +15,7 @@ export function About() {
 
   return (
     <section id="about" className="max-w-5xl mx-auto px-6 py-24">
-      <Kicker cn="零二" num="02" en="About" zh="关于" />
+      <Kicker cn="零五" num="05" en="About" zh="关于" />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-12 lg:gap-16">
         {/* --- Bio paragraphs --- */}
@@ -26,7 +27,7 @@ export function About() {
                 i === 0 ? 'first-letter:font-serif first-letter:text-5xl first-letter:float-left first-letter:mr-2 first-letter:leading-[0.85] first-letter:mt-1' : ''
               }`}
             >
-              {para}
+              <T en={para} zh={bio_zh[i]} />
             </p>
           ))}
         </div>
@@ -45,7 +46,7 @@ export function About() {
                 />
               </div>
               <figcaption className="px-4 py-3 text-[10px] font-mono uppercase tracking-widest text-muted border-t border-divider">
-                Taipei ⇄ Los Angeles
+                <T en="Taipei ⇄ Los Angeles" zh="台北 ⇄ 洛杉矶" />
               </figcaption>
             </figure>
           )}
@@ -57,7 +58,7 @@ export function About() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-400" />
               </span>
               <span className="text-[10px] font-mono uppercase tracking-widest text-muted">
-                Currently
+                <T en="Currently" zh="当前" />
               </span>
             </div>
 
@@ -65,10 +66,10 @@ export function About() {
               {currently.map((c) => (
                 <div key={c.label}>
                   <dt className="text-[10px] font-mono uppercase tracking-widest text-muted mb-1">
-                    {c.label}
+                    <T en={c.label} zh={c.label_zh} />
                   </dt>
                   <dd className="font-serif text-base text-primary leading-snug">
-                    {c.value}
+                    <T en={c.value} zh={c.value_zh} />
                   </dd>
                 </div>
               ))}

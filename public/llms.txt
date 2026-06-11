@@ -25,8 +25,9 @@
 
 ## Key pages
 
-- [Home](https://martinhsieh.com/): Bio, experience timeline, skills, and live activity.
-- [Projects](https://martinhsieh.com/projects): Selected builds, each led by the metric it moved.
+- [Home](https://martinhsieh.com/): Recruiter-first overview — featured projects, experience timeline, stack, about, contact.
+- [Projects](https://martinhsieh.com/projects): All projects as mini specs — problem, what was built, stack, and proof links.
+- [Personal](https://martinhsieh.com/personal): The personal layer — listening (Spotify + NetEase Cloud Music), off-hours, Claude usage telemetry.
 - [Now](https://martinhsieh.com/now): What he is currently working on, studying, and reading.
 - [Tea Atlas](https://martinhsieh.com/tea): A rated bubble-tea map across LA and Taipei.
 - [Resume (PDF)](https://martinhsieh.com/cv.pdf): Full CV.

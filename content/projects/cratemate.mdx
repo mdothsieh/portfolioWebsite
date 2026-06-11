@@ -22,6 +22,20 @@ metrics:
   - label: status
     value: v1 slice, evals next
 github_repo: mdothsieh/CrateMate
+featured: 1
+problem: DJs organize tracks by memory and repeated listening — finding songs that actually mix well together is slow, manual work.
+built:
+  - Audio analysis pipeline (ffmpeg → Essentia.js → ONNX) run over a real 1,664-track library
+  - Track compatibility scoring across style, BPM, harmonic key, and energy
+  - Byte-compatible Serato .crate export, verified by round-tripping
+  - Local-first desktop UI — the library never leaves the machine
+tagline_zh: DJ 的挖歌搭档——一款本地优先的桌面应用，分析你真实的音乐库，找出适合混在一起的曲目，并直接导出 Serato 歌单箱。
+problem_zh: DJ 靠记忆和反复试听来整理曲目——找出真正能混到一起的歌，又慢又费工。
+built_zh:
+  - 音频分析管线（ffmpeg → Essentia.js → ONNX），跑在 1,664 首真实曲目的音乐库上
+  - 跨风格、BPM、调性与能量的曲目兼容度评分
+  - 字节级兼容的 Serato .crate 导出，经往返解析验证
+  - 本地优先的桌面界面——音乐库永远不离开你的电脑
 ---
 
 > Drop an MP3 onto CrateMate and it returns the 5 most *mixable* tracks from your own library — with the reasons shown (style match, BPM, harmonic key, energy) — then exports a Serato `.crate` you can open and play. Everything runs locally: your audio, your play history, and the learned index never leave your machine.

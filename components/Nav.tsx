@@ -1,5 +1,6 @@
 // Sticky top navigation (server). Two stacked rows in one fixed container:
-// nav links (<NavLinks>) + a live strip. Fetches now-playing via lib/spotify
+// nav links (<NavLinks>) + lang/theme toggles + socials + a persistent red
+// Resume pill (/cv.pdf), then a live strip. Fetches now-playing via lib/spotify
 // for the live row. Mounted in app/layout.tsx. (Replaced the retired LiveStrip.)
 import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
@@ -7,6 +8,8 @@ import { getNowPlaying } from '@/lib/spotify';
 import { getClaudeUsage } from '@/lib/claude-usage';
 import { NavLinks } from './NavLinks';
 import { LangToggle } from './LangToggle';
+import { ThemeToggle } from './ThemeToggle';
+import { T } from './i18n';
 
 const SOCIALS = {
   github: 'https://github.com/mdothsieh',
@@ -50,8 +53,9 @@ export async function Nav() {
 
           <LangToggle />
 
-          {/* social cluster */}
+          {/* utility cluster — theme switch + socials */}
           <div className="flex items-center gap-1 rounded-full bg-surface/80 border border-divider px-1.5 py-1">
+            <ThemeToggle />
             <a
               href={SOCIALS.linkedin}
               target="_blank"
@@ -78,6 +82,16 @@ export async function Nav() {
               <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
             </a>
           </div>
+
+          {/* persistent resume CTA — recruiters never scroll to find it */}
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-mono uppercase tracking-widest rounded-full border border-rose-400/50 text-rose-400 px-3 py-1.5 hover:bg-rose-400 hover:text-bg transition-colors"
+          >
+            <T en="Resume" zh="简历" />
+          </a>
         </div>
       </nav>
 
@@ -113,20 +127,20 @@ export async function Nav() {
             ) : (
               <span className="flex items-center gap-1.5 opacity-60">
                 <span className="h-1.5 w-1.5 rounded-full bg-divider" />
-                <span>spotify quiet</span>
+                <span><T en="spotify quiet" zh="spotify 安静中" /></span>
               </span>
             )}
 
             <span className="text-divider hidden md:inline">·</span>
             <span className="hidden md:flex items-center gap-1.5">
               <span className="text-rose-400 tabular">{todayActivity}</span>
-              <span>msgs today</span>
+              <span><T en="msgs today" zh="条今日消息" /></span>
             </span>
 
             <span className="text-divider hidden md:inline">·</span>
             <span className="hidden md:flex items-center gap-1.5">
               <span className="text-primary tabular">{totalSessions}</span>
-              <span>sessions</span>
+              <span><T en="sessions" zh="次会话" /></span>
             </span>
           </div>
         </div>

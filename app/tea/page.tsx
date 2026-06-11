@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { TeaAtlasClient } from '@/components/TeaAtlasClient';
+import { T } from '@/components/i18n';
 
 // The Leaflet map is client-only (ssr:false). Rendering this route on demand
 // instead of statically prerendering it avoids pulling Leaflet's window-touching
@@ -16,13 +17,16 @@ export default function TeaPage() {
   return (
     <main className="max-w-5xl mx-auto px-6 pt-32 pb-24">
       <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-        Tea Atlas
+        <T en="Tea Atlas" zh="茶图鉴" />
       </div>
-      <h1 className="font-serif text-5xl mb-3">Where I actually drink.</h1>
+      <h1 className="font-serif text-5xl mb-3">
+        <T en="Where I actually drink." zh="我真正会去喝的店。" />
+      </h1>
       <p className="text-muted mb-12 max-w-2xl">
-        Pinned across the two cities I move between. Pin color is my rating —
-        red = 9+, light red = solid, muted = situational. Hover a pin for the
-        card; click a card to fly the map there.
+        <T
+          en="Pinned across the two cities I move between. Pin color is my rating — red = 9+, light red = solid, muted = situational. Hover a pin for the card; click a card to fly the map there."
+          zh="标在我往返的两座城市之间。图钉颜色是我的评分——红色 = 9 分以上，浅红 = 稳定发挥，灰色 = 看情况。悬停图钉看卡片；点卡片让地图飞过去。"
+        />
       </p>
 
       <TeaAtlasClient />
@@ -32,10 +36,10 @@ export default function TeaPage() {
           href="/"
           className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors"
         >
-          ← back home
+          <T en="← back home" zh="← 回主页" />
         </Link>
         <p className="text-[10px] font-mono text-muted mt-3 leading-relaxed max-w-2xl">
-          The map is{' '}
+          <T en="The map is " zh="地图基于 " />
           <a
             href="https://leafletjs.com"
             target="_blank"

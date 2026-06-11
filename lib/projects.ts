@@ -1,6 +1,7 @@
 // Server-only MDX project loader. Reads content/projects/*.mdx and parses
-// frontmatter with gray-matter. getAllProjects() (drafts dropped, newest first)
-// and getProjectBySlug() back app/page.tsx, /projects, /projects/[slug], and sitemap.ts.
+// frontmatter with gray-matter. getAllProjects() (drafts dropped, newest first),
+// getFeaturedProjects() (recruiter-priority order via the `featured` field) and
+// getProjectBySlug() back app/page.tsx, /projects, /projects/[slug], and sitemap.ts.
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -22,6 +23,20 @@ export interface ProjectFrontmatter {
   github_repo?: string;
   cover?: string;
   draft?: boolean;
+  /** One-line problem statement for the mini-spec card ("Problem:" row). */
+  problem?: string;
+  /** "What I built" bullets for the mini-spec card. */
+  built?: string[];
+  /** Simplified-Chinese twins (繁體 auto-converted client-side). */
+  tagline_zh?: string;
+  problem_zh?: string;
+  built_zh?: string[];
+  /** Homepage/recruiter ordering: 1 = first. Unset projects sort after, by date. */
+  featured?: number;
+  /** Work project with no public repo — cards show a "proprietary" note instead of a GitHub link. */
+  proprietary?: boolean;
+  /** Optional live-demo URL. Only rendered when real — never fabricate. */
+  demo?: string;
 }
 
 export interface Project {
@@ -46,6 +61,16 @@ export function getAllProjects(): Project[] {
   return projects
     .filter(p => !p.frontmatter.draft)
     .sort((a, b) => (a.frontmatter.date > b.frontmatter.date ? -1 : 1));
+}
+
+// Recruiter-priority ordering for the homepage: projects with a `featured`
+// number come first (ascending), everything else follows in date order.
+export function getFeaturedProjects(): Project[] {
+  return [...getAllProjects()].sort((a, b) => {
+    const fa = a.frontmatter.featured ?? Number.MAX_SAFE_INTEGER;
+    const fb = b.frontmatter.featured ?? Number.MAX_SAFE_INTEGER;
+    return fa - fb;
+  });
 }
 
 export function getProjectBySlug(slug: string): Project | null {

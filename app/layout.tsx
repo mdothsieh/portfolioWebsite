@@ -98,8 +98,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="relative bg-bg text-primary font-sans antialiased">
         {/* Progressive-enhancement gate: animation hidden-states in globals.css
             are scoped under html.js, so content stays visible when JS is off
-            or unsupported. Runs before first paint (CSS blocks rendering). */}
-        <script>{`if('IntersectionObserver' in window)document.documentElement.classList.add('js')`}</script>
+            or unsupported. Also restores the saved language (en / zh-hans /
+            zh-hant) and theme (night default; 'day' is the only stored value
+            that changes anything — whitelisted, so a tampered localStorage
+            value can't inject attributes) before first paint so returning
+            visitors don't see a flash. Runs before paint (CSS blocks render). */}
+        <script>{`if('IntersectionObserver' in window)document.documentElement.classList.add('js');try{var l=localStorage.getItem('lang');if(l==='zh')l='zh-hans';if(l==='zh-hans'||l==='zh-hant'){document.documentElement.dataset.lang=l;document.documentElement.lang=l==='zh-hans'?'zh-Hans':'zh-Hant'}if(localStorage.getItem('theme')==='day')document.documentElement.dataset.theme='day'}catch(e){}`}</script>
         <AmbientWash />
         <Atmosphere />
         <LiveFavicon />

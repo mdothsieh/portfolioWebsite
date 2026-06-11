@@ -1,10 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useZhText } from './i18n';
 
 interface Props {
   /** The text to reveal, word by word. */
   text: string;
+  /** Optional 简体中文 version — shown in Chinese modes (繁體 auto-converted),
+   *  revealed character by character since CJK has no word spaces. */
+  zh?: string;
   /** Extra classes on the wrapper (e.g. font + size utilities). */
   className?: string;
   /** Words rendered in the signature red. Matched case-insensitively, punctuation-trimmed. */
@@ -27,6 +31,7 @@ interface Props {
 // instantly (see .rt-word rules in app/globals.css). Mirrors Reveal.tsx.
 export function RevealText({
   text,
+  zh,
   className = '',
   accentWords = [],
   stagger = 42,
@@ -35,6 +40,7 @@ export function RevealText({
 }: Props) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [shown, setShown] = useState(false);
+  const resolved = useZhText(text, zh);
 
   useEffect(() => {
     const el = ref.current;
@@ -64,7 +70,11 @@ export function RevealText({
   }, [threshold]);
 
   const accentSet = new Set(accentWords.map((w) => normalize(w)));
-  const words = text.split(/(\s+)/); // keep whitespace tokens so wrapping stays natural
+  // CJK text has no word spaces — reveal it character by character instead.
+  const isCjk = resolved !== text && /[㐀-鿿]/.test(resolved);
+  const words = isCjk
+    ? Array.from(resolved)
+    : resolved.split(/(\s+)/); // keep whitespace tokens so wrapping stays natural
 
   let wordIndex = 0;
   return (

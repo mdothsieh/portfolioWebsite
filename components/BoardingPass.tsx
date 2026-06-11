@@ -1,4 +1,5 @@
 import { ArrowDownToLine, Plane } from 'lucide-react';
+import { T } from './i18n';
 
 /**
  * CV boarding-pass card. Themed to the TPE ↔ LAX international-student angle.
@@ -23,10 +24,10 @@ export function BoardingPass() {
           {/* top meta */}
           <div className="flex items-center justify-between mb-8">
             <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
-              Boarding Pass · CV-2026
+              <T en="Boarding Pass · CV-2026" zh="登机牌 · CV-2026" />
             </div>
             <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
-              Seat — Anywhere
+              <T en="Seat — Anywhere" zh="座位 — 任意" />
             </div>
           </div>
 
@@ -34,11 +35,11 @@ export function BoardingPass() {
           <div className="flex items-center gap-6 md:gap-10">
             <div>
               <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted mb-1">
-                From
+                <T en="From" zh="从" />
               </div>
               <div className="font-serif text-4xl md:text-5xl leading-none tabular">TPE</div>
               <div className="text-[10px] font-mono uppercase tracking-widest text-muted mt-2">
-                Taipei · 桃園
+                <T en="Taipei · 桃園" zh="台北 · 桃園" />
               </div>
             </div>
 
@@ -51,21 +52,21 @@ export function BoardingPass() {
 
             <div className="text-right">
               <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted mb-1">
-                To
+                <T en="To" zh="至" />
               </div>
               <div className="font-serif text-4xl md:text-5xl leading-none tabular">LAX</div>
               <div className="text-[10px] font-mono uppercase tracking-widest text-muted mt-2">
-                Los Angeles · USC
+                <T en="Los Angeles · USC" zh="洛杉矶 · USC" />
               </div>
             </div>
           </div>
 
           {/* secondary meta — 4 columns */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-4 mt-10">
-            <Cell label="Passenger" value="Martin Hsieh" />
-            <Cell label="Class" value="CS · '28" />
-            <Cell label="Flight" value="CV-2026" />
-            <Cell label="Boarding" value="Now" mono />
+            <Cell label={<T en="Passenger" zh="乘客" />} value="Martin Hsieh" />
+            <Cell label={<T en="Class" zh="舱位" />} value="CS · '28" />
+            <Cell label={<T en="Flight" zh="航班" />} value="CV-2026" />
+            <Cell label={<T en="Boarding" zh="登机" />} value={<T en="Now" zh="现在" />} mono />
           </div>
         </div>
 
@@ -79,7 +80,7 @@ export function BoardingPass() {
         {/* === right stub: the action === */}
         <div className="w-32 md:w-44 p-5 md:p-6 flex flex-col items-center justify-between text-center">
           <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted">
-            Resume
+            <T en="Resume" zh="简历" />
           </div>
 
           {/* "barcode" — fits the boarding-pass metaphor */}
@@ -99,7 +100,7 @@ export function BoardingPass() {
 
           <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-rose-400 group-hover:text-rose-300 transition-colors">
             <ArrowDownToLine className="w-3 h-3" strokeWidth={2} />
-            <span>Download</span>
+            <span><T en="Download" zh="下载" /></span>
           </div>
         </div>
       </div>
@@ -112,8 +113,8 @@ function Cell({
   value,
   mono,
 }: {
-  label: string;
-  value: string;
+  label: React.ReactNode;
+  value: React.ReactNode;
   mono?: boolean;
 }) {
   return (

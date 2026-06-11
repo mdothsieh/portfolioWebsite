@@ -1,0 +1,57 @@
+---
+title: Kenmou Dashboard
+slug: kenmou-dashboard
+tagline: Order-processing dashboard the production floor at Kenmou Enterprise ran on daily — order throughput up 40%.
+date: '2025-05 -> 2025-09'
+stack:
+  - React
+  - Node.js
+  - SQL
+  - Docker
+  - ArtiosCAD
+metrics:
+  - label: context
+    value: SWE internship
+  - label: users
+    value: production floor
+  - label: throughput
+    value: +40%
+  - label: status
+    value: in daily use
+featured: 4
+proprietary: true
+problem: Operational teams tracked orders through email chains and paper forms, with no shared view of order status or production throughput.
+built:
+  - React + Node order-processing dashboard used daily on the production floor
+  - ArtiosCAD wired into the approval workflow — packaging prototypes stopped waiting on email
+  - The team's first Docker-based CI/CD pipeline — releases went from a manual afternoon to a push
+  - Digital inspection checklist replacing paper sheets
+tagline_zh: Kenmou Enterprise 生产车间每天在用的订单处理仪表盘——订单吞吐量提升 40%。
+problem_zh: 运营团队靠邮件往来和纸质表单追踪订单，对订单状态和产线吞吐量没有统一视图。
+built_zh:
+  - 生产车间每天在用的 React + Node 订单处理仪表盘
+  - 将 ArtiosCAD 接入审批流程——包装打样不再等邮件
+  - 团队第一条基于 Docker 的 CI/CD 流水线——发布从一个手动的下午变成一次推送
+  - 取代纸质检验单的数字检查清单
+---
+
+> Built during my Summer 2025 software engineering internship at **Kenmou Enterprise** in Taipei: an order-processing dashboard that gave the production floor one live view of every order — status, throughput, and what to act on next. The code is proprietary, so there's no public repo; this page is the spec.
+
+## The problem
+
+Kenmou is a packaging manufacturer. Before the dashboard, an order's journey lived in email threads, paper forms, and a few people's heads. Production staff couldn't see where an order stood without asking someone, packaging-prototype approvals waited on email chains, and throughput was something you felt rather than measured.
+
+## What I built
+
+- **An order-processing dashboard** — React on the front, Node on the back, SQL as the system of record — that the production floor ran on daily. Orders, statuses, and workflow stages in one view, built for people standing at a workstation, not engineers at a desk.
+- **ArtiosCAD integration** — packaging prototype designs were wired into the internal approval workflow, so a prototype moved from CAD to sign-off without leaving the system.
+- **The team's first Docker-based CI/CD pipeline** — before it, a release was a manual afternoon; after it, a push. This outlived my internship by design.
+- **A digital inspection checklist** that replaced paper sheets. Measurable: −12% paper usage. Immeasurable: −100% lost forms.
+
+## The result
+
+Order throughput went up **40%** against the pre-dashboard baseline — mostly because nobody had to chase information anymore. The tools were built for users who are not engineers, which is the constraint that shaped everything: fewer screens, clearer states, no configuration.
+
+## Context
+
+Built as a software engineering intern, May–September 2025, Taipei. The dashboard is internal production software owned by Kenmou Enterprise, so the source is not public — the [experience timeline](/#experience) and my resume carry the verifiable details.

@@ -1,27 +1,33 @@
 // Projects index (/projects). Lists every project from lib/projects
-// getAllProjects() (drafts dropped, newest first). Each entry links to /projects/[slug].
-import Link from 'next/link';
-import Image from 'next/image';
-import { getAllProjects } from '@/lib/projects';
+// getFeaturedProjects() (recruiter-priority order, drafts dropped) as
+// mini-spec cards (components/ProjectSpecCard). Each entry links to /projects/[slug].
+import { getFeaturedProjects } from '@/lib/projects';
+import { ProjectSpecCard } from '@/components/ProjectSpecCard';
+import { T } from '@/components/i18n';
 
 export const metadata = {
   // The root layout's title template appends "· Martin Hsieh".
   title: 'Projects',
   description:
-    'Selected software projects by Martin Hsieh — full-stack systems, applied-AI tooling, RPA bots, and internal platforms, each led by the metric it moved.',
+    'Software projects by Martin Hsieh — full-stack systems, applied-AI tooling, internal dashboards, and production software, each documented as a mini spec: problem, what was built, stack, and proof.',
 };
 
 export default function ProjectsPage() {
-  const projects = getAllProjects();
+  const projects = getFeaturedProjects();
 
   return (
     <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
       <div className="text-[10px] font-mono uppercase tracking-widest text-muted mb-6">
-        04 — Builds
+        <T en="Work — all projects" zh="作品 — 全部项目" />
       </div>
-      <h1 className="font-serif text-5xl mb-3">Selected projects.</h1>
-      <p className="text-muted mb-16">
-        Each entry leads with the metric that moved, then the stack, then the regret.
+      <h1 className="font-serif text-5xl mb-3">
+        <T en="Projects." zh="项目。" />
+      </h1>
+      <p className="text-muted mb-16 max-w-xl">
+        <T
+          en="Every project documented the same way: the problem, what I built, the stack, and where the proof lives. Work projects without public code say so."
+          zh="每个项目都用同一种方式记录：问题、构建内容、技术栈，以及佐证在哪里。没有公开代码的工作项目会如实标注。"
+        />
       </p>
 
       {projects.length === 0 ? (
@@ -31,43 +37,10 @@ export default function ProjectsPage() {
           </div>
         </div>
       ) : (
-        <ol className="space-y-12">
-          {projects.map(p => (
+        <ol className="space-y-10">
+          {projects.map((p, i) => (
             <li key={p.slug}>
-              <Link href={`/projects/${p.slug}`} className="block group">
-                {p.frontmatter.cover && (
-                  <div className="relative aspect-video mb-4 rounded-lg overflow-hidden border border-divider bg-surface">
-                    <Image
-                      src={p.frontmatter.cover}
-                      alt={`${p.frontmatter.title} — screenshot`}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 768px) 672px, 100vw"
-                    />
-                  </div>
-                )}
-                <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
-                  <div className="font-serif text-3xl group-hover:text-accent-project transition-colors">
-                    {p.frontmatter.title}
-                  </div>
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-muted">
-                    {p.frontmatter.date}
-                  </div>
-                </div>
-                <div className="text-muted mb-3">{p.frontmatter.tagline}</div>
-                {p.frontmatter.stack && (
-                  <div className="flex gap-2 flex-wrap">
-                    {p.frontmatter.stack.map(s => (
-                      <span
-                        key={s}
-                        className="text-[10px] font-mono uppercase tracking-wider text-muted bg-surface border border-divider px-2 py-1 rounded"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </Link>
+              <ProjectSpecCard project={p} index={i + 1} />
             </li>
           ))}
         </ol>

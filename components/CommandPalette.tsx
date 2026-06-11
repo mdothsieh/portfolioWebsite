@@ -4,10 +4,12 @@
 // available on every route; provides keyboard navigation to sections and routes.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useZhText } from './i18n';
 
 interface Action {
   id: string;
   label: string;
+  label_zh?: string;
   hint?: string;
   keywords?: string;
   run: () => void;
@@ -30,18 +32,20 @@ export function CommandPalette() {
       window.open(href, '_blank', 'noopener,noreferrer');
     };
     return [
-      { id: 'about', label: 'About', hint: 'section', keywords: 'bio intro', run: go('/#about') },
-      { id: 'projects', label: 'Builds / Projects', hint: 'page', keywords: 'work portfolio', run: go('/projects') },
-      { id: 'stack', label: 'Stack', hint: 'section', keywords: 'skills tools', run: go('/#stack') },
-      { id: 'off-hours', label: 'Off-Hours', hint: 'section', keywords: 'hobbies', run: go('/#off-hours') },
-      { id: 'listening', label: 'Listening', hint: 'section', keywords: 'spotify netease music', run: go('/#listening') },
-      { id: 'now', label: '/now', hint: 'page', keywords: 'current weekly', run: go('/now') },
-      { id: 'tea', label: 'Tea Atlas', hint: 'page', keywords: 'map boba', run: go('/tea') },
-      { id: 'cv', label: 'Download CV', hint: 'pdf', keywords: 'resume', run: () => { setOpen(false); window.location.href = '/cv.pdf'; } },
-      { id: 'email', label: 'Copy email', hint: 'mdothsieh@gmail.com', keywords: 'contact', run: () => { navigator.clipboard?.writeText('mdothsieh@gmail.com'); setOpen(false); } },
-      { id: 'gh', label: 'GitHub', hint: 'external', keywords: 'code', run: ext('https://github.com/mdothsieh') },
-      { id: 'li', label: 'LinkedIn', hint: 'external', keywords: 'profile', run: ext('https://www.linkedin.com/in/martin-hsieh/') },
-      { id: 'top', label: 'Back to top', hint: 'scroll', keywords: 'home hero', run: () => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+      { id: 'projects', label: 'Work / Projects', label_zh: '作品 / 项目', hint: 'page', keywords: 'work portfolio builds 项目 作品', run: go('/projects') },
+      { id: 'experience', label: 'Experience', label_zh: '经历', hint: 'section', keywords: 'internships timeline 实习 经历', run: go('/#experience') },
+      { id: 'stack', label: 'Stack', label_zh: '技术栈', hint: 'section', keywords: 'skills tools 技能 技术栈', run: go('/#stack') },
+      { id: 'about', label: 'About', label_zh: '关于', hint: 'section', keywords: 'bio intro 关于 简介', run: go('/#about') },
+      { id: 'personal', label: 'Personal layer', label_zh: '个人层', hint: 'page', keywords: 'listening hobbies telemetry 个人', run: go('/personal') },
+      { id: 'off-hours', label: 'Off-Hours', label_zh: '工余', hint: 'section', keywords: 'hobbies 爱好 工余', run: go('/personal#off-hours') },
+      { id: 'listening', label: 'Listening', label_zh: '在听', hint: 'section', keywords: 'spotify netease music 音乐 网易云 在听', run: go('/personal#listening') },
+      { id: 'now', label: '/now', hint: 'page', keywords: 'current weekly 现在', run: go('/now') },
+      { id: 'tea', label: 'Tea Atlas', label_zh: '茶图鉴', hint: 'page', keywords: 'map boba 奶茶 茶', run: go('/tea') },
+      { id: 'cv', label: 'Download CV', label_zh: '下载简历', hint: 'pdf', keywords: 'resume 简历', run: () => { setOpen(false); window.location.href = '/cv.pdf'; } },
+      { id: 'email', label: 'Copy email', label_zh: '复制邮箱', hint: 'mdothsieh@gmail.com', keywords: 'contact 联系 邮箱', run: () => { navigator.clipboard?.writeText('mdothsieh@gmail.com'); setOpen(false); } },
+      { id: 'gh', label: 'GitHub', hint: 'external', keywords: 'code 代码', run: ext('https://github.com/mdothsieh') },
+      { id: 'li', label: 'LinkedIn', hint: 'external', keywords: 'profile 领英', run: ext('https://www.linkedin.com/in/martin-hsieh/') },
+      { id: 'top', label: 'Back to top', label_zh: '回到顶部', hint: 'scroll', keywords: 'home hero 顶部', run: () => { setOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     ];
   }, [router]);
 
@@ -51,6 +55,7 @@ export function CommandPalette() {
     return actions.filter(
       (a) =>
         a.label.toLowerCase().includes(q) ||
+        a.label_zh?.includes(q) ||
         a.hint?.toLowerCase().includes(q) ||
         a.keywords?.toLowerCase().includes(q),
     );
@@ -138,7 +143,7 @@ export function CommandPalette() {
                   i === active ? 'bg-rose-500/10 text-primary' : 'text-muted hover:text-primary'
                 }`}
               >
-                <span className="text-sm">{a.label}</span>
+                <span className="text-sm"><ActionLabel a={a} /></span>
                 {a.hint && (
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted shrink-0">
                     {a.hint}
@@ -156,4 +161,9 @@ export function CommandPalette() {
       </div>
     </div>
   );
+}
+
+// Bilingual action label (hooks can't run inside the .map() loop directly).
+function ActionLabel({ a }: { a: Action }) {
+  return <>{useZhText(a.label, a.label_zh)}</>;
 }

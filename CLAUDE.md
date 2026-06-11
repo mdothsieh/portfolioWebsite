@@ -59,6 +59,11 @@ no payments — all dynamic data comes from external APIs (fetched server-side) 
   added only for interactivity or browser APIs. `app/page.tsx` is the server-rendered
   landing page that fetches projects + Claude usage + Spotify in parallel and composes
   the numbered sections from `components/`.
+- **Two-layer structure (recruiter-first redesign).** The homepage is the recruiter
+  layer (hero → work → experience → stack → about → resume); `/personal` is the
+  personal layer (listening with Spotify + NetEase, off-hours, Claude telemetry).
+  Don't move personal features back into the homepage flow, and never fabricate
+  project links — proprietary work projects carry `proprietary: true` instead of a repo.
 - **Content lives outside code.** Projects are `content/projects/*.mdx` (frontmatter
   parsed by `lib/projects.ts`, rendered via `next-mdx-remote/rsc`). Section content
   (about, experience, skills, hobbies, now, tea) lives in typed `data/*.ts` modules.
